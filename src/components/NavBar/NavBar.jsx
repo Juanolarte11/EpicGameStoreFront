@@ -11,12 +11,12 @@ export default function NavBar({ size, userName }) {
   return (
     <nav className={style.nav}>
       <div className={style.a}>
-        <a href="/home">HOME</a>
+        <Link to="/home">HOME</Link>
         <Favorites />
-        <a href="/videogame">VENDER</a>
-        <a href="/about">ABOUT</a>
-        <a href="/login">LOGIN</a>
-        <a href="/register">REGISTER</a>
+        <Link to="/videogame">VENDER</Link>
+        <Link to="/about">ABOUT</Link>
+        <Link to="/login">LOGIN</Link>
+        <Link to="/register">REGISTER</Link>
       </div>
       <div>
         <IconButton aria-label="mostrar items" color="inherit">
@@ -32,9 +32,4 @@ export default function NavBar({ size, userName }) {
       </div>
     </nav>
   );
-}
-
-{
-  /* <img src={userName ? userName : { joystick }} alt="Imagen de perfil" />
-"""""silenciado hasta que reciba el userName""""" */
 }

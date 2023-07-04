@@ -1,38 +1,27 @@
 .nav {
   display: flex;
-  align-items: center;
-  columns: 3;
   justify-content: space-between;
-  background-color: #cbe9f5;
+  align-items: center;
+  background-color: #f5f5f5;
   padding: 10px;
-  font-family: "Monomaniac One", cursive;
 }
 
-.a {
-  display: flex;
-  gap: 40px;
-  padding-left: 2rem;
-}
-
-.a a {
+.nav a {
   text-decoration: none;
   color: #333;
+  margin: 0 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.cart {
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 50%;
-  margin-right: 10px;
+.nav a:hover {
+  color: #4285f4;
 }
 
-.cart:hover {
-  background-color: #555;
-}
-
-.userImg {
+.nav .userImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
 }

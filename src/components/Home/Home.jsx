@@ -250,6 +250,7 @@ const arrayItem = {}
                     image={el.background_image || el.image}
                     id={el.id}
                     key={el.id}
+                    rating={el.rating}
                   />
                 ))}
               </div>
