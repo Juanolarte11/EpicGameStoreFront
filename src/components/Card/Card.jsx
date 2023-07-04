@@ -9,6 +9,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaStar } from 'react-icons/fa';
+import { useDispatch } from "react-redux";
+import { getCartUser } from "../../actions";
 
 
 export default function Card({
@@ -26,6 +28,10 @@ export default function Card({
   const userIdLocal = useSelector(state => state.dataUser.userID);
 
   const history = useHistory();
+  /////
+  const dispatch = useDispatch()
+  const user = useSelector(state=>state.dataUser.cartID)
+  /////////
 
   const favorites = [];
   const roundedRating = Math.round(rating);
@@ -53,10 +59,12 @@ export default function Card({
         };
         await axios.post(`http://localhost:3001/cart`, data);
         handleClickCart(item);
+        dispatch(getCartUser(user))
       } catch (error) {
         console.log(error);
       };
     };
+
   };
 
   return (
