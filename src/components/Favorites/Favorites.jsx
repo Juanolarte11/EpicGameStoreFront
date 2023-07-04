@@ -1,8 +1,13 @@
 import React from "react";
 
-function Favorites(image, name, price) {
-  console.log(image, name, price);
-  return <div></div>;
+import styles from "./Favorites.module.css";
+
+function Favorites() {
+  return (
+    <div>
+      <h1>Lista de Favoritos</h1>
+    </div>
+  );
 }
 
 export default Favorites;

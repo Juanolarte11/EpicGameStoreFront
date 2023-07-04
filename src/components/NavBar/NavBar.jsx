@@ -5,14 +5,13 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import joystick from "../NavBar/joystick.jpg";
-import Favorites from "../Favorites/Favorites";
 
 export default function NavBar({ size, userName }) {
   return (
     <nav className={style.nav}>
       <div className={style.a}>
         <a href="/home">HOME</a>
-        <Favorites />
+        <a href="/favorites">FAVORITES</a>
         <a href="/videogame">VENDER</a>
         <a href="/about">ABOUT</a>
         <a href="/login">LOGIN</a>

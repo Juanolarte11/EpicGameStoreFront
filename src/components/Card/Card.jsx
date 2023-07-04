@@ -17,13 +17,13 @@ export default function Card({
   item,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const favorites = [];
+  const [favotiresList, setFavotiresList] = useState([]);
 
   const handleToggleFavorite = () => {
-    favorites.push({ image, name, price });
     setIsFavorite(!isFavorite);
-    Favorites(favorites);
+
+    setFavotiresList({ image, name, price });
+    Favorites(favotiresList);
   };
 
   let genreList = [];
@@ -65,6 +65,7 @@ export default function Card({
         <h3 className={styles.cardTitle}>{name}</h3>
         <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
+
       <button onClick={() => handleClickCart(item)}>Add to cart</button>
     </div>
   );

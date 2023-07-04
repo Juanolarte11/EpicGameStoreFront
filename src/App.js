@@ -5,9 +5,11 @@ import Home from "./components/Home/Home.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
 import About from "./components/about/About.jsx";
-import Registro from "./components/Registro/Registro.jsx"
+import Registro from "./components/Registro/Registro.jsx";
 import "./App.css";
 import Login from "./components/Login/Login.jsx";
+import Favorites from "./components/Favorites/Favorites.jsx";
+
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/register" component={Registro} />
           <Route path="/login" component={Login} />
-          {/* <Route path = "/carrito" component = { addCarrito }/> */}
+          <Route path="/favorites" component={Favorites} />
         </Switch>
       </div>
     </BrowserRouter>
