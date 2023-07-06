@@ -5,6 +5,9 @@ import noImage from "./noImageFound.jpg";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Favorites from "../Favorites/Favorites";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Card({
   name,
@@ -17,13 +20,18 @@ export default function Card({
   item,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favotiresList, setFavotiresList] = useState([]);
+  const [favoritesList, setFavotiresList] = useState([]);
+  const userIdLocal = useSelector((state) => state.dataUser.userID);
+
+  const history = useHistory();
+
+  const favorites = [];
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
 
     setFavotiresList({ image, name, price });
-    Favorites(favotiresList);
+    Favorites(favoritesList);
   };
 
   let genreList = [];
@@ -37,7 +45,22 @@ export default function Card({
     }));
   }
 
-  const addCarrito = () => {};
+  const addCarrito = async (gameId) => {
+    if (!userIdLocal) {
+      history.push("/register");
+    } else {
+      try {
+        const data = {
+          gameID: gameId,
+          userId: userIdLocal,
+        };
+        await axios.post(`http://localhost:3001/cart`, data);
+        handleClickCart(item);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className={styles.card}>
@@ -65,8 +88,7 @@ export default function Card({
         <h3 className={styles.cardTitle}>{name}</h3>
         <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
-
-      <button onClick={() => handleClickCart(item)}>Add to cart</button>
+      <button onClick={() => addCarrito(id)}>Add to cart</button>
     </div>
   );
 }

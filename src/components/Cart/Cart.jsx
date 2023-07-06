@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import style from "./Favorites.module.css";
+import style from "./Cart.module.css";
 import axios from "axios";
+import MercadoPago from "./MercadoPago/MercadoPago";
 
-const Favorites = () => {
+const Cart = () => {
   const dataUser = useSelector((state) => state.dataUser);
+  const [price, setPrice] = useState(0);
   const [cart, setCart] = useState([]);
   const history = useHistory();
 
-  const handleDataFavorites = async () => {
+  const handleDataCart = async () => {
     const cartID = dataUser.cartID;
     const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
     setCart(response.data[0]?.Videogames);
@@ -33,20 +35,36 @@ const Favorites = () => {
     }
   };
 
+  // useEffect(() => {
+  //   handleDataCart();
+  //   handlePrice();
+  // }, []);
+
   useEffect(() => {
-    handleDataFavorites();
+    handleDataCart();
   }, []);
 
+  useEffect(() => {
+    handlePrice();
+  }, [cart]);
+
+  const handlePrice = () => {
+    const total = cart.reduce((accumulator, item) => {
+      return accumulator + item.quantity * item.unit_price;
+    }, 0);
+    setPrice(total);
+  };
+
   return (
-    <div className={style.container}>
+    <div className={style.all}>
       <div>
         <NavBar />
       </div>
       {cart?.length > 0 ? (
         cart.map((item) => (
-          <div key={item.id} className={style.detail}>
+          <div key={item.id} className={style.cart_box}>
             <div className={style.cart_img}>
-              <img src={item.image} alt={item.title} className={style.img} />
+              <img src={item.image} alt={item.title} className={style.image} />
               <p>{item.title}</p>
             </div>
             <div>
@@ -59,13 +77,20 @@ const Favorites = () => {
           </div>
         ))
       ) : (
-        <div className={style.emptyFavorites}>
-          <p>There are no favorites games in your list</p>
+        <div className={style.emptyCart}>
+          <p>There are no games in your cart</p>
           <button onClick={() => history.push("/home")}>Go Home</button>
         </div>
       )}
+      <div className={style.total}>
+        <span>Total Price of your Cart</span>
+        <span>{price.toFixed(2)}</span>
+      </div>
+      <div>
+        <MercadoPago arrayGames={cart} />
+      </div>
     </div>
   );
 };
 
-export default Favorites;
+export default Cart;

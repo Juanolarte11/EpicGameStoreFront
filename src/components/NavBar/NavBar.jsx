@@ -5,8 +5,12 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import joystick from "../NavBar/joystick.jpg";
+import { useSelector } from "react-redux";
 
-export default function NavBar({ size, userName }) {
+export default function NavBar({ size }) {
+  const DataUser = useSelector((state) => state.dataUser);
+
+  // console.log(DataUser.nombre.charAt(0).toUpperCase());
   return (
     <nav className={style.nav}>
       <div className={style.a}>
@@ -27,13 +31,18 @@ export default function NavBar({ size, userName }) {
         </IconButton>
       </div>
       <div>
-        <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
+        <Link to="/user">
+          <img
+            className={style.userImg}
+            src={
+              DataUser && DataUser.nombre && DataUser.nombre.length > 0
+                ? DataUser.nombre.charAt(0).toUpperCase()
+                : joystick
+            }
+            alt="Imagen de perfil"
+          />
+        </Link>
       </div>
     </nav>
   );
-}
-
-{
-  /* <img src={userName ? userName : { joystick }} alt="Imagen de perfil" />
-"""""silenciado hasta que reciba el userName""""" */
 }

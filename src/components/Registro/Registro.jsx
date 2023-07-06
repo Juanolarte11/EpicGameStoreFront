@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import './RegistrationForm.css';
+import styles from './RegistrationForm.module.css';
 import axios from 'axios';
+import ButtonGoogleRegister from './googleSingin/ButtonGoogleRegister'
 
 
 const RegistrationForm = () => {
@@ -17,21 +18,21 @@ const RegistrationForm = () => {
             userEmail: email, 
         };
         try {
-          const response = await axios.post('http://localhost:3001/users', newUserPost);
+          const response = await axios.post('http://localhost:3001/users/', newUserPost);
           const {newCart, newUser} = response.data
         alert("Usuario creado con exito")
           history.push("/login");
         } catch (error) {
           console.log(error);
         }
-      };      
+      };
 
     return (
         <div>
-            <div className="registration-form">
+            <div className={styles.RegistrationForm}>
                 <h2>Registro</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="name">Nombre:</label>
                         <input
                             type="text"
@@ -41,7 +42,7 @@ const RegistrationForm = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="email">Email:</label>
                         <input
                             type="email"
@@ -51,7 +52,7 @@ const RegistrationForm = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="password">Contraseña:</label>
                         <input
                             type="password"
@@ -61,8 +62,10 @@ const RegistrationForm = () => {
                             required
                         />
                     </div>
-                    <button type="submit">Registrarse</button>
+                    <button className={styles.buttonForm}>Registrarse</button>
                 </form>
+                <ButtonGoogleRegister className={styles.buttonGoogle}></ButtonGoogleRegister>
+                {/* <button className={styles.buttonGoogle} onClick={handleRegisterByGoogle} >Registrarse con Google</button> */}
             </div>
         </div>
     );

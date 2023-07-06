@@ -25,23 +25,18 @@ import axios from "axios";
 /////////////
 
 export default function Home() {
-  const DataUser = useSelector((state) => state);
+  const DataUser = useSelector((state) => state.dataUser);
   console.log(DataUser);
   /////////////////////////////
   //estado preferenceId
   const [preferenceId, setPreferenceId] = useState(null);
   initMercadoPago("TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d");
-
+  const arrayItem = {};
   const createPreference = async () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/pay/create_preference",
-        {
-          description: "Bananita contenta",
-          price: 100,
-          quantity: 1,
-          // currency_id:"ARS"
-        }
+        arrayItem
       );
       const { id } = response.data;
       return id;
@@ -181,7 +176,7 @@ export default function Home() {
           <div>
             <NavBar size={currentCart.length} />
           </div>
-          {/* <h3>Hola {state.dataUser.nombre.toUpperCase()}</h3> */}
+          <h3>HOLA {state.dataUser?.nombre?.toUpperCase()}</h3>
           <div className={styles["filter-container"]}>
             <div>
               <label className={styles.label}>Rating: </label>

@@ -6,6 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import store from './store';
 
+//////////////////// FIREBASE
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 ReactDOM.render(
   <Provider store = { store }>

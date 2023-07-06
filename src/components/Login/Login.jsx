@@ -3,7 +3,8 @@ import { getDataUser } from '../../actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import './Login.css';
+import styles from './Login.module.css';
+import ButtonGoogleLogin from './googleSingin/ButtonGoogleLogin'
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -25,6 +26,7 @@ const Login = () => {
                 cartID: Carrito.id
             }
             const resDataUsuer = dispatch(getDataUser(dataUser))
+            localStorage.setItem('userData', JSON.stringify(dataUser));
             history.push("/home");
         } catch (error) {
             console.log(error)
@@ -32,12 +34,13 @@ const Login = () => {
     };
 
     return (
-        <div className="login-form">
-            <h2>Iniciar sesión</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="email">Correo electrónico:</label>
-                    <input
+        <div className= {styles.loginForm}>
+            <h2 className={styles.loginFormH2}>Iniciar sesión</h2>
+            <form onSubmit={handleSubmit} className={styles.loginFormForm}>
+                <div className={styles.loginForm}>
+                    <label className={styles.loginFormLabel} htmlFor="email">Correo electrónico:</label>
+                    <input 
+                        className={styles.loginFormInput}
                         type="email"
                         id="email"
                         value={email}
@@ -45,9 +48,10 @@ const Login = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password">Contraseña:</label>
+                <div className={styles.loginForm}>
+                    <label className={styles.loginFormLabel}  htmlFor="password">Contraseña:</label>
                     <input
+                        className={styles.loginFormInput}
                         type="password"
                         id="password"
                         value={password}
@@ -55,8 +59,9 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button type="submit">Iniciar sesión</button>
+                <button type="submit" className={styles.loginForm}>Iniciar sesión</button>
             </form>
+            <ButtonGoogleLogin className={styles.buttonGoogle}></ButtonGoogleLogin>
         </div>
     );
 };
