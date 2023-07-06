@@ -16,13 +16,9 @@ import { getCartUser } from "../../actions";
 export default function Card({
   name,
   price,
-  genres,
-  Genres,
   image,
   id,
   rating,
-  handleClickCart,
-  item,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const userIdLocal = useSelector(state => state.dataUser.userID);
@@ -31,6 +27,7 @@ export default function Card({
   /////
   const dispatch = useDispatch()
   const user = useSelector(state=>state.dataUser.cartID)
+  const userca = useSelector(state => state.cartUser)
   /////////
 
   const favorites = [];
@@ -42,13 +39,12 @@ export default function Card({
       return <FaStar key={index} className={styles.starEmpty} />;
     }
   });
-  const handleToggleFavorite = () => {
-    favorites.push({ image, name, price });
-    setIsFavorite(!isFavorite);
-    Favorites(favorites);
-  };
 
   const addCarrito = async (gameId) => {
+    const gameInCart = userca.filter((e) => e.id === id) 
+    if (gameInCart.length) {
+      alert("the game is already in the cart")
+    }
     if (!userIdLocal) {
      history.push("/register") 
     }else{
@@ -58,14 +54,21 @@ export default function Card({
           userId: userIdLocal
         };
         await axios.post(`http://localhost:3001/cart`, data);
-        handleClickCart(item);
         dispatch(getCartUser(user))
       } catch (error) {
         console.log(error);
       };
     };
-
+  
   };
+
+  const handleToggleFavorite = () => {
+    favorites.push({ image, name, price });
+    setIsFavorite(!isFavorite);
+    Favorites(favorites);
+  };
+
+
 
   return (
     <div className={styles.container}>

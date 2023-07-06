@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import { setCurrentPage, getVideogames, setOrigin } from "../../actions";
 
-export default function NavBar({ size, cartId }) {
+export default function NavBar() {
   const dispatch = useDispatch();
 
   const cart = useSelector(state => state.cartUser)
@@ -20,8 +20,8 @@ export default function NavBar({ size, cartId }) {
   const userLog = useSelector(state => state.dataUser)
   const location = useLocation();
 
-  console.log(userLog)
-  console.log(cart)
+  // console.log(userLog)
+  // console.log(cart)
 
   const btnClick = () => {
     window.location.reload()

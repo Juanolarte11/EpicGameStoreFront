@@ -41,10 +41,6 @@ const Cart = () => {
     }
   };
 
-  // useEffect(() => {
-  //   handleDataCart();
-  //   handlePrice();
-  // }, []);
 
   useEffect(() => {
     handleDataCart();
