@@ -17,61 +17,15 @@ import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
 import NavBar from "../NavBar/NavBar.jsx";
 
-//////////////
-
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import axios from "axios";
-
-/////////////
-
 export default function Home() {
   const DataUser = useSelector((state) => state.dataUser);
   console.log(DataUser);
-  /////////////////////////////
-  //estado preferenceId
-  const [preferenceId, setPreferenceId] = useState(null);
-  initMercadoPago("TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d");
-  const arrayItem = {};
-  const createPreference = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/pay/create_preference",
-        arrayItem
-      );
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
-  /////////////////////////////
-
-  //estado del carrito
-  const [currentCart, setCurrentCart] = useState([]);
-
-  function handleClickCart(item) {
-    let isPresent = false;
-    currentCart.forEach((product) => {
-      if (item.id === product.id) isPresent = true;
-    });
-    if (isPresent) return;
-    setCurrentCart([...currentCart, item]);
-  }
-
-  //estado del carrito
 
   const dispatch = useDispatch();
   const location = useLocation();
   const state = useSelector((state) => state);
   const allVideogames = useSelector((state) => state.videogames);
-  console.log(allVideogames);
+  // console.log(allVideogames);
   const pageNumber = useSelector((state) => state.currentPage);
   const origin = useSelector((state) => state.origin || "all");
   const [videogamesPerPage, setVideogamesPerPage] = useState(15);
@@ -174,9 +128,9 @@ export default function Home() {
       ) : (
         <div className={styles.container}>
           <div>
-            <NavBar size={currentCart.length} />
+            <NavBar />
           </div>
-          <h3>HOLA {state.dataUser?.nombre?.toUpperCase()}</h3>
+
           <div className={styles["filter-container"]}>
             <div>
               <label className={styles.label}>Rating: </label>
@@ -202,31 +156,8 @@ export default function Home() {
                 <option value="zToA">Z to A</option>
               </select>
             </div>
-            {/* <div>
-              <label className={styles.label}>Origin: </label>
-              <select
-                onChange={(e) => handleFilterOrigin(e)}
-                className={styles.select}
-                id="originSelect"
-              >
-                <option value="all">All videogames</option>
-                <option value="db">Database</option>
-                <option value="api">Api</option>
-              </select>
-            </div> */}
           </div>
           <div>
-            <SearchBar />
-
-            {/* ////////////////// */}
-
-            <button onClick={handleBuy}>MERCADO PAGO</button>
-            {preferenceId && (
-              <Wallet initialization={{ preferenceId: preferenceId }} />
-            )}
-
-            {/* ////////////////// */}
-
             <button onClick={(e) => handleClick(e)} className={styles.button}>
               Reload videogames
             </button>
@@ -242,13 +173,13 @@ export default function Home() {
                 {currentVideogames.map((el) => (
                   <Card
                     item={el}
-                    handleClickCart={handleClickCart}
                     name={el.name}
                     // genres={el.genres}
                     price={el.price}
                     image={el.background_image || el.image}
                     id={el.id}
                     key={el.id}
+                    rating={el.rating}
                   />
                 ))}
               </div>

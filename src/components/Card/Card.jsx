@@ -8,6 +8,9 @@ import Favorites from "../Favorites/Favorites";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { getCartUser } from "../../actions";
 
 export default function Card({
   name,
@@ -16,22 +19,25 @@ export default function Card({
   Genres,
   image,
   id,
-  handleClickCart,
-  item,
+  rating,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoritesList, setFavotiresList] = useState([]);
   const userIdLocal = useSelector((state) => state.dataUser.userID);
 
   const history = useHistory();
+  /////
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.dataUser.cartID);
+  const userca = useSelector((state) => state.cartUser);
+  /////////
 
   const favorites = [];
 
   const handleToggleFavorite = () => {
+    favorites.push({ image, name, price });
     setIsFavorite(!isFavorite);
-
-    setFavotiresList({ image, name, price });
-    Favorites(favoritesList);
+    Favorites(favorites);
   };
 
   let genreList = [];
