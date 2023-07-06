@@ -86,6 +86,11 @@ p {
 }
 
 .image{
-    width: 50rem;
-    height: 35rem;
+    width: 40rem;
+    height: 30rem;
+}
+
+.priceRating{
+    background-color: var(--melon);
+    margin-right: 2rem;
 }
