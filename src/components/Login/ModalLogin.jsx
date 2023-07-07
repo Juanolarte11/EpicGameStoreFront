@@ -38,14 +38,9 @@ function ModalLogin() {
                 userID: id,
                 cartID: Carrito.id
             }
-            const resDataUsuer = dispatch(getDataUser(dataUser))
-<<<<<<< HEAD:src/components/Login/Login.jsx
-           localStorage.setItem('userData', JSON.stringify(dataUser));
-            history.push("/home");
-=======
-            localStorage.setItem('userData', JSON.stringify(dataUser));
+            // const resDataUsuer = dispatch(getDataUser(dataUser))
+            // localStorage.setItem('userData', JSON.stringify(dataUser));
             handleCloseModal();
->>>>>>> 991785e86a1c9c3a703137dc73662a397b27c6b2:src/components/Login/ModalLogin.jsx
         } catch (error) {
             console.log(error)
         }
