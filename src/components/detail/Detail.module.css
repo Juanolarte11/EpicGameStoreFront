@@ -43,9 +43,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 50px;
 }
-  
-  
-  
+
 .description {
     font-size: 24px;
     color: var(--gunmetal);
@@ -58,7 +56,7 @@ p {
     font-size: 24px;
     color: var(--gunmetal);
 }
-  
+
 .button {
     display: inline-block;
     padding: 6px 12px; 
@@ -93,4 +91,5 @@ p {
 .priceRating{
     background-color: var(--melon);
     margin-right: 2rem;
+    padding: 5px;
 }
