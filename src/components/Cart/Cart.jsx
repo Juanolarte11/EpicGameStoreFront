@@ -14,13 +14,26 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const history = useHistory();
 
-
+  console.log(dataUser);
   const dispatch = useDispatch()
-  const user = useSelector(state=>state.dataUser.cartID)
+  const user = useSelector(state => state.dataUser.cartID)
+
+  useEffect(async () => {
+    if (cart?.length === 0) {
+      try {
+        const cartID = dataUser.cartID;
+        const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
+        setCart(response.data[0]?.Videogames);
+      } catch (error) {
+
+      }
+    }
+  })
 
 
   const handleDataCart = async () => {
     const cartID = dataUser.cartID;
+    console.log(cartID);
     const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
     setCart(response.data[0]?.Videogames);
   };
@@ -37,7 +50,7 @@ const Cart = () => {
       dispatch(getCartUser(user))
     } catch (error) {
       console.log(error);
-      
+
     }
   };
 
@@ -55,10 +68,10 @@ const Cart = () => {
   }, [cart]);
 
   const handlePrice = () => {
-      const total = cart.reduce((accumulator, item) => {
+    const total = cart?.reduce((accumulator, item) => {
       return accumulator + item.quantity * item.unit_price;
     }, 0);
-    setPrice(total); 
+    setPrice(total);
   };
 
   return (
@@ -90,10 +103,10 @@ const Cart = () => {
       )}
       <div className={style.total}>
         <span>Total Price of your Cart</span>
-        <span>{price.toFixed(2)}</span>
+        <span>{price?.toFixed(2)}</span>
       </div>
       <div>
-        <MercadoPago arrayGames= {cart}/>
+        <MercadoPago arrayGames={cart} />
       </div>
     </div>
   );

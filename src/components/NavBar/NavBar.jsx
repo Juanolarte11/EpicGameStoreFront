@@ -16,19 +16,19 @@ export default function NavBar({ size, cartId }) {
   const dispatch = useDispatch();
 
   const cart = useSelector(state => state.cartUser)
-  const user = useSelector(state => state.dataUser.cartID)
+  const user = useSelector(state => state.dataUser.userID)
   const userLog = useSelector(state => state.dataUser)
   const location = useLocation();
 
   console.log(userLog)
-  console.log(cart)
 
   const btnClick = () => {
     window.location.reload()
   }
 
   useEffect(() => {
-    dispatch(getCartUser(user))
+    const responseDis = dispatch(getCartUser(cart))
+    console.log(responseDis);
   }, [])
 
   return (
@@ -38,7 +38,7 @@ export default function NavBar({ size, cartId }) {
       <div className={style.navLinks}>
       <div className={style.a}>
         <Link to="/home">HOME</Link>
-        <Link to="/about">ABOUT</Link>
+        {/* <Link to="/about">ABOUT</Link> */}
         <Favorites />
         {/* <Link to="/videogame">SELL</Link> */}
         {/* <Link to="/login">LOGIN</Link>

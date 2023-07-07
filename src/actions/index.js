@@ -12,11 +12,15 @@ export function getVideogames (){
 
 export function getCartUser (id){
     return async function(dispatch){
-        const json = await axios.get(`/cart/${id}`); 
+        try {
+            const json = await axios.get(`/cart/${id}`); 
         return dispatch({
             type: "GET_CART_USER",
             payload: json.data[0]?.Videogames
         });
+        } catch (error) {
+            console.log(error);
+        }
     };
 };
 

@@ -7,7 +7,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaGithub } from 'react-i
 function LandingPage() {
   return (
     <div className={styles.container}>
-      <nav className={styles.navbar}>
+      {/* <nav className={styles.navbar}>
         <a href="#" className={styles.logo}>
           EpicGameStore
         </a>
@@ -19,7 +19,7 @@ function LandingPage() {
             <button className={styles.navButton}>Register</button>
           </Link>
         </div>
-      </nav>
+      </nav> */}
       <main className={styles.main}>
         <div className={styles.contentWrapper}>
           <h1 className={styles.heading}>Welcome to EpicGameStore!</h1>

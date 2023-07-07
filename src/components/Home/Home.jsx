@@ -6,6 +6,7 @@ import {
   filterVideogamesByOrigin,
   setCurrentPage,
   setOrigin,
+  getDataUser
 } from "../../actions/index.js";
 import { Link, useLocation } from "react-router-dom";
 import Card from "../Card/Card.jsx";
@@ -21,7 +22,7 @@ export default function Home() {
 
   const DataUser = useSelector(state => state.dataUser)
   console.log(DataUser); 
-
+  let dataLocalUser = JSON.parse(localStorage.getItem("userData"))
   //estado del carrito
   const [currentCart, setCurrentCart] = useState([]);
 
@@ -51,13 +52,11 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getVideogames());
-
     const handleLocationChange = () => {
       dispatch(setCurrentPage(1));
     };
-
+    dispatch(getDataUser(dataLocalUser))
     window.addEventListener("popstate", handleLocationChange);
-
     return () => {
       dispatch(setCurrentPage(1));
       dispatch(setOrigin("all"));
@@ -65,7 +64,7 @@ export default function Home() {
       setAlphabeticalOrder("");
     };
   }, [dispatch, location.pathname]);
-
+  console.log(dataLocalUser);
   function handleClick(e) {
     e.preventDefault();
     dispatch(setCurrentPage(1));
