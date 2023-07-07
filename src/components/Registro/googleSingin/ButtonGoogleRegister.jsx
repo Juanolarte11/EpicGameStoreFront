@@ -1,24 +1,27 @@
 import { auth , provider } from './config'
 import { signInWithPopup } from 'firebase/auth'
-import  style  from '../RegistrationForm.module.css'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import  style  from '../Login.module.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-const Login = () => {
-    const history = useHistory()
-    
+const ButtonGoogleRegister = ( ) => {
+
+    const history = useHistory()      
+      
     const handleClick = () => {
-
+        
+       
         signInWithPopup(auth,provider).then( async(data) => {    
             const response =  await axios.get('http://localhost:3001/users/')
             const arrayUsers = response.data
 
             const result = arrayUsers.find( user => user.userEmail === data.user.email)
-            console.log(response)
 
             if(result){
-                alert('ya existe ese usuario')   
+                alert('ya existe ese usuario') 
+                  
             }else{
+                history.push("/Home");
                 const value = ({
                     userName: data.user.displayName,
                     userPassword: 'firepass',        
@@ -27,12 +30,11 @@ const Login = () => {
                         // data.user.photoURL '               
                         // userProvider: data.user.providerId,
                         // userUid: data.user.uid
-                }) 
-                    try {
-                        console.log(value)
+                })                
+                    try { 
+                                              
                         const respuestaPost = await axios.post('http://localhost:3001/users/', value) 
-                        console.log(respuestaPost);
-                        history.push("/Login");
+                                             
                     } catch (error) {
                         console.log(error);
                     }
@@ -50,4 +52,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ButtonGoogleRegister
