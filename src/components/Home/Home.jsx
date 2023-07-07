@@ -21,6 +21,7 @@ export default function Home() {
 
   const DataUser = useSelector(state => state.dataUser)
   console.log(DataUser); 
+<<<<<<< HEAD
 
   //estado del carrito
   const [currentCart, setCurrentCart] = useState([]);
@@ -35,12 +36,14 @@ export default function Home() {
   }
 
   //estado del carrito
+=======
+>>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
 
   const dispatch = useDispatch();
   const location = useLocation();
   const state = useSelector(state=>state)
   const allVideogames = useSelector((state) => state.videogames);
-  console.log(allVideogames);
+  // console.log(allVideogames);
   const pageNumber = useSelector((state) => state.currentPage);
   const origin = useSelector((state) => state.origin || "all");
   const [videogamesPerPage, setVideogamesPerPage] = useState(15);
@@ -143,7 +146,7 @@ export default function Home() {
       ) : (
         <div className={styles.container}>
           <div>
-            <NavBar size={currentCart.length} />
+            <NavBar />
           </div>
           
           <div className={styles["filter-container"]}>
@@ -188,7 +191,7 @@ export default function Home() {
                 {currentVideogames.map((el) => (
                   <Card
                     item={el}
-                    handleClickCart={handleClickCart}
+
                     name={el.name}
                     // genres={el.genres}
                     price={el.price}

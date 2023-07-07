@@ -11,10 +11,15 @@ import { getCartUser } from "../../actions";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import { setCurrentPage, getVideogames, setOrigin } from "../../actions";
+<<<<<<< HEAD
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
 
 export default function NavBar({ size, cartId }) {
+=======
+
+export default function NavBar() {
+>>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
   const dispatch = useDispatch();
 
   const cart = useSelector(state => state.cartUser)
@@ -22,8 +27,13 @@ export default function NavBar({ size, cartId }) {
   const userLog = useSelector(state => state.dataUser)
   const location = useLocation();
 
+<<<<<<< HEAD
   console.log(userLog)
   console.log(cart)
+=======
+  // console.log(userLog)
+  // console.log(cart)
+>>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
 
   const btnClick = () => {
     window.location.reload()
@@ -61,6 +71,7 @@ export default function NavBar({ size, cartId }) {
       <div>
         <div className={style.navButtons}>
           {
+<<<<<<< HEAD
             !userLog.userID &&  
             <ModalLogin/>}
             {            
@@ -68,6 +79,19 @@ export default function NavBar({ size, cartId }) {
             !userLog.userID &&
             <RegisterLogin/>
             }
+=======
+            !userLog.userID &&
+            <Link to="/login">
+              <button className={style.navButton}>Login</button>
+            </Link>
+          }
+          {
+            !userLog.userID &&
+            <Link to="/register">
+              <button className={style.navButton}>Register</button>
+            </Link>
+          }
+>>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
           {
             userLog.userID &&
             <button onClick={btnClick} className={style.navButton}>Logout</button>
