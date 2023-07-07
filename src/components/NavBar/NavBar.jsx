@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import joystick from "./joystick.jpg";
-// import Favorites from "../../pages/Favorites/Favorites";
+import Favorites from "../Favorites/Favorites";
 import { useSelector } from "react-redux";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
@@ -31,7 +31,6 @@ export default function NavBar({size}) {
         <Link to="/home">HOME</Link>
         <Link to="/about">ABOUT</Link>
         <Link to="/favorites">FAVOITES</Link>
-        {/* <Favorites /> */}
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
