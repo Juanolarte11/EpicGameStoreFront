@@ -19,7 +19,6 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/videogame" component={CreateVideogame} />
           <Route path="/about" component={About} />
-  
           <Route path = "/cart" component = { Cart }/>
         </Switch>
       </div>

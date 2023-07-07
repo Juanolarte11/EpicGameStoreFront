@@ -17,17 +17,15 @@ import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
 import NavBar from "../NavBar/NavBar.jsx";
+import ConteinerCars from "../ContainerCards/ConteinersCard.jsx"
 
 export default function Home() {
 
+  const size = 0;
   const DataUser = useSelector(state => state.dataUser)
   console.log(DataUser); 
-<<<<<<< HEAD
   let dataLocalUser = JSON.parse(localStorage.getItem("userData"))
-=======
-<<<<<<< HEAD
 
->>>>>>> 991785e86a1c9c3a703137dc73662a397b27c6b2
   //estado del carrito
   const [currentCart, setCurrentCart] = useState([]);
 
@@ -39,10 +37,9 @@ export default function Home() {
     if (isPresent) return;
     setCurrentCart([...currentCart, item]);
   }
-
-  //estado del carrito
-=======
->>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
+  if(dataLocalUser){
+    dispatch(getDataUser(dataLocalUser))
+  }
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -56,13 +53,13 @@ export default function Home() {
   const [alphabeticalOrder, setAlphabeticalOrder] = useState("");
   const indexOfLastVideogame = pageNumber * videogamesPerPage; // 15
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
-
+console.log(allVideogames);
   useEffect(() => {
     dispatch(getVideogames());
     const handleLocationChange = () => {
       dispatch(setCurrentPage(1));
     };
-    dispatch(getDataUser(dataLocalUser))
+    
     window.addEventListener("popstate", handleLocationChange);
     return () => {
       dispatch(setCurrentPage(1));
@@ -71,168 +68,22 @@ export default function Home() {
       setAlphabeticalOrder("");
     };
   }, [dispatch, location.pathname]);
-  console.log(dataLocalUser);
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(setCurrentPage(1));
-    dispatch(getVideogames());
-    dispatch(setOrigin("all"));
-    const originSelect = document.getElementById("originSelect");
-    if (originSelect) {
-      originSelect.selectedIndex = 0;
-    }
-    const alphabetSelect = document.getElementById("alphabeticalOrder");
-    if (alphabetSelect) {
-      alphabetSelect.selectedIndex = 0;
-    }
-    const ratingSelect = document.getElementById("ratingOrder");
-    if (ratingSelect) {
-      ratingSelect.selectedIndex = 0;
-    }
-  }
 
-  function handleFilterOrigin(e) {
-    e.preventDefault();
-    const handleLocationChange = () => {
-      dispatch(setCurrentPage(1));
-    };
-
-    window.addEventListener("popstate", handleLocationChange);
-    const origin = e.target.value;
-    dispatch(setOrigin(origin));
-    dispatch(setCurrentPage(1));
-    dispatch(filterVideogamesByOrigin(origin));
-  }
-
-  const handleRatingSort = (e) => {
-    e.preventDefault();
-    const order = e.target.value;
-    if (order === "na") {
-      return;
-    }
-    const alphabetSelect = document.getElementById("alphabeticalOrder");
-    if (alphabetSelect) {
-      alphabetSelect.selectedIndex = 0;
-    }
-    dispatch(setCurrentPage(1));
-    setRatingOrder(`Order ${order}`);
-    dispatch({ type: "SORT_BY_RATING", payload: order });
-  };
-
-  const handleAlphabeticalOrder = (e) => {
-    e.preventDefault();
-    const order = e.target.value;
-    if (order === "na") {
-      return;
-    }
-    const ratingSelect = document.getElementById("ratingOrder");
-    if (ratingSelect) {
-      ratingSelect.selectedIndex = 0;
-    }
-    dispatch(setCurrentPage(1));
-    setAlphabeticalOrder(`order ${order}`);
-    dispatch({ type: "SORT_BY_ALPHABET", payload: order });
-  };
-
-  const currentVideogames =
-    allVideogames && allVideogames.length
-      ? allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
-      : [];
-  return (
-    <div>
-      {(
-        origin === "db" || origin === "search"
-          ? !allVideogames
-          : !allVideogames || allVideogames.length === 0
-      ) ? (
-        <LoadingPage />
-      ) : (
-        <div className={styles.container}>
-          <div>
-            <NavBar />
-          </div>
-          
-          <div className={styles["filter-container"]}>
-            <div>
-              <label className={styles.label}>Rating: </label>
-              <select
-                onChange={(e) => handleRatingSort(e)}
-                className={styles.select}
-                id="ratingOrder"
-              >
-                <option value="na"> -- </option>
-                <option value="lToH">Lowest to highest</option>
-                <option value="hToL">Highest to lowest</option>
-              </select>
-            </div>
-            <div>
-              <label className={styles.label}>Alphabetical order: </label>
-              <select
-                onChange={(e) => handleAlphabeticalOrder(e)}
-                className={styles.select}
-                id="alphabeticalOrder"
-              >
-                <option value="na"> -- </option>
-                <option value="aToZ">A to Z</option>
-                <option value="zToA">Z to A</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <button onClick={(e) => handleClick(e)} className={styles.button}>
-              Reload videogames
-            </button>
-            <Pages
-              videogamesPerPage={videogamesPerPage}
-              allVideogames={allVideogames.length}
-              pages={pageNumber}
-            />
-          </div>
-          <div className={styles.card}>
-            {currentVideogames && currentVideogames.length > 0 ? (
-              <div className={styles["card-container"]}>
-                {currentVideogames.map((el) => (
-                  <Card
-                    item={el}
-
-                    name={el.name}
-                    // genres={el.genres}
-                    price={el.price}
-                    image={el.background_image || el.image}
-                    id={el.id}
-                    key={el.id}
-                    rating={el.rating}
-                  />
-                ))}
-              </div>
-            ) : (
+      return (
+        <div>
+          {allVideogames.length === 0 ? (
+            <LoadingPage />
+          ) : (
+            <div className={styles.container}>
               <div>
-                {origin === "db" ? (
-                  <Card
-                    name={"No videogame Found, click here to create one"}
-                    image={noGameFif}
-                    id={-5}
-                    key={"noGameFound"}
-                  />
-                ) : (
-                  <Card
-                    name={"No videogame Found in search results"}
-                    image={noGameSearh}
-                    id={-6}
-                    key={"noGameSearchFound"}
-                  />
-                )}
+                <NavBar size={size} />
               </div>
-            )}
-          </div>
-          <div className={styles.paginationContainer}>
-            <Pages
-              videogamesPerPage={videogamesPerPage}
-              allVideogames={allVideogames.length}
-            />
-          </div>
+              <ConteinerCars
+                allVideogames={allVideogames}
+                handleClickCart={handleClickCart}
+              />
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
-}
+      );
+    }
