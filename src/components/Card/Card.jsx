@@ -16,8 +16,6 @@ import { getCartUser } from "../../actions";
 export default function Card({
   name,
   price,
-  genres,
-  Genres,
   image,
   id,
   rating,
@@ -42,13 +40,12 @@ export default function Card({
       return <FaStar key={index} className={styles.starEmpty} />;
     }
   });
-  const handleToggleFavorite = () => {
-    favorites.push({ image, name, price });
-    setIsFavorite(!isFavorite);
-    Favorites(favorites);
-  };
 
   const addCarrito = async (gameId) => {
+    const gameInCart = userca.filter((e) => e.id === id) 
+    if (gameInCart.length) {
+      alert("the game is already in the cart")
+    }
     if (!userIdLocal) {
      history.push("/register") 
     }else{
@@ -64,8 +61,15 @@ export default function Card({
         console.log(error);
       };
     };
-
   };
+
+  const handleToggleFavorite = () => {
+    favorites.push({ image, name, price });
+    setIsFavorite(!isFavorite);
+    Favorites(favorites);
+  };
+
+
 
   return (
     <div className={styles.container}>
