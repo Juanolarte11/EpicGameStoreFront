@@ -5,6 +5,10 @@
   --fondo-color: #f5f5f5;
   --texto-color: #ffffff;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
 .name{
   color: var(--texto-color);
 }

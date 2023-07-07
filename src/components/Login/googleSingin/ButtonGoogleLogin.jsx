@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { getDataUser } from '../../../actions'
 
 
-const Login = () => {
+const ButtonGoogleLogin = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     
@@ -40,4 +40,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ButtonGoogleLogin

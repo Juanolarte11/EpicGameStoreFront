@@ -25,7 +25,7 @@ export default function Home() {
   const location = useLocation();
   const state = useSelector((state) => state);
   const allVideogames = useSelector((state) => state.videogames);
-  // console.log(allVideogames);
+  console.log(allVideogames);
   const pageNumber = useSelector((state) => state.currentPage);
   const origin = useSelector((state) => state.origin || "all");
   const [videogamesPerPage, setVideogamesPerPage] = useState(15);

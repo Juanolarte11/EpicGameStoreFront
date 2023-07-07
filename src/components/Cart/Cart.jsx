@@ -30,12 +30,9 @@ const Cart = () => {
       const cartIdLocal = dataUser.cartID;
       const data = {
         gameID: gameId,
-        cartID: cartIdLocal,
+        cartID: cartIdLocal
       };
-      const response = await axios.post(
-        `http://localhost:3001/cart/delete`,
-        data
-      );
+      const response = await axios.post(`http://localhost:3001/cart/delete`, data);
       setCart(response.data[0]?.Videogames);
       dispatch(getCartUser(user))
     } catch (error) {
@@ -54,10 +51,10 @@ const Cart = () => {
   }, [cart]);
 
   const handlePrice = () => {
-    const total = cart.reduce((accumulator, item) => {
+      const total = cart.reduce((accumulator, item) => {
       return accumulator + item.quantity * item.unit_price;
     }, 0);
-    setPrice(total);
+    setPrice(total); 
   };
 
   return (
@@ -83,8 +80,8 @@ const Cart = () => {
         ))
       ) : (
         <div className={style.emptyCart}>
-          <p>There are no games in your cart</p>
-          <button onClick={() => history.push("/home")}>Go Home</button>
+          <p>Aún no hay juegos en tu carrito</p>
+          <button onClick={() => history.push("/home")}>Ir al Home</button>
         </div>
       )}
       <div className={style.total}>
@@ -92,7 +89,7 @@ const Cart = () => {
         <span>{price.toFixed(2)}</span>
       </div>
       <div>
-        <MercadoPago arrayGames={cart} />
+        <MercadoPago arrayGames= {cart}/>
       </div>
     </div>
   );
