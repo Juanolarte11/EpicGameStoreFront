@@ -21,23 +21,6 @@ export default function Home() {
 
   const DataUser = useSelector(state => state.dataUser)
   console.log(DataUser); 
-<<<<<<< HEAD
-
-  //estado del carrito
-  const [currentCart, setCurrentCart] = useState([]);
-
-  function handleClickCart(item) {
-    let isPresent = false;
-    currentCart.forEach((product) => {
-      if (item.id === product.id) isPresent = true;
-    });
-    if (isPresent) return;
-    setCurrentCart([...currentCart, item]);
-  }
-
-  //estado del carrito
-=======
->>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
 
   const dispatch = useDispatch();
   const location = useLocation();

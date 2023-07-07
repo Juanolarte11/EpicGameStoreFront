@@ -11,22 +11,14 @@ function LandingPage() {
         <a href="#" className={styles.logo}>
           EpicGameStore
         </a>
-<<<<<<< HEAD
         {/* <div className={styles.navButtons}>
-=======
-        <div className={styles.navButtons}>
->>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
           <Link to="/login">
             <button className={styles.navButton}>Login</button>
           </Link>
           <Link to="/register">
             <button className={styles.navButton}>Register</button>
           </Link>
-<<<<<<< HEAD
         </div> */}
-=======
-        </div>
->>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
       </nav>
       <main className={styles.main}>
         <div className={styles.contentWrapper}>
