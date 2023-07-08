@@ -1,0 +1,39 @@
+.navbar {
+  background-color: rgb(12, 12, 61);
+  padding: 10px;
+  margin: 10px;
+  width: 65%;
+  height: 40px;
+}
+
+.navbarNav {
+  list-style: none;
+  display: flex;
+}
+
+.navItem {
+  margin-right: 5px;
+}
+
+.navLink {
+  color: #ffffff;
+  background-color: blue;
+  padding: 2px;
+  height: 25px;
+  width: 25px;
+}
+
+.navLink:hover {
+  background-color: #ddd;
+}
+
+.spans {
+  padding-right: 5px;
+  color: #ffffff;
+  font-size: 16px;
+}
+.selector{
+  width:100px;
+  background-color: blue;
+  color: #ffffff;
+}

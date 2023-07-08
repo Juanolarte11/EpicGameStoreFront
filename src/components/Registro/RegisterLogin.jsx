@@ -7,6 +7,10 @@ import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
 
 function RegisterLogin() {
   const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -15,11 +19,6 @@ function RegisterLogin() {
   const handleCloseModal = () => {
     setIsOpen(false);
   };
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -86,7 +85,7 @@ function RegisterLogin() {
                   </div>
                   <div className={styles.formGroup}>
                     <div>
-                      <label htmlFor="password">Contraseña:</label>
+                      <label htmlFor="password">ContraseÃ±a:</label>
                     </div>
                     <div>
                       <input

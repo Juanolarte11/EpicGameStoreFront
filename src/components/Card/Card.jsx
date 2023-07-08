@@ -1,39 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Card.module.css";
-import noImage from "./noImageFound.jpg";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Favorites from "../Favorites/Favorites";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from "react";
 import { FaStar } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { getCartUser } from "../../actions";
+import styles from "./Card.module.css";
 
-export default function Card({
-  name,
-  price,
-  image,
-  id,
-  rating,
-  handleClickCart,
-  item,
-}) {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const userIdLocal = useSelector((state) => state.dataUser.userID);
-
-  const userca = useSelector((state) => state.cartUser);
-  const history = useHistory();
-  /////
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.dataUser.cartID);
-  /////////
-
-  const favorites = [];
+export default function Card({ game, handleClickCart }) {
+  const { name, price, rating, image, Genres } = game;
+  const divisa = "USD";
+  const decuent = "-30%";
   const roundedRating = Math.round(rating);
-  const stars = Array.from({ length: 5 }, (_, index) => {
+  const stars = Array?.from({ length: 5 }, (_, index) => {
     if (index < roundedRating) {
       return <FaStar key={index} className={styles.starFilled} />;
     } else {
@@ -41,68 +15,41 @@ export default function Card({
     }
   });
 
-  const addCarrito = async (gameId) => {
-    if (userca?.length) {
-      const gameInCart = userca.filter((e) => e.id === id);
-      if (gameInCart.length) {
-        alert("the game is already in the cart");
-      }
-    }
-    if (!userIdLocal) {
-      history.push("/register");
-    } else {
-      try {
-        const data = {
-          gameID: gameId,
-          userId: userIdLocal,
-        };
-        await axios.post(`http://localhost:3001/cart`, data);
-        dispatch(getCartUser(user));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
-  const handleToggleFavorite = () => {
-    favorites.push({ image, name, price });
-    setIsFavorite(!isFavorite);
-    Favorites(favorites);
-  };
+  function renderGenreTags(genres) {
+    return genres?.map((genre, index) => (
+      <span className={styles.genreTag} key={index}>
+        {genre.genreName}
+      </span>
+    ));
+  }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.rating}>{stars}</div>
-        <button
-          className={`${styles.favoriteButton} ${
-            isFavorite ? styles.favorite : ""
-          }`}
-          onClick={handleToggleFavorite}
-        >
-          {isFavorite ? (
-            <FavoriteIcon className={styles.favoriteIcon} />
-          ) : (
-            <FavoriteBorderIcon className={styles.favoriteIcon} />
-          )}
-        </button>
-        <Link
-          to={id === -5 ? "/videogame" : id === -6 ? "#" : `/home/${id}`}
-          key={id}
-        >
-          <div className={styles.imageContainer}>
-            <img
-              className={styles.image}
-              src={image || noImage}
-              alt="image not found"
-            />
+    <div className={styles.carGame}>
+      <div className={styles.imageContainer}>
+        <div className={styles.spaceImage}>
+          <img src={image} alt={name} className={styles.image} />
+        </div>
+        <div className={styles.overlay}>
+          <div
+            className={styles.overlayContent}
+            onClick={() => handleClickCart(game.id)}
+          >
+            <h3 className={styles.gameName}>{name}</h3>
+            <div className={styles.rating}>{stars}</div>
+            <div className={styles.genres}>{renderGenreTags(Genres)}</div>
+            <div className={styles.contButtons}>
+              <button className={styles.addButton}>Add to Cart</button>
+              <button className={styles.favoriteButton}>
+                Add to Favorites
+              </button>
+            </div>
+            <div className={styles.contPrice}>
+              <p className={styles.gameDesc}>{decuent}</p>
+              <p className={styles.gameDivisa}>{divisa}</p>
+              <p className={styles.gamePrice}>{price}</p>
+            </div>
           </div>
-          <h3 className={styles.cardTitle}>{name}</h3>
-          <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
-        </Link>
-        <button className={styles.buton} onClick={() => addCarrito(id)}>
-          Add to cart
-        </button>
+        </div>
       </div>
     </div>
   );

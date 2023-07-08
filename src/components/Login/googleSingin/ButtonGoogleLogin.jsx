@@ -26,6 +26,7 @@ const ButtonGoogleLogin = () => {
                     cartID: result.Carrito.id
                 }
                  dispatch(getDataUser(dataUser))
+                 localStorage.setItem('userData', JSON.stringify(dataUser));
                 history.push("/Home");    
             }else{
                 alert('No existe este usuario')    

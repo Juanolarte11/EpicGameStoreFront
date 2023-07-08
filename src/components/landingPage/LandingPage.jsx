@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./landingPage.module.css";
-import portada from "../Home/LogoPortada.webp";
+import portada from "./LogoPortada.webp";
 import {
   FaFacebook,
   FaTwitter,
@@ -13,19 +13,6 @@ import {
 function LandingPage() {
   return (
     <div className={styles.container}>
-      <nav className={styles.navbar}>
-        <a href="#" className={styles.logo}>
-          EpicGameStore
-        </a>
-        {/* <div className={styles.navButtons}>
-          <Link to="/login">
-            <button className={styles.navButton}>Login</button>
-          </Link>
-          <Link to="/register">
-            <button className={styles.navButton}>Register</button>
-          </Link>
-        </div> */}
-      </nav>
       <main className={styles.main}>
         <div className={styles.contentWrapper}>
           <h1 className={styles.heading}>Welcome to EpicGameStore!</h1>
@@ -40,21 +27,21 @@ function LandingPage() {
           &copy; 2023 EpicGameStore. All rights reserved.
         </p>
         <div className={styles.socialMedia}>
-          <a href="#" className={styles.socialLink}>
+          <button className={styles.socialButton}>
             <FaFacebook />
-          </a>
-          <a href="#" className={styles.socialLink}>
+          </button>
+          <button className={styles.socialButton}>
             <FaTwitter />
-          </a>
-          <a href="#" className={styles.socialLink}>
+          </button>
+          <button className={styles.socialButton}>
             <FaInstagram />
-          </a>
-          <a href="#" className={styles.socialLink}>
+          </button>
+          <button className={styles.socialButton}>
             <FaYoutube />
-          </a>
-          <a href="#" className={styles.socialLink}>
+          </button>
+          <button className={styles.socialButton}>
             <FaGithub />
-          </a>
+          </button>
         </div>
       </footer>
     </div>

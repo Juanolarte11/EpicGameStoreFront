@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getVideogamesByName, setCurrentPage, setOrigin } from "../../actions";
 import styles from "./searchBar.module.css";
-export default function SearchBar() {
+export default function SearchBar({ handleSearch }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
@@ -13,17 +13,12 @@ export default function SearchBar() {
     if (inputValue.length === 0) {
       dispatch(getVideogamesByName(inputValue));
     }
-    if (inputValue.length >= 1) {
-      dispatch(getVideogamesByName(inputValue));
-    }
-  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(setCurrentPage(1));
-    dispatch(getVideogamesByName(name));
-    dispatch(setOrigin("search"));
-  };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      handleSearch(name);
+    };
+  }
 
   return (
     <div className={`${styles.searchBarContainer} searchBarContainer`}>
