@@ -1,20 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import style from "./User.module.css";
+import style from "./Users.module.css";
 import { Link } from "react-router-dom";
 
 function User() {
-  const userLog = useSelector((state) => state.dataUser);
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
 
   return (
     <div className={style.container}>
       <h1>Rol: {"a completar segun usuario"}</h1>
-      <hr />
-      <h1> {userLog.nombre.toUpperCase()}</h1>
-      <h4>{"mis datos(posibilidad de cambio de password y nickname)"}</h4>
-      <h4>{"lista de favoritos"}</h4>
-      <h4>{"registro de compras"}</h4>
-      <h4>{"registro de ventas"}</h4>
+      <h1> {dataUser.nombre.toUpperCase()}</h1>
+      <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
+      <h2>{"lista de favoritos"}</h2>
+      <h2>{"registro de compras"}</h2>
+      <h2>{"registro de ventas"}</h2>
 
       <Link to="/home" className={style.link}>
         HOME

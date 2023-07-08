@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import joystick from "./joystick.jpg";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
+import noUser from "../NavBar/noUser.png";
 
 export default function NavBar({ size }) {
   const dataUser = JSON.parse(localStorage.getItem("userData"));
+
+  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
 
   const btnClick = () => {
     localStorage.setItem("userData", JSON.stringify({}));
@@ -17,7 +20,14 @@ export default function NavBar({ size }) {
 
   return (
     <nav className={style.nav}>
-      <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
+      {dataUser.nombre ? (
+        <Link to="/users" className={style.userLink}>
+          <span className={style.userIcon}>{iconUser}</span>
+        </Link>
+      ) : (
+        <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
+      )}
+
       <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
 
       <div className={style.navLinks}>

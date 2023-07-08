@@ -1,17 +1,22 @@
 .container {
   background-image: url("./backImage.jpg");
-  background-color: white;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
+  width: auto;
   padding: 20px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .container h1,
 .container h4 {
   margin: 10px 0;
+  color: white;
 }
 
 .container button {
@@ -22,4 +27,5 @@
   font-weight: bold;
   transition: color 0.3s ease;
   font-size: 30px;
+  color: white;
 }
