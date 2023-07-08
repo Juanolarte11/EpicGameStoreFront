@@ -4,28 +4,20 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import joystick from "./joystick.jpg";
-import Favorites from "../Favorites/Favorites";
-import { useSelector } from "react-redux";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
-// import axios from "axios";
 
 export default function NavBar({size}) {
   
-  const dataSet = {}
-  const userLog = useSelector(state => state.dataUser)
-  // localStorage.setItem('userData', JSON.stringify(userLog));
-  let userData = {}
-  // let userData = JSON.parse(localStorage.getItem("userData"))
-
+  const dataUser = JSON.parse(localStorage.getItem("userData"))
   const btnClick = () => {
-    // localStorage.setItem("userData",  JSON.stringify(dataSet))
-    // window.location.reload()
+    localStorage.setItem('userData', JSON.stringify({}));
+    window.location.reload();
   }
   return (
     <nav className={style.nav}>
       <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
-      <h3 className={style.name}>{userLog?.nombre?.toUpperCase()}</h3>
+      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
       <div className={style.navLinks}>
       <div className={style.a}>
         <Link to="/home">HOME</Link>
@@ -43,15 +35,15 @@ export default function NavBar({size}) {
       <div>
         <div className={style.navButtons}>
           {
-            !userLog.userID &&  
+            !dataUser.userID &&  
             <ModalLogin/>}
             {            
             }{
-            !userLog.userID &&
+            !dataUser.userID &&
             <RegisterLogin/>
             }
           {
-            userLog.userID &&
+            dataUser.userID &&
             <button onClick={btnClick} className={style.navButton}>Logout</button>
           }
         </div>

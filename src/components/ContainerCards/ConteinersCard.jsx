@@ -11,8 +11,7 @@ export default function ConteinerCars({ allVideogames, handleClickCart }) {
   const videogamesPerPage = 15;
 
   useEffect(() => {
-    // let localOrder = localStorage.getItem("order");
-    let localOrder = ""
+    let localOrder = localStorage.getItem("order");
     if (localOrder && localOrder.length > 0) {
       setSortOrder(localOrder);
     }
@@ -49,6 +48,7 @@ export default function ConteinerCars({ allVideogames, handleClickCart }) {
   };
 
   const handleSort = (order) => {
+    localStorage.setItem("order", order)
     setSortOrder(order);
     setCurrentPage(1);
   };
