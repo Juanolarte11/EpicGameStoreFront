@@ -6,23 +6,35 @@ import { Link } from "react-router-dom";
 import joystick from "./joystick.jpg";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
+import noUser from "../NavBar/noUser.png";
 
-export default function NavBar({size}) {
-  
-  const dataUser = JSON.parse(localStorage.getItem("userData"))
+export default function NavBar({ size }) {
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
+
+  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+
   const btnClick = () => {
-    localStorage.setItem('userData', JSON.stringify({}));
+    localStorage.setItem("userData", JSON.stringify({}));
     window.location.reload();
-  }
+  };
+
   return (
     <nav className={style.nav}>
-      <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
+      {dataUser.nombre ? (
+        <Link to="/users" className={style.userLink}>
+          <span className={style.userIcon}>{iconUser}</span>
+        </Link>
+      ) : (
+        <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
+      )}
+
       <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+
       <div className={style.navLinks}>
-      <div className={style.a}>
-        <Link to="/home">HOME</Link>
-        <Link to="/favorites">FAVORITES</Link>
-        <Link to="/about">ABOUT</Link>
+        <div className={style.a}>
+          <Link to="/home">HOME</Link>
+          <Link to="/about">ABOUT</Link>
+          <Link to="/favorites">FAVORITES</Link>
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
@@ -32,20 +44,17 @@ export default function NavBar({size}) {
           </Badge>
         </IconButton>
       </div>
+
       <div>
         <div className={style.navButtons}>
-          {
-            !dataUser.userID &&  
-            <ModalLogin/>}
-            {            
-            }{
-            !dataUser.userID &&
-            <RegisterLogin/>
-            }
-          {
-            dataUser.userID &&
-            <button onClick={btnClick} className={style.navButton}>Logout</button>
-          }
+          {!dataUser?.userID && <ModalLogin />}
+
+          {!dataUser?.userID && <RegisterLogin />}
+          {dataUser?.userID && (
+            <button onClick={btnClick} className={style.navButton}>
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </nav>

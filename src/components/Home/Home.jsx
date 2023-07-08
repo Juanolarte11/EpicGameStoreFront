@@ -5,17 +5,17 @@ import { getVideogames, getCartUser } from "../../actions/index.js";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
-import ConteinerCars from "../ContainerCards/ConteinersCard.jsx"
+import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
 
 import axios from "axios";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
-  const dataUser = JSON.parse(localStorage.getItem("userData"))
-  const [sizeCart, setSizeCart] = useState(0)
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
+  const [sizeCart, setSizeCart] = useState(0);
 
-  const handleClickCart = async(gameId) => {
+  const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
       console.log("logeate");
      }else{
@@ -74,5 +74,4 @@ export default function Home() {
             </div>
           )}
         </div>
-      );
-    }
+      )}

@@ -1,8 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './landingPage.module.css';
-import portada from "./LogoPortada.webp"
-import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaGithub } from 'react-icons/fa';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./landingPage.module.css";
+import portada from "./LogoPortada.webp";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaGithub,
+} from "react-icons/fa";
 
 function LandingPage() {
   return (
@@ -17,7 +23,9 @@ function LandingPage() {
         <img className={styles.img} src={portada} alt="Logo Portada" />
       </main>
       <footer className={styles.footer}>
-        <p className={styles.copy}>&copy; 2023 EpicGameStore. All rights reserved.</p>
+        <p className={styles.copy}>
+          &copy; 2023 EpicGameStore. All rights reserved.
+        </p>
         <div className={styles.socialMedia}>
           <button className={styles.socialButton}>
             <FaFacebook />
