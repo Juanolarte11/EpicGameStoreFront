@@ -4,24 +4,26 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import joystick from "../NavBar/joystick.jpg";
+import noUser from "../NavBar/noUser.png";
 import Favorites from "../Favorites/Favorites";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartUser } from "../../actions";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import { setCurrentPage, getVideogames, setOrigin } from "../../actions";
+import ModalLogin from "../Login/ModalLogin";
+import RegisterLogin from "../Registro/RegisterLogin";
 
-export default function NavBar() {
+export default function NavBar({ size, cartId }) {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cartUser);
   const user = useSelector((state) => state.dataUser.cartID);
   const userLog = useSelector((state) => state.dataUser);
   const location = useLocation();
+  const userImg = useSelector((state) => state.dataUser.nombre);
 
-  // console.log(userLog)
-  // console.log(cart)
+  const iconUser = userImg ? userImg.charAt(0).toUpperCase() : "";
 
   const btnClick = () => {
     window.location.reload();
@@ -33,20 +35,22 @@ export default function NavBar() {
 
   return (
     <nav className={style.nav}>
-      <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
+      {userImg ? (
+        <Link to="/user" className={style.userLink}>
+          <span className={style.userIcon}>{iconUser}</span>
+        </Link>
+      ) : (
+        <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
+      )}
       <h3 className={style.name}>HELLO {userLog?.nombre?.toUpperCase()}</h3>
       <div className={style.navLinks}>
         <div className={style.a}>
           <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
           <Favorites />
-          {/* <Link to="/videogame">SELL</Link> */}
-          {/* <Link to="/login">LOGIN</Link>
-        <Link to="/register">REGISTER</Link> */}
         </div>
       </div>
       <SearchBar />
-
       <div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={cart?.length} color="secondary">
@@ -58,16 +62,8 @@ export default function NavBar() {
       </div>
       <div>
         <div className={style.navButtons}>
-          {!userLog.userID && (
-            <Link to="/login">
-              <button className={style.navButton}>Login</button>
-            </Link>
-          )}
-          {!userLog.userID && (
-            <Link to="/register">
-              <button className={style.navButton}>Register</button>
-            </Link>
-          )}
+          {!userLog.userID && <ModalLogin />}
+          {/* {!userLog.userID && <RegisterLogin />} */}
           {userLog.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout

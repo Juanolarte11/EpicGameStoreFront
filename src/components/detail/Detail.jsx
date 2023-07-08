@@ -21,7 +21,7 @@ export default function Detail(props) {
   const videogameDetail = useSelector((state) => state.detail);
 
   const addCarrito = async (gameId) => {
-    const gameInCart = userca.filter((e) => e.id === id)
+    const gameInCart = userca?.filter((e) => e.id === id)
     if (gameInCart.length) {
       alert("the game is already in the cart")
     }

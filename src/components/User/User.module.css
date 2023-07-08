@@ -1,0 +1,25 @@
+.container {
+  background-image: url("./backImage.jpg");
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding: 20px;
+}
+
+.container h1,
+.container h4 {
+  margin: 10px 0;
+}
+
+.container button {
+  margin-top: auto;
+}
+
+.link {
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: 30px;
+}

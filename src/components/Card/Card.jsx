@@ -42,9 +42,11 @@ export default function Card({
   });
 
   const addCarrito = async (gameId) => {
-    const gameInCart = userca.filter((e) => e.id === id);
-    if (gameInCart.length) {
-      alert("the game is already in the cart");
+    if (userca?.length) {
+      const gameInCart = userca.filter((e) => e.id === id);
+      if (gameInCart.length) {
+        alert("the game is already in the cart");
+      }
     }
     if (!userIdLocal) {
       history.push("/register");
@@ -55,7 +57,6 @@ export default function Card({
           userId: userIdLocal,
         };
         await axios.post(`http://localhost:3001/cart`, data);
-        handleClickCart(item);
         dispatch(getCartUser(user));
       } catch (error) {
         console.log(error);

@@ -5,11 +5,7 @@
   --fondo-color: #f5f5f5;
   --texto-color: #ffffff;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 8be15ba2127475f3d682a1fec5c514e84fa2aef1
-.name{
+<<<<<<< HEAD =======>>>>>>>8be15ba2127475f3d682a1fec5c514e84fa2aef1 .name {
   color: var(--texto-color);
 }
 .nav {
@@ -41,7 +37,9 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  margin-left: 10px;
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .navButtons {
@@ -65,3 +63,19 @@
   background-color: var(--primero-color);
 }
 
+.userIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 35px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+.userLink {
+  text-decoration: none;
+}
