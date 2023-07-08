@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import Pagination from "@mui/material/Pagination";
-import styles from "./ConteinerCars.module.css";
+import styles from "./ConteinerCars.module.css"; 
 import NavbarSec from "../NavBarSec/NavSec";
 
 export default function ConteinerCars({ allVideogames, handleClickCart }) {
