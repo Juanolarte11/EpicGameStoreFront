@@ -9,19 +9,22 @@ import RegisterLogin from "../Registro/RegisterLogin";
 
 export default function NavBar({ size }) {
   const dataUser = JSON.parse(localStorage.getItem("userData"));
+
   const btnClick = () => {
     localStorage.setItem("userData", JSON.stringify({}));
     window.location.reload();
   };
+
   return (
     <nav className={style.nav}>
       <img className={style.userImg} src={joystick} alt="Imagen de perfil" />
       <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+
       <div className={style.navLinks}>
         <div className={style.a}>
           <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
-          <Link to="/favorites">FAVOITES</Link>
+          <Link to="/favorites">FAVORITES</Link>
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
@@ -31,12 +34,13 @@ export default function NavBar({ size }) {
           </Badge>
         </IconButton>
       </div>
+
       <div>
         <div className={style.navButtons}>
-          {!userLog.userID && <ModalLogin />}
-          {}
-          {!dataUser.userID && <RegisterLogin />}
-          {userLog.userID && (
+          {!dataUser?.userID && <ModalLogin />}
+
+          {!dataUser?.userID && <RegisterLogin />}
+          {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout
             </button>

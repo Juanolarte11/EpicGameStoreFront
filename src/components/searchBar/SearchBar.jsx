@@ -1,24 +1,19 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getVideogamesByName, setCurrentPage, setOrigin } from "../../actions";
 import styles from "./searchBar.module.css";
+
 export default function SearchBar({ handleSearch }) {
-  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
-  function handleInputChange(e) {
-    const inputValue = e.target.value;
-    setName(inputValue);
-    if (inputValue.length === 0) {
-      dispatch(getVideogamesByName(inputValue));
-    }
+  async function handleInputChange(e) {
+    const name = e.target.value;
+    setName(name);
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      handleSearch(name);
-    };
+    handleSubmit();
   }
+  const handleSubmit = (e) => {
+    handleSearch(name);
+  };
 
   return (
     <div className={`${styles.searchBarContainer} searchBarContainer`}>
