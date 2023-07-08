@@ -10,11 +10,12 @@ import axios from "axios";
 import { getCartUser } from "../../actions";
 
 export default function Detail(props) {
+
   const id = props.match.params.id;
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => dispatch(getDetail(id)), [dispatch]);
-  const userIdLocal = useSelector(state => state.dataUser.userID);
+  const dataUser = JSON.parse(localStorage.getItem("userData"))
   const user = useSelector(state => state.dataUser.cartID)
   const userca = useSelector(state => state.cartUser)
 
@@ -25,13 +26,13 @@ export default function Detail(props) {
     if (gameInCart.length) {
       alert("the game is already in the cart")
     }
-    if (!userIdLocal) {
+    if (!dataUser) {
       history.push("/register")
     } else {
       try {
         const data = {
           gameID: gameId,
-          userId: userIdLocal
+          userId: dataUser
         };
         await axios.post(`http://localhost:3001/cart`, data);
         dispatch(getCartUser(user))

@@ -21,8 +21,8 @@ export default function NavBar({size}) {
       <div className={style.navLinks}>
       <div className={style.a}>
         <Link to="/home">HOME</Link>
+        <Link to="/favorites">FAVORITES</Link>
         <Link to="/about">ABOUT</Link>
-        <Link to="/favorites">FAVOITES</Link>
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
@@ -35,7 +35,7 @@ export default function NavBar({size}) {
       <div>
         <div className={style.navButtons}>
           {
-            !userLog.userID &&  
+            !dataUser.userID &&  
             <ModalLogin/>}
             {            
             }{
@@ -43,7 +43,7 @@ export default function NavBar({size}) {
             <RegisterLogin/>
             }
           {
-            userLog.userID &&
+            dataUser.userID &&
             <button onClick={btnClick} className={style.navButton}>Logout</button>
           }
         </div>

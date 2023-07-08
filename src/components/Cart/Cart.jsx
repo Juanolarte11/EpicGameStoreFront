@@ -9,12 +9,10 @@ import { getCartUser } from "../../actions";
 import { useDispatch } from "react-redux";
 
 const Cart = () => {
-  const dataUser = useSelector((state) => state.dataUser);
+  const dataUser = JSON.parse(localStorage.getItem("userData"))
   const [price, setPrice] = useState(0);
   const [cart, setCart] = useState([]);
   const history = useHistory();
-
-  console.log(dataUser);
   const dispatch = useDispatch()
   const user = useSelector(state => state.dataUser.cartID)
 

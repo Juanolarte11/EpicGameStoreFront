@@ -32,13 +32,25 @@ export default function Home() {
        };
      };
   }
+  const clickFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("/favorites", game)
+      alert("game add favorites")
+    } catch (error) {
+      console.log(error);
+    }
+  }
  
   useEffect(async() => {
     if(dataUser){
       try {
         const response = await axios.get(`http://localhost:3001/cart/${dataUser.cartID}`);
          dispatch(getCartUser(dataUser.userID))
-        setSizeCart(response.data[0].Videogames.length)
+        setSizeCart(response?.data[0]?.Videogames?.length)
       } catch (error) {
         console.log(error);
       }
@@ -57,6 +69,7 @@ export default function Home() {
               <ConteinerCars
                 allVideogames={allVideogames}
                 handleClickCart={handleClickCart}
+                clickFavorite={clickFavorite}
               />
             </div>
           )}
