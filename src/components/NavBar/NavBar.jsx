@@ -35,7 +35,7 @@ export default function NavBar({size}) {
       <div>
         <div className={style.navButtons}>
           {
-            !dataUser.userID &&  
+            !userLog.userID &&  
             <ModalLogin/>}
             {            
             }{
@@ -43,7 +43,7 @@ export default function NavBar({size}) {
             <RegisterLogin/>
             }
           {
-            dataUser.userID &&
+            userLog.userID &&
             <button onClick={btnClick} className={style.navButton}>Logout</button>
           }
         </div>
