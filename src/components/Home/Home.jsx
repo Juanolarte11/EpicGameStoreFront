@@ -6,10 +6,10 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
-
 import axios from "axios";
 
 export default function Home() {
+  const favorite = {name: "add Favorite"}
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
@@ -44,7 +44,7 @@ export default function Home() {
       console.log(error);
     }
   }
- 
+ console.log(location.pathname);
   useEffect(async() => {
     if(dataUser){
       try {
@@ -70,6 +70,7 @@ export default function Home() {
                 allVideogames={allVideogames}
                 handleClickCart={handleClickCart}
                 clickFavorite={clickFavorite}
+                favorite={favorite}
               />
             </div>
           )}

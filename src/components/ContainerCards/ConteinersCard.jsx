@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import styles from "./ConteinerCars.module.css"; 
 import NavbarSec from "../NavBarSec/NavSec";
 
-export default function ConteinerCars({ allVideogames, handleClickCart, clickFavorite }) {
+export default function ConteinerCars({ allVideogames, handleClickCart, clickFavorite, favorite }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,7 +62,6 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
     setSearchTerm("");
     setCurrentPage(1);
   };
-
   return (
     <div className={styles.container}>
       <NavbarSec handleSort={handleSort} handleSearch={handleSearch} handleReset={handleReset} />
@@ -70,7 +69,7 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
         {sortedVideogames
           .slice(indexOfFirstVideogame, indexOfLastVideogame)
           .map((game) => (
-            <Card key={game.id} game={game} handleClickCart={handleClickCart} clickFavorite={clickFavorite}/>
+            <Card key={game.id} game={game} handleClickCart={handleClickCart} clickFavorite={clickFavorite} favorite={favorite}/>
           ))}
       </div>
       <div className={styles.paginationContainer}>

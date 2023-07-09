@@ -12,6 +12,7 @@ const Cart = () => {
   const dataUser = JSON.parse(localStorage.getItem("userData"))
   const [price, setPrice] = useState(0);
   const [cart, setCart] = useState([]);
+  const [size, setSize] = useState([])
   const history = useHistory();
   const dispatch = useDispatch()
   const user = useSelector(state => state.dataUser.cartID)
@@ -22,6 +23,7 @@ const Cart = () => {
         const cartID = dataUser.cartID;
         const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
         setCart(response.data[0]?.Videogames);
+        setSize(response.data[0]?.Videogames.length);
       } catch (error) {
 
       }
@@ -45,6 +47,7 @@ const Cart = () => {
       };
       const response = await axios.post(`http://localhost:3001/cart/delete`, data);
       setCart(response.data[0]?.Videogames);
+      setSize(response.data[0]?.Videogames.length);
       dispatch(getCartUser(user))
     } catch (error) {
       console.log(error);
@@ -71,7 +74,7 @@ const Cart = () => {
   return (
     <div className={style.all}>
       <div>
-        <NavBar />
+        <NavBar size={size}/>
       </div>
       {cart?.length > 0 ? (
         cart.map((item) => (
