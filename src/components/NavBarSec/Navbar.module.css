@@ -1,5 +1,5 @@
 .navbar {
-  background-color: rgb(12, 12, 61);
+  background-color: rgb(54, 97, 146);
   padding: 10px;
   margin: 10px;
   width: 65%;
@@ -17,14 +17,15 @@
 
 .navLink {
   color: #ffffff;
-  background-color: blue;
+  background-color: rgb(112, 114, 114);
   padding: 2px;
   height: 25px;
   width: 25px;
 }
 
 .navLink:hover {
-  background-color: #ddd;
+  background-color: #ffffff;
+  color: rgb(112, 114, 114);
 }
 
 .spans {
@@ -34,6 +35,6 @@
 }
 .selector{
   width:100px;
-  background-color: blue;
+  background-color: rgb(112, 114, 114);
   color: #ffffff;
 }

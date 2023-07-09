@@ -27,9 +27,7 @@ export default function NavBar({ size }) {
       ) : (
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
       )}
-
       <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
-
       <div className={style.navLinks}>
         <div className={style.a}>
           <Link to="/home">HOME</Link>
@@ -44,7 +42,6 @@ export default function NavBar({ size }) {
           </Badge>
         </IconButton>
       </div>
-
       <div>
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
