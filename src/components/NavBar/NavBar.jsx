@@ -20,7 +20,7 @@ export default function NavBar({ size }) {
 
   return (
     <nav className={style.nav}>
-      {dataUser.nombre ? (
+      {dataUser?.nombre ? (
         <Link to="/users" className={style.userLink}>
           <span className={style.userIcon}>{iconUser}</span>
         </Link>

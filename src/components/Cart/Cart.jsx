@@ -32,8 +32,10 @@ const Cart = () => {
 
 
   const handleDataCart = async () => {
-    const cartID = dataUser.cartID;
-    console.log(cartID);
+    let cartID
+    if(dataUser) {
+      cartID = dataUser?.cartID;
+    }
     const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
     setCart(response.data[0]?.Videogames);
   };
