@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 
-export default function Selector({ options, onChange, placeholder }) {
+export default function Selector({ options, handleGenres, placeholder }) {
+  // console.log(placeholder);
   return (
-    <select className={styles.selector} onChange={onChange}>
+    <select className={styles.selector} onChange={handleGenres}>
       <option value="">{placeholder}</option>
       {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
+        <option key={option.genreName} value={option.genreName}>
+          {option.genreName}
         </option>
       ))}
     </select>
