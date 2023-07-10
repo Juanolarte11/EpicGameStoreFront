@@ -9,8 +9,8 @@
 .modal-overlay {
     position: fixed;
     margin-top: 6%;
-    top: 10%;
-    left: 50%;
+    top: 6%;
+    left: 0;
     width: 10%;
     height: 15%;
     display: flex;

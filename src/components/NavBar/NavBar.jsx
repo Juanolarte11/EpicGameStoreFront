@@ -5,15 +5,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
-import noUser from "../NavBar/noUser.png";
-import UserModal from "./UserModal";
+import noUser from "../NavBar/noUser2.png";
+import UserModal from "./Modales/Users/UserModal";
+
 
 
 export default function NavBar({ size }) {
 
   const dataUser = JSON.parse(localStorage.getItem("userData"));
-
-
 
   const btnClick = () => {
     localStorage.setItem("userData", JSON.stringify({}));
@@ -24,10 +23,10 @@ export default function NavBar({ size }) {
     <nav className={style.nav}>
       {dataUser.nombre ? (
         <UserModal></UserModal>
-      ) : (
+      ) : (<div>
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
-      )}
-
+        </div>
+      )}      
       <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
 
       <div className={style.navLinks}>
