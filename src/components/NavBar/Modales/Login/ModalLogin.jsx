@@ -48,8 +48,8 @@ function ModalLogin() {
       <div>
         <button onClick={handleOpenModal} className={styles.navButton}>Login</button>
         {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal-content">
+          <div className="modal-overlay-login">
+            <div className="modal-content-login">
               <button onClick={handleCloseModal} className={styles.navButton}>Cerrar</button>
               <h2 className={styles.loginFormH2}>Iniciar sesión</h2>
               <form onSubmit={handleSubmit} className={styles.loginFormForm}>

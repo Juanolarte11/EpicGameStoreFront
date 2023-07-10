@@ -89,9 +89,9 @@ function ModalRegister() {
           Registrar
         </button>
         {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              {/* //////////////// */}
+           <div className="modal-overlay-register">
+           <div className="modal-content-register">
+
               <button onClick={handleCloseModal} className={styles.navButton}>
                 Cerrar
               </button>
