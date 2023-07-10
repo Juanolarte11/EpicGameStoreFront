@@ -3,10 +3,11 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import ModalLogin from "../Login/ModalLogin";
-import RegisterLogin from "../Registro/RegisterLogin";
-import noUser from "../NavBar/noUser2.png";
 import UserModal from "./Modales/Users/UserModal";
+import ModalLogin from "./Modales/Login/ModalLogin"
+import ModalRegister from "./Modales/Registro/ModalRegister"
+
+import noUser from "../NavBar/noUser2.png";
 
 
 
@@ -48,7 +49,7 @@ export default function NavBar({ size }) {
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
 
-          {!dataUser?.userID && <RegisterLogin />}
+          {!dataUser?.userID && <ModalRegister />}
           {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout
