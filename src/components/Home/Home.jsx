@@ -6,8 +6,10 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
+import ModalLogin from "../Login/ModalLogin.jsx";
 
 import axios from "axios";
+import { Modal } from "@mui/material";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -59,9 +61,11 @@ export default function Home() {
   }, [dispatch]);
       return (
         <div>
+          {/* {!dataUser?.userID && <ModalLogin />} */}
           {allVideogames.length === 0 ? (
             <LoadingPage />
           ) : (
+            
             <div className={styles.container}>
               <div>
                 <NavBar size={sizeCart} />

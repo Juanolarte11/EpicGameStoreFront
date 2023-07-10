@@ -5,7 +5,7 @@
   --fondo-color: #f5f5f5;
   --texto-color: #ffffff;
 }
-<<<<<<< HEAD =======>>>>>>>8be15ba2127475f3d682a1fec5c514e84fa2aef1 .name {
+.name {
   color: var(--texto-color);
 }
 .nav {
@@ -75,8 +75,24 @@
   font-weight: bold;
   text-decoration: none;
   color: black;
+  margin-left: 50%;
 }
 .userLink {
   text-decoration: none;
   padding-left: 1.5rem;
+}
+
+.userSpan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 35px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+ 
 }

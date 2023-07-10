@@ -3,15 +3,17 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import joystick from "./joystick.jpg";
 import ModalLogin from "../Login/ModalLogin";
 import RegisterLogin from "../Registro/RegisterLogin";
 import noUser from "../NavBar/noUser.png";
+import UserModal from "./UserModal";
+
 
 export default function NavBar({ size }) {
+
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
-  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+
 
   const btnClick = () => {
     localStorage.setItem("userData", JSON.stringify({}));
@@ -21,9 +23,7 @@ export default function NavBar({ size }) {
   return (
     <nav className={style.nav}>
       {dataUser.nombre ? (
-        <Link to="/users" className={style.userLink}>
-          <span className={style.userIcon}>{iconUser}</span>
-        </Link>
+        <UserModal></UserModal>
       ) : (
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
       )}

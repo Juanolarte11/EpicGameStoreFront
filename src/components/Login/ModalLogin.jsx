@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import axios from 'axios';
 import styles from './Login.module.css';
 import ButtonGoogleLogin from './googleSingin/ButtonGoogleLogin'
+import "./Modal.css";
 
 function ModalLogin() {
   const [isOpen, setIsOpen] = useState(false);
