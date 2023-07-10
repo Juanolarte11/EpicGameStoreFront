@@ -26,18 +26,17 @@
     background-color: var(--segundo-color);
     border: 3px solid black;
     padding: 20px;
-    border-radius: 50px;
+    border-radius: 5px 50px 5px 5px;
     max-width: 300px;
     text-align: center;
     width: 100%;
     height: 800px;
     position: absolute;
-  z-index: 9999;
-
+   z-index: 9999;
   }
   .modal-content:hover {
-    box-shadow: 0 0 10px 5px rgba(225, 255, 0, 0.5);
-    border: 3px solid rgb(164, 28, 1);
+    box-shadow: 0 0 10px 5px rgba(82, 0, 0, 0.5); 
+    border: 3pxrgb(164, 28, 1);
     transition: all 0.1s ease-out;   
   }
   

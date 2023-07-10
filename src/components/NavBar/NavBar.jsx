@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import UserModal from "./Modales/Users/UserModal";
 import ModalLogin from "./Modales/Login/ModalLogin"
 import ModalRegister from "./Modales/Registro/ModalRegister"
-
 import noUser from "../NavBar/noUser2.png";
-
-
 
 export default function NavBar({ size }) {
 
