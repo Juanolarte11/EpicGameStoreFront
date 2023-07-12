@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import styles from "./Card.module.css";
 
-export default function Card({ game, handleClickCart, clickFavorite }) {
+export default function Card({ game, handleClickCart, clickFavorite, buttonFavorites }) {
   const { name, price, rating, image, Genres } = game;
   const divisa = "USD";
   const decuent = "-30%";
@@ -39,7 +39,7 @@ export default function Card({ game, handleClickCart, clickFavorite }) {
             <div className={styles.genres}>{renderGenreTags(Genres)}</div>
             <div className={styles.contButtons}>
               <button className={styles.addButton} onClick={() => handleClickCart(game.id)}>Add to Cart</button>
-              <button className={styles.favoriteButton} onClick={() => clickFavorite(game.id)}>Add to Favorites</button>
+              <button className={styles.favoriteButton} onClick={() => clickFavorite(game.id)}>{buttonFavorites}</button>
             </div>
             <div className={styles.contPrice}>
               <p className={styles.gameDesc}>{decuent}</p>

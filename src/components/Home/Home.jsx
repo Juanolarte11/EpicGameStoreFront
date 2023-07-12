@@ -10,6 +10,7 @@ import axios from "axios";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const buttonFavorites = 'Add favorites'
   const allVideogames = useSelector((state) => state.videogames);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const [sizeCart, setSizeCart] = useState(0);
@@ -72,6 +73,7 @@ export default function Home() {
                 allVideogames={allVideogames}
                 handleClickCart={handleClickCart}
                 clickFavorite={clickFavorite}
+                buttonFavorites={buttonFavorites}
               />
             </div>
           )}

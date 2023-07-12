@@ -24,10 +24,11 @@ export default function NavBar({ size }) {
       ) : (<div>
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
         </div>
-      )}      
-      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
-
+      )}           
       <div className={style.navLinks}>
+      <div className={style.nameContainer}>
+      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+      </div> 
         <div className={style.a}>
           <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
