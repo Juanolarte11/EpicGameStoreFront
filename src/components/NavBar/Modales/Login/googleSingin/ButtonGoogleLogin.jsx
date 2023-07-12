@@ -13,7 +13,7 @@ const ButtonGoogleLogin = ({handleCloseModal}) => {
     const handleClick = () => {
 
         signInWithPopup(auth,provider).then( async(data) => {
-            const response =  await axios.get(`http://localhost:3001/users/email/${data.user.email}`);
+            const response =  await axios.get(`http://localhost:3001/users/emailLogin/${data.user.email}`);
          
             const user = response.data
             if(response.status === 200){
