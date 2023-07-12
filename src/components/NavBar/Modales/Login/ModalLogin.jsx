@@ -86,7 +86,7 @@ function ModalLogin() {
                 </div>
                 <button type="submit" className={styles.buttonRegister}>Iniciar sesión</button>
               </form>
-              <ButtonGoogleLogin className={styles.buttonGoogle} />
+              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseModal={handleCloseModal} />
             </div>
           </div>
         )}

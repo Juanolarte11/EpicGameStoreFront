@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { getDataUser } from '../../../../../actions'
 
-const ButtonGoogleLogin = () => {
+const ButtonGoogleLogin = ({handleCloseModal}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     
@@ -25,7 +25,7 @@ const ButtonGoogleLogin = () => {
 
                  dispatch(getDataUser(dataUser))
                  localStorage.setItem('userData', JSON.stringify(dataUser));
-                history.push("/Home");
+                 handleCloseModal()
             }else{
                 alert('No existe este usuario');
             } 

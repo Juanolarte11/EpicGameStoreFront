@@ -4,12 +4,11 @@ import  style  from '../Login.module.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-const ButtonGoogleRegister = ( ) => {
+const ButtonGoogleRegister = ({handleCloseModal}) => {
 
     const history = useHistory()      
       
-    const handleClick = () => {
-        
+    const handleClick = () => { 
        
         signInWithPopup(auth,provider).then( async(data) => {    
             const response =  await axios.get('http://localhost:3001/users/')
@@ -34,7 +33,7 @@ const ButtonGoogleRegister = ( ) => {
                     try { 
                                               
                         const respuestaPost = await axios.post('http://localhost:3001/users/', value) 
-                                             
+                        handleCloseModal() //para cerrar el modal a la hora de registrar                            
                     } catch (error) {
                         console.log(error);
                     }
