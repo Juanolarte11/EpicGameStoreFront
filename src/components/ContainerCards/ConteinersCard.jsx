@@ -28,7 +28,7 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
   )
 
   if (getGenres.length) {
-    filteredVideogames = filteredVideogames.filter((game) => 
+    filteredVideogames = filteredVideogames?.filter((game) => 
     game.Genres.some((genre) => 
       genre.genreName === getGenres )
     )

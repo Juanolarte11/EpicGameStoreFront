@@ -8,6 +8,7 @@ import About from "./components/about/About.jsx";
 import Favorites from "./components/Favorites/Favorites.jsx";
 import "./App.css";
 import Cart from "./components/Cart/Cart.jsx";
+import User from "./components/Users/Users.jsx";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/cart" component={Cart} />
           <Route path="/favorites" component={Favorites} />
+          <Route path="/miPerfil" component={User} />
         </Switch>
       </div>
     </BrowserRouter>
