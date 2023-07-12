@@ -12,6 +12,7 @@ export default function Favorites() {
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([])
   const dataUser = JSON.parse(localStorage.getItem("userData"))
+
    const obternerFavoritos = async() => {
     if(dataUser){
       try {
@@ -23,6 +24,7 @@ export default function Favorites() {
       }
     }
   }
+
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
       console.log("logeate");
