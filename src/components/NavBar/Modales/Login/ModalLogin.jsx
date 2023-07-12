@@ -28,8 +28,6 @@ function ModalLogin() {
     }
     try {
       const response = await axios.post('/users/login', user);
-      // const { id, userName, Carrito } = response.data.user;
-      // const Token = response.data.token
       console.log("response error");
       const dataUser = {
         nombre: userName,
@@ -87,7 +85,7 @@ function ModalLogin() {
                 </div>
                 <button type="submit" className={styles.buttonRegister}>Iniciar sesión</button>
               </form>
-              <ButtonGoogleLogin className={styles.buttonGoogle} />
+              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseModal={handleCloseModal}/>
             </div>
           </div>
         )}

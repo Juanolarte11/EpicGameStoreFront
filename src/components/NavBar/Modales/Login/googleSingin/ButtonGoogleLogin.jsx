@@ -6,29 +6,30 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { getDataUser } from '../../../../../actions'
 
-
-
-const ButtonGoogleLogin = () => {
+const ButtonGoogleLogin = ({handleCloseModal}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     
     const handleClick = () => {
-        signInWithPopup(auth,provider).then( async(data) => {    
-            const user = {
-                email: data.user.email,
-                password: "firepass"
-              }
-            const response = await axios.post(`/users/emailLogin/${data.user.email}`);
-            const dataUser = {
-                nombre: response.data.user.userName,
-                userID: response.data.user.id,
-                cartID: response.data.user.Carrito.id
-              }
-            const Token = response.data.token
-             localStorage.setItem('userData', JSON.stringify(dataUser));
-             localStorage.setItem('Token', JSON.stringify(Token));
-               dispatch(getDataUser(dataUser))
-         }       
+
+        signInWithPopup(auth,provider).then( async(data) => {
+            const response =  await axios.get(`http://localhost:3001/users/emailLogin/${data.user.email}`);
+         
+            const user = response.data
+            if(response.status === 200){
+                const dataUser = {
+                    nombre: user.userName,
+                    userID: user.id,
+                    cartID: user.Carrito.id
+                }
+
+                 dispatch(getDataUser(dataUser))
+                 localStorage.setItem('userData', JSON.stringify(dataUser));
+                 handleCloseModal()
+            }else{
+                alert('No existe este usuario');
+            } 
+         }
         )
     }
   return (

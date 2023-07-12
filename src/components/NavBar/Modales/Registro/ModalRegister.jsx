@@ -4,10 +4,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-/////////////////////
-import { auth , provider } from './config'
-import { signInWithPopup } from 'firebase/auth'
-////////////////////
 function ModalRegister() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
@@ -41,26 +37,6 @@ function ModalRegister() {
       console.log(error);
     }
   };
-
-  /////////////////
-  const handleClick = () => {
-        signInWithPopup(auth,provider).then( async(data) => {    
-          // const response =  await axios.get(`users/email/${data.user.email}`);
-          // console.log(response.status);
-                        const value = ({
-                            userName: data.user.displayName,
-                            userPassword: 'firepass',        
-                            userEmail: data.user.email,     
-                            userImage: data.user.photoURL
-                        })                      
-                        const respuestaPost = await axios.post('/users/', value)  
-                        console.log(respuestaPost);     
-                    })
-        .catch((error) => {
-            console.error(error);
-          });
-    }
-//////////////////////
 
   return (
     <div>
@@ -123,14 +99,10 @@ function ModalRegister() {
                   <button className={styles.buttonRegister}>Registrarse</button>
                 </form>
                 <div>
-                   {/* <ButtonGoogleRegister
-                  className={styles.buttonGoogle}
-                ></ButtonGoogleRegister> */}
-        <button className={styles.buttonGoogle} onClick={handleClick}>Registrar con Google</button>      
-           </div>
-
-
-                
+                   <ButtonGoogleRegister
+                  className={styles.buttonGoogle} handleCloseModal={handleCloseModal}
+                ></ButtonGoogleRegister>    
+           </div>         
               </div>
             </div>
           </div>
