@@ -31,6 +31,7 @@ export default function Home() {
        };
      };
   }
+
   const clickFavorite = async(gameId) => {
     try {
       const game = {

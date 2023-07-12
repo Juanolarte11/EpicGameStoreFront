@@ -28,7 +28,9 @@ function ModalLogin() {
     }
     try {
       const response = await axios.post('http://localhost:3001/users/login', user);
-      const { id, userName, Carrito } = response.data;
+      const { id, userName, Carrito } = response.data.user;
+      const Token = response.data.token
+      console.log(response);
       const dataUser = {
         nombre: userName,
         userID: id,
@@ -36,6 +38,7 @@ function ModalLogin() {
       }
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
+      localStorage.setItem('Token', JSON.stringify(Token));
       console.log(dataUser);
       handleCloseModal();
     } catch (error) {
