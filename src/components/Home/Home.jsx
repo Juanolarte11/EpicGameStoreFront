@@ -7,6 +7,7 @@ import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
 import axios from "axios";
+import ModalLogin from "../NavBar/Modales/Login/ModalLogin.jsx";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -16,8 +17,9 @@ export default function Home() {
   const [sizeCart, setSizeCart] = useState(0);
 
   const handleClickCart = async (gameId) => {
-    if (!dataUser.userID) {
-      console.log("logeate");
+    if (!dataUser?.userID) {
+      alert("Inicia sesion para agregar a tu carrito")
+      openModalLogin()
      }else{
        try {
          const data = {
@@ -33,7 +35,18 @@ export default function Home() {
      };
   }
 
+  const openModalLogin = () => {
+    return (
+      <div>
+        <ModalLogin/>
+      </div>
+    )
+  }
+
   const clickFavorite = async(gameId) => {
+   if(!dataUser?.userID){
+    alert("Inicia sesion para guardar tus favoritos")
+   } else{
     try {
       const game = {
         userId : dataUser.userID,
@@ -44,6 +57,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+   }
   }
  
   useEffect(async() => {
