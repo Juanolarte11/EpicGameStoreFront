@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-
 function ModalRegister() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");

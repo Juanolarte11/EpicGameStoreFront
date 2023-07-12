@@ -2,8 +2,11 @@ import { auth, provider } from './config'
 import { signInWithPopup } from 'firebase/auth'
 import style from '../Login.module.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const ButtonGoogleRegister = ({ handleCloseModal }) => {
+
+    const history = useHistory()
 
     const handleClick = () => {
 
@@ -25,7 +28,6 @@ const ButtonGoogleRegister = ({ handleCloseModal }) => {
                     console.log(error);
                 }
             }
-
         }
         )
             .catch((error) => {
