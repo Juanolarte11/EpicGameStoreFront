@@ -66,18 +66,14 @@ const Cart = () => {
   };
 
   return (
-    <div className={style.all}>
+    <div>
       <div>
         <NavBar size={size} />
       </div>
       <div className={style.total}>
-        <span>Total: {price?.toFixed(2)}</span>
-      </div>
-      {price > 0 && (
-        <div className={style.pay}>
-          <MercadoPago arrayGames={cart} />
-        </div>
-      )}
+
+       
+      <div className={style.listCart}>
       {cart?.length > 0 ? (
         cart.map((item) => (
           <div key={item.id} className={style.cart_box}>
@@ -107,6 +103,42 @@ const Cart = () => {
           </button>
         </div>
       )}
+    </div>
+      <div className={style.totalPrice}>
+    <div className={style.listPrice}>
+      {cart?.length > 0 ? (
+        cart.map((item) => (
+          <div key={item.id} className={style.cart_pay}>       
+            <div>
+            <h1 className={style.title}>{item.title}</h1>
+              <div className={style.contPrice}>
+                <p className={style.gameDesc}>{decuent}</p>
+                <p className={style.gameDivisac}>{divisa}</p>
+                <p className={style.price}> {item.unit_price}</p>
+                <p className={style.priceB}> {(item.unit_price*100/70).toFixed(2)}</p>
+              </div>
+              
+            </div>
+          </div>
+        ))
+      ) : ''}
+      </div>
+      <div className={style.textTotal}>
+      <span className={style.totalA}>Total: {(price*100/70).toFixed(2)} USD</span>
+        <br/>
+        <span className={style.totalDesc}>desc {((price*100/70).toFixed(2)- price?.toFixed(2)).toFixed(2)} USD</span>
+        <br/>
+        <span>Total with desc: {price?.toFixed(2)} USD</span>
+        {price > 0 && (
+        <div className={style.pay}>
+          <MercadoPago arrayGames={cart} />
+        </div>
+      )}
+      </div>
+     
+      </div>
+
+    </div>
     </div>
   );
   
