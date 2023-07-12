@@ -5,9 +5,7 @@ import axios from "axios";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([])
-  console.log("estoy en favorites");
   const dataUser = JSON.parse(localStorage.getItem("userData"))
-console.log(dataUser);
    const obternerFavoritos = async() => {
     if(dataUser){
       try {
