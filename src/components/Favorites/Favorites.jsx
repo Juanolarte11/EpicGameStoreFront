@@ -41,6 +41,19 @@ export default function Favorites() {
      };
   }
 
+  const clickFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("http://localhost:3001/favorites/delete", game)
+      alert("delete favorites")
+      await obternerFavoritos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(async() => {await obternerFavoritos()},[])
   useEffect(async () => {
@@ -54,7 +67,7 @@ export default function Favorites() {
 
       }
     }
-  })
+  },[])
   return (
     <div className="">
       <div>
@@ -63,6 +76,7 @@ export default function Favorites() {
       <div>
         <ConteinerCars 
         allVideogames={favorites} 
+        clickFavorite={clickFavorite}
         buttonFavorites={buttonFavorites}
         handleClickCart={handleClickCart} />
       </div>

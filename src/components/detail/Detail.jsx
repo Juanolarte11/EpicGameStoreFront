@@ -21,9 +21,10 @@ export default function Detail(props) {
   const userca = useSelector(state => state.cartUser)
 
   const game = useSelector((state) => state.detail);
+
   const addCarrito = async (gameId) => {
     const gameInCart = userca?.filter((e) => e.id === id)
-    if (gameInCart.length) {
+    if (gameInCart?.length) {
       alert("the game is already in the cart")
     }
     if (!dataUser) {
@@ -91,6 +92,9 @@ export default function Detail(props) {
       return <FaStar key={index} className={styles.starEmpty} />;
     }
   });
+
+
+
   return (
     <div>
       <NavBar />
@@ -104,7 +108,7 @@ export default function Detail(props) {
               <p className={styles.gameDivisa}>{divisa}</p>
               <p className={styles.gamePrice}>{price}</p>
             </div>
-            <button className={styles.addButton}>Add to Cart</button>
+            <button className={styles.addButton} onClick={addCarrito}>Add to Cart</button>
             <button className={styles.favoriteButton}>add favorite</button>
           </div>
           <div className={styles.rating}>{stars}</div>
