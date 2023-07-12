@@ -47,7 +47,7 @@
 
 .navButton {
   background-color: var(--segundo-color);
-  color: var(--segundo-color);
+  color: var(--texto-color);
   border: none;
   padding: 8px 16px;
   margin-left: 10px;

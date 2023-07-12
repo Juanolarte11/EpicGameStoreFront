@@ -45,9 +45,11 @@ function ModalRegister() {
   /////////////////
   const handleClick = () => {
         
-       
-    signInWithPopup(auth,provider).then( async(data) => {    
+    
+    signInWithPopup(auth,provider).then( async(data) => {   
+      
         const response =  await axios.get('http://localhost:3001/users/')
+        console.log('holis') 
         const arrayUsers = response.data
 
         const result = arrayUsers.find( user => user.userEmail === data.user.email)
