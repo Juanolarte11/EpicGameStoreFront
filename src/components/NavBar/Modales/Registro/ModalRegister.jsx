@@ -4,12 +4,17 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-function ModalRegister() {
+
+function ModalRegister(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
+  const clickLogin = () => {
+    // completar con la funcion handleOpenModalLogin
+  };
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -21,6 +26,7 @@ function ModalRegister() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const newUserPost = {
       userName: name,
       userPassword: password,
@@ -38,50 +44,6 @@ function ModalRegister() {
     }
   };
 
-<<<<<<< HEAD
-  /////////////////
-  const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then(async (data) => {
-        const response = await axios.get("http://localhost:3001/users/");
-        const arrayUsers = response.data;
-
-        const result = arrayUsers.find(
-          (user) => user.userEmail === data.user.email
-        );
-
-        if (result) {
-          alert("ya existe ese usuario");
-        } else {
-          history.push("/Home");
-          const value = {
-            userName: data.user.displayName,
-            userPassword: "firepass",
-            userEmail: data.user.email,
-            userImage: data.user.photoURL,
-            // data.user.photoURL '
-            // userProvider: data.user.providerId,
-            // userUid: data.user.uid
-          };
-          try {
-            const respuestaPost = await axios.post(
-              "http://localhost:3001/users/",
-              value
-            );
-            handleCloseModal();
-          } catch (error) {
-            console.log(error);
-          }
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-  //////////////////////
-
-=======
->>>>>>> 0fe570fcee5d0fd2e11d011b7c8bcdfc322c9d95
   return (
     <div>
       <div>
@@ -89,21 +51,21 @@ function ModalRegister() {
           Register
         </button>
         {isOpen && (
-           <div className="modal-overlay-register">
-           <div className="modal-content-register">
-
+          <div className="modal-overlay-register">
+            <div className="modal-content-register">
               <button onClick={handleCloseModal} className={styles.navButton}>
-                Cerrar
+                Close
               </button>
               <div className={styles.RegistrationForm}>
-                <h2 className={styles.loginFormH2}>Registro</h2>
+                <h2 className={styles.loginFormH2}>REGISTER YOUR ACCOUNT</h2>
                 <form onSubmit={handleSubmit}>
                   <div className={styles.formGroup}>
                     <div>
-                      <label htmlFor="name">Nombre:</label>
+                      <label htmlFor="name">Name:</label>
                     </div>
                     <div>
                       <input
+                        placeholder="Name..."
                         type="text"
                         id="name"
                         value={name}
@@ -118,45 +80,47 @@ function ModalRegister() {
                     </div>
                     <div>
                       <input
+                        placeholder="Email..."
                         type="email"
                         id="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+                        pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/"
                         required
                       />
                     </div>
                   </div>
                   <div className={styles.formGroup}>
                     <div>
-                      <label htmlFor="password">ContraseÃ±a:</label>
+                      <label htmlFor="password">Password:</label>
                     </div>
                     <div>
                       <input
+                        placeholder="Password..."
                         type="password"
                         id="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        minLength="8"
+                        pattern="(?=.*\d)(?=.*[A-Z])\w+"
+                        title="Please enter a password with at least 8 characters, one uppercase letter, and one number"
                         required
                       />
                     </div>
                   </div>
-                  <button className={styles.buttonRegister}>Registrarse</button>
+                  <button className={styles.buttonRegister}>Register</button>
                 </form>
                 <div>
-<<<<<<< HEAD
-                  {/* <ButtonGoogleRegister
-                  className={styles.buttonGoogle}
-                ></ButtonGoogleRegister> */}
-                  <button className={styles.buttonGoogle} onClick={handleClick}>
-                    Registrar con Google
-                  </button>
+                  <ButtonGoogleRegister
+                    className={styles.buttonGoogle}
+                    handleCloseModal={handleCloseModal}
+                  ></ButtonGoogleRegister>
                 </div>
-=======
-                   <ButtonGoogleRegister
-                  className={styles.buttonGoogle} handleCloseModal={handleCloseModal}
-                ></ButtonGoogleRegister>    
-           </div>         
->>>>>>> 0fe570fcee5d0fd2e11d011b7c8bcdfc322c9d95
+                <hr />
+                <div className={styles.goLogin}>
+                  Are you registered? please
+                  <a onClick={props.handleOpenModalLogin}> LOGIN</a>
+                </div>
               </div>
             </div>
           </div>

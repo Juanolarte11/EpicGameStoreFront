@@ -1,42 +1,45 @@
-import { auth , provider } from './config'
-import { signInWithPopup } from 'firebase/auth'
-import  style  from '../Login.module.css'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import { getDataUser } from '../../../../../actions'
+import { auth, provider } from "./config";
+import { signInWithPopup } from "firebase/auth";
+import style from "../Login.module.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getDataUser } from "../../../../../actions";
 
-const ButtonGoogleLogin = ({handleCloseModal}) => {
-    const dispatch = useDispatch()
-    const history = useHistory()
-    
-    const handleClick = () => {
+const ButtonGoogleLogin = ({ handleCloseModal }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-        signInWithPopup(auth,provider).then( async(data) => {
-            const response =  await axios.get(`http://localhost:3001/users/emailLogin/${data.user.email}`);
-         
-            const user = response.data
-            if(response.status === 200){
-                const dataUser = {
-                    nombre: user.userName,
-                    userID: user.id,
-                    cartID: user.Carrito.id
-                }
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then(async (data) => {
+      const response = await axios.get(
+        `http://localhost:3001/users/emailLogin/${data.user.email}`
+      );
 
-                 dispatch(getDataUser(dataUser))
-                 localStorage.setItem('userData', JSON.stringify(dataUser));
-                 handleCloseModal()
-            }else{
-                alert('No existe este usuario');
-            } 
-         }
-        )
-    }
+      const user = response.data;
+      if (response.status === 200) {
+        const dataUser = {
+          nombre: user.userName,
+          userID: user.id,
+          cartID: user.Carrito.id,
+        };
+
+        dispatch(getDataUser(dataUser));
+        localStorage.setItem("userData", JSON.stringify(dataUser));
+        handleCloseModal();
+        window.location.reload();
+      } else {
+        alert("No user found...");
+      }
+    });
+  };
   return (
     <div>
-        <button className={style.buttonGoogle} onClick={handleClick}>Logear con Google</button>      
+      <button className={style.buttonGoogle} onClick={handleClick}>
+        Login with Google
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default ButtonGoogleLogin
+export default ButtonGoogleLogin;
