@@ -28,6 +28,7 @@ function ModalLogin() {
     }
     try {
       const response = await axios.post('/users/login', user);
+      console.log(response)
       const Token = response.data.token
       console.log(Token);
       const dataUser = {
