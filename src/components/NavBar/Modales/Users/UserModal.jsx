@@ -21,17 +21,16 @@ function ModalUser() {
   return (
     <div>
         <div>
-        {!isOpen  &&  (
-        <button onClick={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
+        {!isOpen  &&   (
+        <button onMouseEnter={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
         )}</div>
         <div>
         {isOpen &&  (
-        <button onClick={handleCloseModal} className={styles.userIcon} >{iconUser}</button>
+        <button className={styles.userIcon} >{iconUser}</button>
         )}</div>
 
-
     {isOpen && (
-        <div>    
+        <div onMouseLeave={handleCloseModal}>    
           <div className="modal-overlay">          
           <div className={"modal-content"}>
      

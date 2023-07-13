@@ -28,15 +28,15 @@ function User() {
   const getDataUsers = async () => {
     const response = await axios.get(`/users/${dataUser.userID}`)
     const respoCart = await axios.get(`/cart/${dataUser.cartID}`)
-    setUser(response.data)
-    if(user.role === "cliente"){
+      setUser(response.data)
+    if(user.role = "cliente"){
       setFavorites(response.data.Videogames)
       setCart(respoCart.data[0].Videogames)
     }
   }
 
   useEffect(async () => {
-    await getDataUsers()
+      getDataUsers()      
   }, [])
 
   const btnClick = () => {
