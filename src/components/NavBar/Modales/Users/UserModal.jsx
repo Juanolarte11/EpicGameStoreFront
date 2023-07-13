@@ -2,6 +2,7 @@ import React from 'react'
 import "./Modal.css";
 import { useState } from 'react';
 import styles from "./Users.module.css"
+import { Link } from 'react-router-dom';
 
 
 function ModalUser() {
@@ -20,22 +21,21 @@ function ModalUser() {
   return (
     <div>
         <div>
-        {!isOpen  &&  (
-        <button onClick={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
+        {!isOpen  &&   (
+        <button onMouseEnter={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
         )}</div>
         <div>
         {isOpen &&  (
-        <button onClick={handleCloseModal} className={styles.userIcon} >{iconUser}</button>
+        <button className={styles.userIcon} >{iconUser}</button>
         )}</div>
 
-
     {isOpen && (
-        <div>    
+        <div onMouseLeave={handleCloseModal}>    
           <div className="modal-overlay">          
           <div className={"modal-content"}>
      
             <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
-            <p className={styles.h2}> {dataUser.nombre?.toUpperCase()}</p>
+            <Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>
             <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
             <h2>{"lista de favoritos"}</h2>
             <h2>{"registro de compras"}</h2>

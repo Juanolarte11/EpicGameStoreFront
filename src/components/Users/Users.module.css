@@ -1,0 +1,20 @@
+.imageList{
+    width: 50px;
+    height: 60px;
+}
+.user_box{
+    /* display: flex; */
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 1px;
+}
+.head{
+    background-color: blue;
+    float: left;
+    margin-left: 100px;
+}
+.list{
+    display: flex;
+    width: 800px;
+    float: right;
+    background-color: aqua;
+}

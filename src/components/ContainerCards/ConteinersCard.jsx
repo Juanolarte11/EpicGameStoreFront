@@ -8,6 +8,9 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [getGenres, setGetGenres] = useState("");
+
+
   const videogamesPerPage = 15;
 
   useEffect(() => {
@@ -20,9 +23,16 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
   const indexOfLastVideogame = currentPage * videogamesPerPage;
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
 
-  const filteredVideogames = allVideogames.filter((game) =>
+  let filteredVideogames = allVideogames.filter((game) =>
     game.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  )
+
+  if (getGenres.length) {
+    filteredVideogames = filteredVideogames?.filter((game) => 
+    game.Genres.some((genre) => 
+      genre.genreName === getGenres )
+    )
+  }
 
   const sortedVideogames = [...filteredVideogames].sort((a, b) => {
     switch (sortOrder) {
@@ -47,6 +57,10 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
     setCurrentPage(page);
   };
 
+  const handleGenres = (genre) => {
+    setGetGenres(genre.target.value)
+  }
+
   const handleSort = (order) => {
     localStorage.setItem("order", order)
     setSortOrder(order);
@@ -60,12 +74,13 @@ export default function ConteinerCars({ allVideogames, handleClickCart, clickFav
 
   const handleReset = () => {
     setSearchTerm("");
+    setGetGenres("")
     setCurrentPage(1);
   };
 
   return (
     <div className={styles.container}>
-      <NavbarSec handleSort={handleSort} handleSearch={handleSearch} handleReset={handleReset} />
+      <NavbarSec handleSort={handleSort} handleSearch={handleSearch} handleReset={handleReset} handleGenres={handleGenres} />
       <div className={styles.cardsContainer}>
         {sortedVideogames
           .slice(indexOfFirstVideogame, indexOfLastVideogame)
