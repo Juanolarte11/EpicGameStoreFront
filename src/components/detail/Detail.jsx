@@ -15,48 +15,33 @@ export default function Detail(props) {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(() => dispatch(getDetail(id)), [dispatch]);
+  const [size, setSize] = useState([])
+  const [cart, setCart] = useState([]);
   const dataUser = JSON.parse(localStorage.getItem("userData"))
   const user = useSelector(state => state.dataUser.cartID)
   const userca = useSelector(state => state.cartUser)
-
   const game = useSelector((state) => state.detail);
+////
 
-  const addCarrito = async (gameId) => {
-    const gameInCart = userca?.filter((e) => e.id === id)
-    if (gameInCart?.length) {
-      alert("the game is already in the cart")
-    }
-    if (!dataUser) {
-      history.push("/register")
-    } else {
-      try {
-        const data = {
-          gameID: gameId,
-          userId: dataUser
-        };
-        await axios.post(`http://localhost:3001/cart`, data);
-        dispatch(getCartUser(user))
-      } catch (error) {
-        console.log(error);
-      };
-    };
+  const [favorites, setFavorites] = useState([])
 
-  };
-
-  const origin = isNaN(id) ? "db" : "api";
+  const obternerFavoritos = async() => {
+   if(dataUser){
+     try {
+       const respuesta = await axios.get(`/users/${dataUser.userID}`);
+       setFavorites(respuesta.data.Videogames)
+     } catch (error) {
+       console.log(error);
+     }
+   }
+ }
 
   let apiRatings = [];
   if (origin === "api" && game?.ratings) {
     apiRatings = game?.ratings.map((rating) => rating.title);
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(setCurrentPage(1));
-    history.push("/home");
-  }
-  const decuent = "-30"
+  const decuent = "-30% "
   const divisa = "USD"
   const {
     Developer,
@@ -77,6 +62,11 @@ export default function Detail(props) {
       </span>
     ));
   }
+  const resultado = favorites.find( result => result.id === game.id  );
+  console.log(!resultado)
+
+
+
   function renderPlatformTags(platforms) {
     return platforms?.map((platform, index) => (
       <span className={styles.genreTag} key={index}>
@@ -94,10 +84,71 @@ export default function Detail(props) {
   });
 
 
+  const handleClickCart = async (gameId) => {
+    if (!dataUser.userID) {
+      console.log("logeate");
+     }else{
+       try {
+         const data = {
+           gameID: gameId,
+           userId: dataUser.userID
+         };
+         const response = await axios.post(`http://localhost:3001/cart`, data);
+         dispatch(getCartUser(dataUser.userID))
+        setSize(response.data[0].Videogames.length)
+       } catch (error) {
+         console.log(error);
+       };
+     };
+  }
+
+  const clickFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("/favorites", game)
+      alert("game add favorites")
+      obternerFavoritos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const DeleteFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("http://localhost:3001/favorites/delete", game)
+      alert("delete favorites")
+      await obternerFavoritos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => dispatch(getDetail(id)), [dispatch]);
+  useEffect(async() => {await obternerFavoritos()},[])
+
+  useEffect(async () => {
+    if (cart?.length === 0) {
+      try {
+        const cartID = dataUser.cartID;
+        const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
+        setCart(response.data[0]?.Videogames);
+        setSize(response.data[0]?.Videogames.length);
+      } catch (error) {
+
+      }
+    }
+  },[])
 
   return (
     <div>
-      <NavBar />
+      <NavBar size={size} />
       <div className={styles.detailContainer}>
         <h1 className={styles.detailTitle}>{game?.name}</h1>
         <img className={styles.detailImage} src={image} alt={name} />
@@ -108,8 +159,15 @@ export default function Detail(props) {
               <p className={styles.gameDivisa}>{divisa}</p>
               <p className={styles.gamePrice}>{price}</p>
             </div>
-            <button className={styles.addButton} onClick={addCarrito}>Add to Cart</button>
-            <button className={styles.favoriteButton}>add favorite</button>
+            <button className={styles.addButton} onClick={() => handleClickCart(game.id)}>Add to Cart</button>
+            {!resultado&&
+             <button className={styles.favoriteButton} 
+             onClick={() => clickFavorite(game.id)}>Add favorite</button>
+            }{resultado&&
+              <button className={styles.favoriteButton}
+              onClick={() => DeleteFavorite(game.id)}>Delete favorite</button>
+             }
+           
           </div>
           <div className={styles.rating}>{stars}</div>
           <p className={styles.detailInfoItem}>Developer: {Developer?.name}</p>

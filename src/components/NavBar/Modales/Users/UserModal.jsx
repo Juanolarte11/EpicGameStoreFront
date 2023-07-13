@@ -35,7 +35,7 @@ function ModalUser() {
           <div className={"modal-content"}>
      
             <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
-            <p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p>
+            <p className={styles.h2}> {dataUser.nombre?.toUpperCase()}</p>
             <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
             <h2>{"lista de favoritos"}</h2>
             <h2>{"registro de compras"}</h2>

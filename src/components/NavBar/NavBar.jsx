@@ -19,7 +19,7 @@ export default function NavBar({ size }) {
 
   return (
     <nav className={style.nav}>
-      {dataUser.nombre ? (
+      {dataUser?.nombre ? (
         <UserModal></UserModal>
       ) : (<div>
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
