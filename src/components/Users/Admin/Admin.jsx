@@ -63,7 +63,7 @@ function Admin() {
         // setUser(dataUser);
         // try {
             console.log(token);
-            axios.get("http://localhost:3001/users", {
+            axios.get("http://localhost:3001/admin/users", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
