@@ -5,8 +5,8 @@ import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
 /////////////////////
-import { auth , provider } from './config'
-import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from "./config";
+import { signInWithPopup } from "firebase/auth";
 ////////////////////
 function ModalRegister() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,49 +44,50 @@ function ModalRegister() {
 
   /////////////////
   const handleClick = () => {
-        
-       
-    signInWithPopup(auth,provider).then( async(data) => {    
-        const response =  await axios.get('http://localhost:3001/users/')
-        const arrayUsers = response.data
+    signInWithPopup(auth, provider)
+      .then(async (data) => {
+        const response = await axios.get("http://localhost:3001/users/");
+        const arrayUsers = response.data;
 
-        const result = arrayUsers.find( user => user.userEmail === data.user.email)
+        const result = arrayUsers.find(
+          (user) => user.userEmail === data.user.email
+        );
 
-        if(result){
-            alert('ya existe ese usuario') 
-              
-        }else{
-            history.push("/Home");
-            const value = ({
-                userName: data.user.displayName,
-                userPassword: 'firepass',        
-                userEmail: data.user.email,     
-                userImage: data.user.photoURL
-                    // data.user.photoURL '               
-                    // userProvider: data.user.providerId,
-                    // userUid: data.user.uid
-            })                
-                try { 
-                                          
-                    const respuestaPost = await axios.post('http://localhost:3001/users/', value) 
-                    handleCloseModal();                    
-                } catch (error) {
-                    console.log(error);
-                }
-        } 
-     }       
-    )
-    .catch((error) => {
-        console.error('Error:', error);
+        if (result) {
+          alert("ya existe ese usuario");
+        } else {
+          history.push("/Home");
+          const value = {
+            userName: data.user.displayName,
+            userPassword: "firepass",
+            userEmail: data.user.email,
+            userImage: data.user.photoURL,
+            // data.user.photoURL '
+            // userProvider: data.user.providerId,
+            // userUid: data.user.uid
+          };
+          try {
+            const respuestaPost = await axios.post(
+              "http://localhost:3001/users/",
+              value
+            );
+            handleCloseModal();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-}
-//////////////////////
+  };
+  //////////////////////
 
   return (
     <div>
       <div>
         <button onClick={handleOpenModal} className={styles.navButton}>
-          Registrar
+          Register
         </button>
         {isOpen && (
           <div className="modal-overlay">
@@ -143,14 +144,13 @@ function ModalRegister() {
                   <button className={styles.buttonRegister}>Registrarse</button>
                 </form>
                 <div>
-                   {/* <ButtonGoogleRegister
+                  {/* <ButtonGoogleRegister
                   className={styles.buttonGoogle}
                 ></ButtonGoogleRegister> */}
-        <button className={styles.buttonGoogle} onClick={handleClick}>Registrar con Google</button>      
-           </div>
-
-
-                
+                  <button className={styles.buttonGoogle} onClick={handleClick}>
+                    Registrar con Google
+                  </button>
+                </div>
               </div>
             </div>
           </div>
