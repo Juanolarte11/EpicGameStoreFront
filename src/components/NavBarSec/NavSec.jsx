@@ -2,12 +2,16 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import SearchBar from '../searchBar/SearchBar';
 import Selector from './Selecto';
-export default function NavbarSec({ handleSort, handleReset, handleSearch }) {
-  const options = ["value1", "value2", "value3"]
+import { useAutocomplete } from '@mui/material';
+import { useSelector } from "react-redux";
+export default function NavbarSec({ handleSort, handleReset, handleSearch, handleGenres }) {
+  const genres = useSelector(state => state.genres)
+  // console.log(genres);
+  // const options = ["value1", "value2", "value3"]
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navbarNav}>
-        <li className={styles.navItem}>
+        <li className={styles.navItem}> 
           <span className={styles.spans}>A-Z</span>
           <button onClick={() => handleSort("AtoZ")} className={styles.navLink}>
           {'\u2191'}
@@ -42,7 +46,7 @@ export default function NavbarSec({ handleSort, handleReset, handleSearch }) {
         </li>
         <li className={styles.navItem}><span className={styles.spans}>Genre</span></li>
         <li className={styles.navItem}>
-          <Selector options={options}/>
+          <Selector options={genres} handleGenres={handleGenres}/>
         </li>
         <li className={styles.navItem}>
           <button onClick={() => handleReset()} className={styles.navLink}>

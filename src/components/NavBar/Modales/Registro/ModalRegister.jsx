@@ -4,10 +4,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-/////////////////////
-import { auth, provider } from "./config";
-import { signInWithPopup } from "firebase/auth";
-////////////////////
 function ModalRegister() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
@@ -42,6 +38,7 @@ function ModalRegister() {
     }
   };
 
+<<<<<<< HEAD
   /////////////////
   const handleClick = () => {
     signInWithPopup(auth, provider)
@@ -83,6 +80,8 @@ function ModalRegister() {
   };
   //////////////////////
 
+=======
+>>>>>>> 0fe570fcee5d0fd2e11d011b7c8bcdfc322c9d95
   return (
     <div>
       <div>
@@ -90,9 +89,9 @@ function ModalRegister() {
           Register
         </button>
         {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              {/* //////////////// */}
+           <div className="modal-overlay-register">
+           <div className="modal-content-register">
+
               <button onClick={handleCloseModal} className={styles.navButton}>
                 Cerrar
               </button>
@@ -144,6 +143,7 @@ function ModalRegister() {
                   <button className={styles.buttonRegister}>Registrarse</button>
                 </form>
                 <div>
+<<<<<<< HEAD
                   {/* <ButtonGoogleRegister
                   className={styles.buttonGoogle}
                 ></ButtonGoogleRegister> */}
@@ -151,6 +151,12 @@ function ModalRegister() {
                     Registrar con Google
                   </button>
                 </div>
+=======
+                   <ButtonGoogleRegister
+                  className={styles.buttonGoogle} handleCloseModal={handleCloseModal}
+                ></ButtonGoogleRegister>    
+           </div>         
+>>>>>>> 0fe570fcee5d0fd2e11d011b7c8bcdfc322c9d95
               </div>
             </div>
           </div>

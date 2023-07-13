@@ -1,12 +1,12 @@
 import React from 'react'
-import "./ModalUser.css";
+import "./Modal.css";
 import { useState } from 'react';
 import styles from "./Users.module.css"
+import { Link } from 'react-router-dom';
 
 
-function UserModal() {
+function ModalUser() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsActive] = useState(false);
     const dataUser = JSON.parse(localStorage.getItem("userData"));
     const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
 
@@ -21,22 +21,21 @@ function UserModal() {
   return (
     <div>
         <div>
-        {!isOpen & !isActive &&  (
-        <button onClick={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
+        {!isOpen  &&   (
+        <button onMouseEnter={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
         )}</div>
         <div>
-        {isOpen && (
-        <button onClick={handleCloseModal} className={styles.userIcon} >{iconUser}</button>
+        {isOpen &&  (
+        <button className={styles.userIcon} >{iconUser}</button>
         )}</div>
 
-
     {isOpen && (
-        <div>    
-          <div className="modal-overlay">
-            <div className="modal-content">
-              
-            <h1>Rol: {"a completar segun usuario"}</h1>
-            <h1> {dataUser.nombre.toUpperCase()}</h1>
+        <div onMouseLeave={handleCloseModal}>    
+          <div className="modal-overlay">          
+          <div className={"modal-content"}>
+     
+            <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
+            <Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>
             <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
             <h2>{"lista de favoritos"}</h2>
             <h2>{"registro de compras"}</h2>
@@ -44,6 +43,7 @@ function UserModal() {
             </div>
             </div>
             </div>
+       
     )}
     </div>
      
@@ -52,4 +52,4 @@ function UserModal() {
   )
 }
 
-export default UserModal
+export default ModalUser

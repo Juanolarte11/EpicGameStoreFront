@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import UserModal from "./Modales/Users/UserModal";
 import ModalLogin from "./Modales/Login/ModalLogin"
 import ModalRegister from "./Modales/Registro/ModalRegister"
-
 import noUser from "../NavBar/noUser2.png";
-
-
 
 export default function NavBar({ size }) {
 
@@ -22,15 +19,16 @@ export default function NavBar({ size }) {
 
   return (
     <nav className={style.nav}>
-      {dataUser.nombre ? (
+      {dataUser?.nombre ? (
         <UserModal></UserModal>
       ) : (<div>
         <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
         </div>
-      )}      
-      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
-
+      )}           
       <div className={style.navLinks}>
+      <div className={style.nameContainer}>
+      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+      </div> 
         <div className={style.a}>
           <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>

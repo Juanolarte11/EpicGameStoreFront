@@ -1,4 +1,4 @@
-/* .modal-overlay {
+ .modal-overlay-login {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 9999;
   }
   
-  .modal-content {
+  .modal-content-login {
     background-color: #fff;
     border: 3px solid black;
     padding: 20px;
@@ -22,18 +22,18 @@
     height: 490px;
     position: absolute;
   }
-  .modal-content:hover {
+  .modal-content-login:hover {
     box-shadow: 0 0 10px 5px rgba(225, 255, 0, 0.5);
     border: 3px solid rgb(164, 28, 1);
     transition: all 0.1s ease-out;   
   }
   
-  .modal-content h2 {
+  .modal-content-login h2 {
     margin-top: 0;
   }
   
-  .modal-content button {
+  .modal-content-login button {
     margin-top: 20px;
-  } */
+  } 
 
   

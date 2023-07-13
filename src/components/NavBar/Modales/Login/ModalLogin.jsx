@@ -27,18 +27,20 @@ function ModalLogin() {
       password: password
     }
     try {
-      const response = await axios.post('http://localhost:3001/users/login', user);
-      const { id, userName, Carrito } = response.data;
+      const response = await axios.post('/users/login', user);
+      const Token = response.data.token
+      console.log(Token);
       const dataUser = {
-        nombre: userName,
-        userID: id,
-        cartID: Carrito.id
+        nombre: response.data.user.userName,
+        userID: response.data.user.id,
+        cartID: response.data.user.Carrito?.id
       }
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
-      console.log(dataUser);
+      localStorage.setItem('Token', JSON.stringify(Token));
       handleCloseModal();
     } catch (error) {
+      alert("error")
       console.log(error);
     }
   };
@@ -48,8 +50,8 @@ function ModalLogin() {
       <div>
         <button onClick={handleOpenModal} className={styles.navButton}>Login</button>
         {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal-content">
+          <div className="modal-overlay-login">
+            <div className="modal-content-login">
               <button onClick={handleCloseModal} className={styles.navButton}>Cerrar</button>
               <h2 className={styles.loginFormH2}>Iniciar sesión</h2>
               <form onSubmit={handleSubmit} className={styles.loginFormForm}>
@@ -83,7 +85,7 @@ function ModalLogin() {
                 </div>
                 <button type="submit" className={styles.buttonRegister}>Iniciar sesión</button>
               </form>
-              <ButtonGoogleLogin className={styles.buttonGoogle} />
+              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseModal={handleCloseModal}/>
             </div>
           </div>
         )}

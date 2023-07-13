@@ -8,136 +8,184 @@ import styles from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import axios from "axios";
 import { getCartUser } from "../../actions";
+import { FaStar } from "react-icons/fa";
 
 export default function Detail(props) {
-
   const id = props.match.params.id;
+
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(() => dispatch(getDetail(id)), [dispatch]);
+  const [size, setSize] = useState([])
+  const [cart, setCart] = useState([]);
   const dataUser = JSON.parse(localStorage.getItem("userData"))
   const user = useSelector(state => state.dataUser.cartID)
   const userca = useSelector(state => state.cartUser)
+  const game = useSelector((state) => state.detail);
+////
 
-  const videogameDetail = useSelector((state) => state.detail);
+  const [favorites, setFavorites] = useState([])
 
-  const addCarrito = async (gameId) => {
-    const gameInCart = userca?.filter((e) => e.id === id)
-    if (gameInCart.length) {
-      alert("the game is already in the cart")
-    }
-    if (!dataUser) {
-      history.push("/register")
-    } else {
-      try {
-        const data = {
-          gameID: gameId,
-          userId: dataUser
-        };
-        await axios.post(`http://localhost:3001/cart`, data);
-        dispatch(getCartUser(user))
-      } catch (error) {
-        console.log(error);
-      };
-    };
-
-  };
-
-  const origin = isNaN(id) ? "db" : "api";
+  const obternerFavoritos = async() => {
+   if(dataUser){
+     try {
+       const respuesta = await axios.get(`/users/${dataUser.userID}`);
+       setFavorites(respuesta.data.Videogames)
+     } catch (error) {
+       console.log(error);
+     }
+   }
+ }
 
   let apiRatings = [];
-  if (origin === "api" && videogameDetail.ratings) {
-    apiRatings = videogameDetail.ratings.map((rating) => rating.title);
+  if (origin === "api" && game?.ratings) {
+    apiRatings = game?.ratings.map((rating) => rating.title);
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(setCurrentPage(1));
-    history.push("/home");
+  const decuent = "-30% "
+  const divisa = "USD"
+  const {
+    Developer,
+    Genres,
+    Platforms,
+    description,
+    image,
+    launchDate,
+    name,
+    price,
+    rating,
+    screenshots,
+  } = game;
+  function renderGenreTags(genres) {
+    return genres?.map((genre, index) => (
+      <span className={styles.genreTag} key={index}>
+        {genre.genreName}
+      </span>
+    ));
   }
+  const resultado = favorites.find( result => result.id === game.id  );
+  console.log(!resultado)
+
+
+
+  function renderPlatformTags(platforms) {
+    return platforms?.map((platform, index) => (
+      <span className={styles.genreTag} key={index}>
+        {platform.platformName}
+      </span>
+    ));
+  }
+  const roundedRating = Math.round(rating);
+  const stars = Array?.from({ length: 5 }, (_, index) => {
+    if (index < roundedRating) {
+      return <FaStar key={index} className={styles.starFilled} />;
+    } else {
+      return <FaStar key={index} className={styles.starEmpty} />;
+    }
+  });
+
+
+  const handleClickCart = async (gameId) => {
+    if (!dataUser.userID) {
+      console.log("logeate");
+     }else{
+       try {
+         const data = {
+           gameID: gameId,
+           userId: dataUser.userID
+         };
+         const response = await axios.post(`http://localhost:3001/cart`, data);
+         dispatch(getCartUser(dataUser.userID))
+        setSize(response.data[0].Videogames.length)
+       } catch (error) {
+         console.log(error);
+       };
+     };
+  }
+
+  const clickFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("/favorites", game)
+      alert("game add favorites")
+      obternerFavoritos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const DeleteFavorite = async(gameId) => {
+    try {
+      const game = {
+        userId : dataUser.userID,
+        gameId : gameId
+      }
+      const respuesta = await axios.post("http://localhost:3001/favorites/delete", game)
+      alert("delete favorites")
+      await obternerFavoritos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => dispatch(getDetail(id)), [dispatch]);
+  useEffect(async() => {await obternerFavoritos()},[])
+
+  useEffect(async () => {
+    if (cart?.length === 0) {
+      try {
+        const cartID = dataUser.cartID;
+        const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
+        setCart(response.data[0]?.Videogames);
+        setSize(response.data[0]?.Videogames.length);
+      } catch (error) {
+
+      }
+    }
+  },[])
 
   return (
     <div>
-      <div>
-        <NavBar />
+      <NavBar size={size} />
+      <div className={styles.detailContainer}>
+        <h1 className={styles.detailTitle}>{game?.name}</h1>
+        <img className={styles.detailImage} src={image} alt={name} />
+        <div className={styles.detailInfo}>
+          <div className={styles.contButtons}>
+            <div className={styles.contPrice}>
+              <p className={styles.gameDesc}>{decuent}</p>
+              <p className={styles.gameDivisa}>{divisa}</p>
+              <p className={styles.gamePrice}>{price}</p>
+            </div>
+            <button className={styles.addButton} onClick={() => handleClickCart(game.id)}>Add to Cart</button>
+            {!resultado&&
+             <button className={styles.favoriteButton} 
+             onClick={() => clickFavorite(game.id)}>Add favorite</button>
+            }{resultado&&
+              <button className={styles.favoriteButton}
+              onClick={() => DeleteFavorite(game.id)}>Delete favorite</button>
+             }
+           
+          </div>
+          <div className={styles.rating}>{stars}</div>
+          <p className={styles.detailInfoItem}>Developer: {Developer?.name}</p>
+          <p className={styles.detailInfoItem}>Launch Date: {launchDate}</p>
+        </div>
+        <h2 className={styles.detailGenresHeading}>Genres:</h2>
+        <div className={styles.genres}>{renderGenreTags(Genres)}</div>
+        <h2 className={styles.detailPlatformsHeading}>Platforms:</h2>
+        <div className={styles.genres}>{renderPlatformTags(Platforms)}</div>
+       <h2 className={styles.detailScreenshotsHeading}>Description:</h2>
+       <text className={styles.detailDescription} dangerouslySetInnerHTML={{ __html: description }}></text>
+        <h2 className={styles.detailScreenshotsHeading}>Screenshots:</h2>
+        <div className={styles.detailScreenshotsContainer}>
+          {screenshots?.split(',').map((screenshot, index) => (
+            <img key={index} className={styles.detailScreenshot} src={screenshot} alt={`Screenshot ${index + 1}`} />
+          ))}
+        </div>
       </div>
-      {(origin === "api" &&
-        (!videogameDetail.genres || !videogameDetail.platforms)) ||
-        (origin === "db" &&
-          (!videogameDetail.Genres || !videogameDetail.Platforms)) ? (
-        <div>
-          <LoadingPage />
-        </div>
-      ) : (
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <div className={styles.titleImage}>
-              <h1 className={styles.title}>{videogameDetail.name}</h1>
-              <img
-                className={styles.image}
-                src={
-                  origin === "api"
-                    ? videogameDetail.background_image
-                    : videogameDetail.image
-                }
-                alt=""
-              />
-            </div>
-            <div className={styles.priceRating}>
-              <h2>
-                Launch date:{" "}
-                {origin === "api"
-                  ? videogameDetail.released
-                  : videogameDetail.launchDate}
-              </h2>
-              <h2>
-                Rating:{" "}
-                {origin === "api"
-                  ? apiRatings.join(", ")
-                  : videogameDetail.rating}
-              </h2>
-              <h3>
-                Platforms:{" "}
-                {origin === "api"
-                  ? videogameDetail.platforms
-                    .map((el) => el.platform.name)
-                    .join(", ")
-                  : videogameDetail.Platforms.map((el) => el.platformName).join(
-                    ", "
-                  )}
-              </h3>
-              <h3>
-                Genres:{" "}
-                {origin === "api"
-                  ? videogameDetail.genres.map((genre) => genre.name).join(", ")
-                  : videogameDetail.Genres.map((genre) => genre.genreName).join(
-                    ", "
-                  )}
-              </h3>
-              <h3>
-                ${videogameDetail.price}
-              </h3>
-              <button onClick={() => addCarrito(id)} className={styles.button}>Add to cart</button>
-            </div>
-          </div>
-          <div className={styles.contentDes}>
-            <h2 className={styles.description}>
-              {origin === "api" ? (
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: videogameDetail.description,
-                  }}
-                ></span>
-              ) : (
-                videogameDetail.description
-              )}
-            </h2>
-            <button onClick={(e) => handleClick(e)} className={styles.button}>
-              Go back
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
-}
+};
