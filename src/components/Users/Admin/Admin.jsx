@@ -14,13 +14,12 @@ function Admin() {
     const dispatch = useDispatch()
     const dataUser = JSON.parse(localStorage.getItem("userData"));
     const token = JSON.parse(localStorage.getItem("Token"));
-    console.log(token);
     // const [edit, setEdit] = useState(false)
     const [user, setUser] = useState({})
     const [listUsers, setListUsers] = useState([])
     const listaVideogames = useSelector((state) => state.videogames);
     const history = useHistory()
-    const usuariosActivos = "UsuariosActivos";
+    const usuariosActivos = "UsuariosActivos";  
     const usuariosBaneados = "UsuariosBaneados";
     const videogamesActivos = "Videogames Activos";
     const videogamesInactivos = "Videogames Inactivos";
@@ -63,8 +62,18 @@ function Admin() {
     const getDataUsers = async () => {
         // setUser(dataUser);
         // try {
-            const response = await axios.get('http://localhost:3001/users',{headers: { Authorization: `Bearer ${token}` }});
-            console.log(response.data);
+            console.log(token);
+            axios.get("http://localhost:3001/users", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error); 
+            });
         // } catch (error) {
         //     console.log(error);
         // }
