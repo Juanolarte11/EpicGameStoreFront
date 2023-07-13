@@ -52,7 +52,7 @@ function Admin() {
         { id: 3, nombre: 'Usuario 3', rol: 'Invitado' },
     ];
     
-    const config = {headers: { Authorization: `Bearer ${token}` }}
+    // const config = 
     //   Axios.post( 
     //       'http://localhost:8000/api/v1/get_token_payloads',
     //       config
@@ -63,7 +63,7 @@ function Admin() {
     const getDataUsers = async () => {
         // setUser(dataUser);
         // try {
-            const response = await axios.get('http://localhost:3001/users', config);
+            const response = await axios.get('http://localhost:3001/users',{headers: { Authorization: `Bearer ${token}` }});
             console.log(response.data);
         // } catch (error) {
         //     console.log(error);
