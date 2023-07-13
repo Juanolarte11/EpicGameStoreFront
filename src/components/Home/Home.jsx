@@ -15,7 +15,10 @@ export default function Home() {
   const buttonFavorites = 'Add favorites'
   const allVideogames = useSelector((state) => state.videogames);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
+  const Token = JSON.parse(localStorage.getItem("Token"));
   const [sizeCart, setSizeCart] = useState(0);
+
+  console.log(Token);
 
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {

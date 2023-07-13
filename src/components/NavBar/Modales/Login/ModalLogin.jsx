@@ -29,16 +29,15 @@ function ModalLogin() {
     try {
       const response = await axios.post('/users/login', user);
       const Token = response.data.token
-      console.log("response error");
+      console.log(Token);
       const dataUser = {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
-        cartID: response.data.user.Carrito.id
+        cartID: response.data.user.Carrito?.id
       }
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
       localStorage.setItem('Token', JSON.stringify(Token));
-      console.log("response error");
       handleCloseModal();
     } catch (error) {
       alert("error")
