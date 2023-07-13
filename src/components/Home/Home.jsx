@@ -10,7 +10,7 @@ import axios from "axios";
 import ModalLogin from "../NavBar/Modales/Login/ModalLogin.jsx";
 
 export default function Home() {
-  const favorite = { name: "add Favorite" };
+
   const dispatch = useDispatch();
   const buttonFavorites = 'Add favorites'
   const allVideogames = useSelector((state) => state.videogames);
@@ -78,7 +78,7 @@ export default function Home() {
             allVideogames={allVideogames}
             handleClickCart={handleClickCart}
             clickFavorite={clickFavorite}
-            favorite={favorite}
+            buttonFavorites={buttonFavorites}
           />
         </div>
       )}
