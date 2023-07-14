@@ -22,8 +22,9 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
           nombre: user.userName,
           userID: user.id,
           cartID: user.Carrito.id,
+          role: user.role
         };
-
+        console.log(dataUser);
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
         handleCloseLogin();
