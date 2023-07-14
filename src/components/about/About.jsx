@@ -1,23 +1,23 @@
 import React from "react";
-import style from "../About/About.module.css";
-import express from "../About/express.png";
-import node from "../About/node.png";
-import postgres from "../About/postgresql.png";
-import react from "../About/react.jpg";
-import redux from "../About/redux.png";
-import sequelize from "../About/sequalize.png";
-import github from "../About/gitHub.png";
-import linkedIn from "../About/linkedIn.png";
+import style from "./about.module.css";
+import express from "./express.png";
+import node from "./node.png";
+import postgres from "./postgresql.png";
+import react from "./react.jpg";
+import redux from "./redux.png";
+import sequelize from "./sequalize.png";
+import github from "./gitHub.png";
+import linkedIn from "./linkedIn.png";
 import { Link } from "react-router-dom";
-import fotoAle from "../About/fotoAle.jpeg";
-import fotoAlex from "../About/fotoAlex.jpeg";
-import fotoRafa from "../About/fotoRafa.jpeg";
-import fotoEric from "../About/fotoEric.jpeg";
-import peru from "../About/peru.jpg";
-import fotoGilbert from "../About/fotoGilbert.jpeg";
-import colombia from "../About/colombia.png";
-import fotoJeffrey from "../About/fotoJeffrey.jpeg";
-import fotoSeba from "../About/fotoSeba.jpeg";
+import fotoAle from "./fotoAle.jpeg";
+import fotoAlex from "./fotoAlex.jpeg";
+import fotoRafa from "./fotoRafa.jpeg";
+import fotoEric from "./fotoEric.jpeg";
+import peru from "./peru.jpg";
+import fotoGilbert from "./fotoGilbert.jpeg";
+import colombia from "./colombia.png";
+import fotoJeffrey from "./fotoJeffrey.jpeg";
+import fotoSeba from "./fotoSeba.jpeg";
 
 function About() {
   return (

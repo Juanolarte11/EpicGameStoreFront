@@ -12,7 +12,6 @@ export default function Favorites() {
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([])
   const dataUser = JSON.parse(localStorage.getItem("userData"))
-
    const obternerFavoritos = async() => {
     if(dataUser){
       try {
