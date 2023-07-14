@@ -23,7 +23,6 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/cart" component={Cart} />
           <Route path="/favorites" component={Favorites} />
-          {/* <Route path="/Dashboard" component={Dashboard}/> */}
         </Switch>
       </div>
     </BrowserRouter>
