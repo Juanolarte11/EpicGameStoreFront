@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Listvideogames.module.css';
 
-const ListVideogames = ({ lista, videogames, boton}) => {
+const ListVideogames = ({ lista, videogames, boton, boton2}) => {
   return (
     <div className={styles.container}>
       <h2>{videogames}</h2>
@@ -13,7 +13,7 @@ const ListVideogames = ({ lista, videogames, boton}) => {
               <span>Price: {lista.price}</span>
             </div>
             <button className={styles.botonBan} onClick={boton}>Ban</button>
-            {/* <button className={styles.botonBan} onClick={b}>Edit</button> */}
+            <button className={styles.botonBan} onClick={boton2}>Edit</button>
           </li>
         ))}
       </ul>

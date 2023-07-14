@@ -30,13 +30,14 @@ const ModalLogin = ({ handleCloseRegister }) => {
     }
     try {
       const response = await axios.post('/users/login', user);
-
+      console.log(response.data);
       const Token = response.data.token
-      console.log(Token);
+
       const dataUser = {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
-        cartID: response.data.user.Carrito?.id
+        cartID: response.data.user.Carrito?.id,
+        role: response.data.user?.role
       }
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
@@ -47,8 +48,6 @@ const ModalLogin = ({ handleCloseRegister }) => {
       console.log(error);
     }
   };
-
-
 
   return (
     <div>
