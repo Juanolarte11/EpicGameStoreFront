@@ -6,8 +6,6 @@ import { useAutocomplete } from '@mui/material';
 import { useSelector } from "react-redux";
 export default function NavbarSec({ handleSort, handleReset, handleSearch, handleGenres }) {
   const genres = useSelector(state => state.genres)
-  // console.log(genres);
-  // const options = ["value1", "value2", "value3"]
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navbarNav}>
@@ -44,9 +42,8 @@ export default function NavbarSec({ handleSort, handleReset, handleSearch, handl
           {'\u2193'}
           </button>
         </li>
-        <li className={styles.navItem}><span className={styles.spans}>Genre</span></li>
         <li className={styles.navItem}>
-          <Selector options={genres} handleGenres={handleGenres}/>
+          <Selector options={genres} handleGenres={handleGenres} placeholder={"Genre"}/>
         </li>
         <li className={styles.navItem}>
           <button onClick={() => handleReset()} className={styles.navLink}>

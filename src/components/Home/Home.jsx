@@ -17,9 +17,7 @@ export default function Home() {
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const Token = JSON.parse(localStorage.getItem("Token"));
   const [sizeCart, setSizeCart] = useState(0);
-
-  console.log(Token);
-
+  dispatch(getGenres())
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
       console.log("logeate");
@@ -57,7 +55,6 @@ export default function Home() {
           `http://localhost:3001/cart/${dataUser.cartID}`
         );
         dispatch(getCartUser(dataUser.userID));
-        dispatch(getGenres())
         setSizeCart(response?.data[0]?.Videogames?.length);
       } catch (error) {
         console.log(error);
