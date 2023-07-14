@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, setCurrentPage } from "../../actions";
+import { getDetail, setCurrentPage, getCommentVideoGame } from "../../actions";
 import { useHistory } from "react-router-dom";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Detail.module.css";
@@ -17,11 +17,71 @@ export default function Detail(props) {
   const history = useHistory();
   const [size, setSize] = useState([])
   const [cart, setCart] = useState([]);
+
   const dataUser = JSON.parse(localStorage.getItem("userData"))
   const user = useSelector(state => state.dataUser.cartID)
   const userca = useSelector(state => state.cartUser)
   const game = useSelector((state) => state.detail);
-////
+////////////
+
+const [commentUser, setCommentUser] = useState('');
+const [ratingUser, setRatingUser] = useState('');
+
+const handleCommentUser = (event) =>{
+  setCommentUser(event.target.value)
+}
+const handleRatingUser = (event) =>{
+  setRatingUser(event.target.value)
+}
+
+const handlePostComment = async() =>{
+
+//// FALTA DETALLAR
+  const comentario = {
+    userId: dataUser.userID,
+    gameId: game.id,
+    comment: commentUser,
+    rating: ratingUser
+  }
+  await axios.post('/reviews', comentario);
+
+}
+
+const commentVideoGame = useSelector(state => state.commentVideoGame)
+console.log(commentVideoGame)
+
+let starsU = Number
+function renderComments() {
+  return commentVideoGame.Reviews?.map((review, index) => (
+    
+    <div>
+      <p className={styles.genreTag} key={index}>
+      {review.Users[0]?.userName}
+    </p>
+      <span className={styles.genreTag} key={index}>
+      {review.comment}
+    </span>
+
+    
+    {
+       starsU = Array?.from({ length: 5 }, (_, index) => {
+        if (index < review.rating) {
+
+          return <FaStar key={index} className={styles.starFilled} />;
+          
+        } else {
+          return <FaStar key={index} className={styles.starEmpty} />;
+        }
+      })
+    } 
+
+    <span className={styles.genreTag} key={index}>
+      {(review.Users[0]?.ReviewUsers.createdAt)?.slice(0,10)}
+    </span>   
+    </div>
+
+  ));
+}
 
   const [favorites, setFavorites] = useState([])
 
@@ -35,7 +95,7 @@ export default function Detail(props) {
      }
    }
  }
-
+ 
   let apiRatings = [];
   if (origin === "api" && game?.ratings) {
     apiRatings = game?.ratings.map((rating) => rating.title);
@@ -55,6 +115,7 @@ export default function Detail(props) {
     rating,
     screenshots,
   } = game;
+
   function renderGenreTags(genres) {
     return genres?.map((genre, index) => (
       <span className={styles.genreTag} key={index}>
@@ -63,9 +124,6 @@ export default function Detail(props) {
     ));
   }
   const resultado = favorites.find( result => result.id === game.id  );
-  console.log(!resultado)
-
-
 
   function renderPlatformTags(platforms) {
     return platforms?.map((platform, index) => (
@@ -74,6 +132,7 @@ export default function Detail(props) {
       </span>
     ));
   }
+
   const roundedRating = Math.round(rating);
   const stars = Array?.from({ length: 5 }, (_, index) => {
     if (index < roundedRating) {
@@ -82,7 +141,6 @@ export default function Detail(props) {
       return <FaStar key={index} className={styles.starEmpty} />;
     }
   });
-
 
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
@@ -130,6 +188,11 @@ export default function Detail(props) {
     }
   }
 
+  useEffect(() => 
+  dispatch(getCommentVideoGame(id))
+  ,[]);
+
+
   useEffect(() => dispatch(getDetail(id)), [dispatch]);
   useEffect(async() => {await obternerFavoritos()},[])
 
@@ -175,6 +238,7 @@ export default function Detail(props) {
         </div>
         <h2 className={styles.detailGenresHeading}>Genres:</h2>
         <div className={styles.genres}>{renderGenreTags(Genres)}</div>
+
         <h2 className={styles.detailPlatformsHeading}>Platforms:</h2>
         <div className={styles.genres}>{renderPlatformTags(Platforms)}</div>
        <h2 className={styles.detailScreenshotsHeading}>Description:</h2>
@@ -185,6 +249,19 @@ export default function Detail(props) {
             <img key={index} className={styles.detailScreenshot} src={screenshot} alt={`Screenshot ${index + 1}`} />
           ))}
         </div>
+
+        {dataUser?.nombre?  (
+        <div>
+        <h2 className={styles.detailScreenshotsHeading}>Comentarios:</h2>
+        <form onSubmit={handlePostComment}>
+        <input onChange={handleCommentUser}></input>
+        <input onChange={handleRatingUser} type="number" max="5" min="0"></input>
+        <button type="submit">Enviar comentario</button>
+        </form>
+        </div> ) : ''
+        }
+        <div className={styles.genres}>{renderComments()}</div>
+        
       </div>
     </div>
   );
