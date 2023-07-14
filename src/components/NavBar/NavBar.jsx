@@ -4,12 +4,11 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import UserModal from "./Modales/Users/UserModal";
-import ModalLogin from "./Modales/Login/ModalLogin"
-import ModalRegister from "./Modales/Registro/ModalRegister"
+import ModalLogin from "./Modales/Login/ModalLogin";
+import ModalRegister from "./Modales/Registro/ModalRegister";
 import noUser from "../NavBar/noUser2.png";
 
 export default function NavBar({ size }) {
-
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
   const btnClick = () => {
@@ -17,18 +16,21 @@ export default function NavBar({ size }) {
     window.location.reload();
   };
 
+  const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
+
   return (
     <nav className={style.nav}>
       {dataUser?.nombre ? (
         <UserModal></UserModal>
-      ) : (<div>
-        <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
+      ) : (
+        <div>
+          <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
         </div>
-      )}           
+      )}
       <div className={style.navLinks}>
-      <div className={style.nameContainer}>
-      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
-      </div> 
+        <div className={style.nameContainer}>
+          <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+        </div>
         <div className={style.a}>
           <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
@@ -47,7 +49,9 @@ export default function NavBar({ size }) {
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
 
-          {!dataUser?.userID && <ModalRegister />}
+          {!dataUser?.userID && (
+            <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
+          )}
           {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout
