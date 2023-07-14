@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import style from "./Users.module.css";
+import style from "./Admin.module.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios"
 import NavBar from "../../NavBar/NavBar";
@@ -20,7 +20,7 @@ function Admin() {
     const [listUsers, setListUsers] = useState([])
     const listaVideogames = useSelector((state) => state.videogames);
     const history = useHistory()
-    const usuariosActivos = "UsuariosActivos";  
+    const usuariosActivos = "UsuariosActivos";
     const usuariosBaneados = "UsuariosBaneados";
     const videogamesActivos = "Videogames Activos";
     const videogamesInactivos = "Videogames Inactivos";
@@ -36,17 +36,16 @@ function Admin() {
 
     }
     const handleBam = async (id) => {
-        console.log(id);
-        const config = {headers: {
-            Authorization: `Bearer ${token}`,
-        }}
-
         const update = {
-            active : false
+            active: false
         }
         try {
-            const response = await axios.patch(`/users/${id}`,config)
-            console.log(response);
+            axios.patch(`http://localhost:3001/users/${id}`,update, { headers: {
+                    Authorization: `Bearer ${token}`}
+            })
+            .then((response) => {
+                console.log(response);
+            })
         } catch (error) {
             console.log(error);
         }
@@ -64,20 +63,20 @@ function Admin() {
         { id: 2, nombre: 'Usuario 2', rol: 'Moderador' },
         { id: 3, nombre: 'Usuario 3', rol: 'Invitado' },
     ];
-    
+
     const getDataUsers = async () => {
-            console.log(token);
-            axios.get("http://localhost:3001/admin/users", {
+        console.log(token);
+        axios.get("http://localhost:3001/admin/users", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-            })
+        })
             .then((response) => {
                 console.log(response.data);
                 setListUsers(response.data)
             })
             .catch((error) => {
-                console.log(error); 
+                console.log(error);
             });
     };
     useEffect(async () => {
@@ -99,12 +98,17 @@ function Admin() {
                 <div>
                     <div>
                         <h1>{user.nombre}</h1>
-                        <ListUsers lista={listUsers} usuarios={usuariosActivos} boton={handleBam} />
-                        <ListUsers lista={usuarios} usuarios={usuariosBaneados} boton={handleActiv} />
-                        <ListUsers lista={usuarios} usuarios={solicitudRol} boton={handleAprove} />
-                        <ListVideogames lista={listaVideogames} videogames={videogamesActivos} boton={handleActivVideogame} boton2={handleModalForm}/>
-                        {edit ? (<ModalForm />) : null}
-                        <ListVideogames lista={usuarios} videogames={videogamesInactivos} boton={handleBamVideogame} />
+                        <div className={style.contUsers}>
+                            <ListUsers lista={listUsers} usuarios={usuariosActivos} boton={handleBam} />
+                            <ListUsers lista={usuarios} usuarios={usuariosBaneados} boton={handleActiv} />
+                            <ListUsers lista={usuarios} usuarios={solicitudRol} boton={handleAprove} />
+                        </div>
+                        <div className={style.contVideogames}>
+                            <ListVideogames lista={listaVideogames} videogames={videogamesActivos} boton={handleActivVideogame} boton2={handleModalForm} />
+                            {edit ? (<ModalForm />) : null}
+                            <ListVideogames lista={usuarios} videogames={videogamesInactivos} boton={handleBamVideogame} />
+                        </div>
+                        <br />
                         <button onClick={btnClick}>Cerrar seccion</button>
                         <br />
                         <Link to="/home" >
