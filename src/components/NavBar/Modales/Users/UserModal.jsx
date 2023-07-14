@@ -2,12 +2,13 @@ import React from 'react'
 import "./Modal.css";
 import { useState } from 'react';
 import styles from "./Users.module.css"
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 function ModalUser() {
   const [isOpen, setIsOpen] = useState(false);
     const dataUser = JSON.parse(localStorage.getItem("userData"));
+    console.log(dataUser);
     const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
 
     const handleOpenModal = () => {
@@ -35,7 +36,8 @@ function ModalUser() {
           <div className={"modal-content"}>
      
             <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
-            <Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>
+            { dataUser.role === "cliente" ? (<Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>) : 
+                (<Link to={"/admin"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>)}
             <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
             <h2>{"lista de favoritos"}</h2>
             <h2>{"registro de compras"}</h2>

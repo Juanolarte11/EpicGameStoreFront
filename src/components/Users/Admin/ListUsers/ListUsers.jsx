@@ -9,11 +9,10 @@ const ListUsers = ({ lista, usuarios, boton }) => {
         {lista.map((lista) => (
           <li key={lista.id} className={styles.usuario}>
             <div>
-              <span>Nombre: {lista.nombre}</span>
-              <span>Rol: {lista.rol}</span>
-              <span>ID: {lista.id}</span>
+              <span>Nombre: {lista.userName}</span>
+              <span>----Rol: {lista.role}</span>
             </div>
-            <button className={styles.botonBan} onClick={boton}>Ban</button>
+            <button className={styles.botonBan} onClick={() => boton(lista.id)}>Ban</button>
           </li>
         ))}
       </ul>
