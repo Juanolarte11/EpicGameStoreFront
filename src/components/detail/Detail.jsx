@@ -22,7 +22,7 @@ export default function Detail(props) {
   const user = useSelector(state => state.dataUser.cartID)
   const userca = useSelector(state => state.cartUser)
   const game = useSelector((state) => state.detail);
-////////////
+
 
 const [commentUser, setCommentUser] = useState('');
 const [ratingUser, setRatingUser] = useState('');
@@ -36,7 +36,6 @@ const handleRatingUser = (event) =>{
 
 const handlePostComment = async() =>{
 
-//// FALTA DETALLAR
   const comentario = {
     userId: dataUser.userID,
     gameId: game.id,
@@ -44,7 +43,6 @@ const handlePostComment = async() =>{
     rating: ratingUser
   }
   await axios.post('/reviews', comentario);
-
 }
 
 const commentVideoGame = useSelector(state => state.commentVideoGame)
@@ -62,7 +60,6 @@ function renderComments() {
       {review.comment}
     </span>
 
-    
     {
        starsU = Array?.from({ length: 5 }, (_, index) => {
         if (index < review.rating) {
