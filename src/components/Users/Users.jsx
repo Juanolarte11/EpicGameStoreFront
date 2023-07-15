@@ -152,6 +152,11 @@ function User() {
       {user && (
         <div className={styles.user_box}>
           <div className={styles.head}>
+            <div>
+            <h1>Informacion Personal</h1>
+            <FormularioEditar settShowForm={settShowForm} user={user}/>
+            </div>
+            
             <h1>{user.userName}</h1>
             <img src={user.userImage} alt={user.userName} />
             <h2>{user.userEmail}</h2>
