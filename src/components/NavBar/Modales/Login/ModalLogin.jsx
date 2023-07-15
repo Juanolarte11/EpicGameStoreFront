@@ -37,7 +37,8 @@ const ModalLogin = ({ handleCloseRegister }) => {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
         cartID: response.data.user.Carrito?.id,
-        role: response.data.user?.role
+        role: response.data.user?.role,
+        image: response.data.user.userImage
       }
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));

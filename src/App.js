@@ -4,17 +4,15 @@ import LandingPage from "./components/landingPage/LandingPage.jsx";
 import Home from "./components/Home/Home.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
-import About from "./components/about/About.jsx";
+import About from "./components/About/About.jsx";
 import Favorites from "./components/Favorites/Favorites.jsx";
 import "./App.css";
 import Cart from "./components/Cart/Cart.jsx";
 import User from "./components/Users/Users.jsx";
 import Admin from "./components/Users/Admin/Admin.jsx";
-import { Cloudinary } from "@cloudinary/url-gen";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
-  const cld = new Cloudinary({ cloud: { cloudName: 'drgco4gsh' } });
   return (
     <BrowserRouter>
       <div className="App">

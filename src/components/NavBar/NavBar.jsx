@@ -13,6 +13,7 @@ export default function NavBar({ size }) {
 
   const btnClick = () => {
     localStorage.setItem("userData", JSON.stringify({}));
+    localStorage.setItem("Token", JSON.stringify({}));
     window.location.reload();
   };
 
@@ -21,7 +22,7 @@ export default function NavBar({ size }) {
   return (
     <nav className={style.nav}>
       {dataUser?.nombre ? (
-        <UserModal></UserModal>
+        <UserModal image={dataUser.image}></UserModal>
       ) : (
         <div>
           <img className={style.userImg} src={noUser} alt="Imagen de perfil" />

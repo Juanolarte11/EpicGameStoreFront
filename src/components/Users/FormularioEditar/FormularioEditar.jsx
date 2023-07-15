@@ -5,17 +5,17 @@ import Modal from "./Modal";
 import axios from "axios";
 import TermsAndConditions from "./TermsAndConditions";
 
-function FormularioEditar({ settShowForm, user }) {
+function FormularioEditar({user }) {
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
-
+    const token = JSON.parse(localStorage.getItem("Token"));
+    const dataUser = JSON.parse(localStorage.getItem("userData"));
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
     const [newUsername, setNewUsername] = useState("");
-    const [image, setImage] = useState("");
-    const [newRole, setNewRole] = useState("");
+    const [image, setImage] = useState(dataUser.image);
 
     const preset_key = "images";
     const cloud_name = "drgco4gsh";
@@ -53,8 +53,7 @@ function FormularioEditar({ settShowForm, user }) {
     };
 
     const btnClick = () => {
-        localStorage.setItem("userData", JSON.stringify({}));
-        history.push("/home");
+        
     };
 
     const updatesUser = () => {
@@ -64,6 +63,20 @@ function FormularioEditar({ settShowForm, user }) {
         }
         if (image.length !== 0) {
             NewUser.userImage = image;
+        }
+        try {
+            axios.patch(`http://localhost:3001/users/${user.id}`,NewUser, { headers: {
+                    Authorization: `Bearer ${token}`}
+            })
+            .then((response) => {
+                localStorage.setItem("userData", JSON.stringify({}));
+                localStorage.setItem('Token', JSON.stringify({}));
+                alert("Datos actualizados con exito, inicia Sesion")
+                history.push("/home");
+            })
+        } catch (error) {
+            alert(error.message)
+            console.log(error);
         }
         console.log(NewUser);
     };

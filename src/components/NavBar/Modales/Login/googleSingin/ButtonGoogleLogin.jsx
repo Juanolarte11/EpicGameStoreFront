@@ -27,6 +27,7 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
         console.log(dataUser);
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
+        localStorage.setItem("Token", JSON.stringify(dataUser));
         handleCloseLogin();
         window.location.reload();
       } else {
