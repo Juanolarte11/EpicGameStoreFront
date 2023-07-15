@@ -2,6 +2,7 @@ import { filterByOrigin } from "./filterByOrigin.js";
 
 const initialState = {
   cartUser: [],
+  commentVideoGame: [],
   videogames: [],
   dataUser: [],
   allVideogames: [],
@@ -30,6 +31,11 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         videogames: action.payload
+      };
+      case "GET_COMMENT_DETAIL":
+      return{
+        ...state,
+        commentVideoGame: action.payload
       };
 
     case "POST_VIDEOGAME":

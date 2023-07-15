@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./about.module.css";
+import style from "./About.module.css";
 import express from "./express.png";
 import node from "./node.png";
 import postgres from "./postgresql.png";
@@ -22,14 +22,18 @@ import fotoSeba from "./fotoSeba.jpeg";
 function About() {
   return (
     <div className={style.container}>
+      <div>
       <h1>
         Hello, we are the developers of the EpicGamesStore. It is a pleasure
         that you visit our page.
       </h1>
+      <h2>These are the technologies implemented in this application...</h2>
+      </div>
+      <div>
       <button>
         <Link to="/home">HOME</Link>
       </button>
-      <h2>These are the technologies implemented in this application...</h2>
+      </div>
       <div className={style.iconTech}>
         <img src={express} alt="Express" />
         <img src={node} alt="Node" />
@@ -39,6 +43,7 @@ function About() {
         <img src={sequelize} alt="Sequelize" />
       </div>
 
+      <div clasName={style.containerCards}>
       <div className={style.card}>
         <div className={style.cardImg}>
           <img src={fotoAle} alt="Ale" />
@@ -101,7 +106,7 @@ function About() {
           ></img>
           <h2>Eric Ramirez</h2>
           <h3>Age:30</h3>
-          <h3>Profession: Bisness Develop Support, Full Stack web Developer</h3>
+          <h3>Profession: Business Develop Support, Full Stack web Developer</h3>
         </div>
         <div className={style.links}>
           <Link to={"https://github.com/sckarlet015"}>
@@ -121,7 +126,10 @@ function About() {
           <img src={peru} alt="Perú"></img>
           <h2>Giancarlo Moreno</h2>
           <h3>Age:27</h3>
-          <h3>Profession: Business administrator. Full Stack web Developer.</h3>
+          <h3>Profession:</h3>
+          <h3> Business manager.<br/>
+              Photographer.<br/>
+ Full Stack web Developer.</h3>
         </div>
         <div className={style.links}>
           <Link to={"https://github.com/YnkETH/"}>
@@ -203,6 +211,7 @@ function About() {
           <Link to={"https://www.linkedin.com/in/rafael-ibarra-6193a857/"}>
             <img src={linkedIn} alt="linkedIn"></img>
           </Link>
+        </div>
         </div>
       </div>
     </div>
