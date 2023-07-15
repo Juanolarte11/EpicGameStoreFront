@@ -7,8 +7,11 @@ import UserModal from "./Modales/Users/UserModal";
 import ModalLogin from "./Modales/Login/ModalLogin";
 import ModalRegister from "./Modales/Registro/ModalRegister";
 import noUser from "../NavBar/noUser2.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function NavBar({ size }) {
+  const [country, setCountry] = useState("");
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
   const btnClick = () => {
@@ -17,7 +20,30 @@ export default function NavBar({ size }) {
     window.location.reload();
   };
 
+
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
+
+  useEffect(() => {
+    const storedCountry = localStorage.getItem("country");
+    if (storedCountry) {
+      setCountry(storedCountry);
+    } else {
+      fetchCountryFromAPI();
+    }
+  }, []);
+
+  const fetchCountryFromAPI = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        const country = response.data.country_name;
+        setCountry(country);
+        localStorage.setItem("country", country);
+      })
+      .catch((error) => {
+        console.error("IP geolocation error:", error);
+      });
+  };
 
   return (
     <nav className={style.nav}>
