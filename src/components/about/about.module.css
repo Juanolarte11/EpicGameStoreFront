@@ -2,25 +2,23 @@
   text-align: center;
   background-color: #f1f1f1;
   padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 97.6%;
-  justify-content: center;
   display: block;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
 }
 
-.container button {
+.buttonHome {
   background-color: rgb(138, 138, 229);
   margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
-  position: absolute;
+  position: relative;
   top: 10px;
   right: 30px;
   border-radius: 10px;
   padding: 15px;
 }
-
 
 
 .container h1 {
@@ -34,11 +32,12 @@
 }
 
 .iconTech {
-  display: flex;
+  display: inline-table;
   justify-content: center;
   margin-top: 20px;
   padding-bottom: 20px;
   border-radius: 8px;
+  grid-column: 1;
 }
 
 .iconTech img {
@@ -84,25 +83,11 @@
   height: 32px;
   margin-right: 10px;
 }
-.home {
-  background-color: blue;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  margin-left: 10px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.containerCards{
-  display: inline-flex;
-  justify-content: flex-end;
-}
 .card {
   position: relative;
-  height: 40%;
+  height: 500px;
   width: 350px;
-  display: flex;
+  display: inline-table;
   flex-direction: column;
   align-items: center;
   padding: 20px;
@@ -111,4 +96,8 @@
   box-shadow: 2px 2px 4px rgba(1, 1, 1, 1);
   margin-right: 2rem;
   margin-top: 2rem;
+}
+
+.cardContainer{
+  width: 300px;
 }
