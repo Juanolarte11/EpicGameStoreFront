@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./About.module.css";
+import style from "./about.module.css";
 import express from "./express.png";
 import node from "./node.png";
 import postgres from "./postgresql.png";
@@ -8,7 +8,7 @@ import redux from "./redux.png";
 import sequelize from "./sequalize.png";
 import github from "./gitHub.png";
 import linkedIn from "./linkedIn.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import fotoAle from "./fotoAle.jpeg";
 import fotoAlex from "./fotoAlex.jpeg";
 import fotoRafa from "./fotoRafa.jpeg";
@@ -19,21 +19,31 @@ import colombia from "./colombia.png";
 import fotoJeffrey from "./fotoJeffrey.jpeg";
 import fotoSeba from "./fotoSeba.jpeg";
 
+
 function About() {
+  const history = useHistory()
+
+  const btnClick = () =>{
+    history.push('/home')
+  }
   return (
     <div className={style.container}>
-      <div>
+      <div className={style.info}>
+      <div className={style}>
+      <button className={style.buttonHome} onClick={btnClick}>
+         Home
+      </button>
+      </div>
+        <div className={style.upInfo}>
       <h1>
         Hello, we are the developers of the EpicGamesStore. It is a pleasure
         that you visit our page.
       </h1>
       <h2>These are the technologies implemented in this application...</h2>
       </div>
-      <div>
-      <button>
-        <Link to="/home">HOME</Link>
-      </button>
+      
       </div>
+      
       <div className={style.iconTech}>
         <img src={express} alt="Express" />
         <img src={node} alt="Node" />
@@ -43,7 +53,7 @@ function About() {
         <img src={sequelize} alt="Sequelize" />
       </div>
 
-      <div clasName={style.containerCards}>
+      <div clasName={style.cardContainer}>
       <div className={style.card}>
         <div className={style.cardImg}>
           <img src={fotoAle} alt="Ale" />
@@ -126,9 +136,9 @@ function About() {
           <img src={peru} alt="Perú"></img>
           <h2>Giancarlo Moreno</h2>
           <h3>Age:27</h3>
-          <h3>Profession:</h3>
-          <h3> Business manager.<br/>
-              Photographer.<br/>
+          <h3>Profession:
+           Business manager.
+              Photographer.
  Full Stack web Developer.</h3>
         </div>
         <div className={style.links}>
@@ -211,7 +221,7 @@ function About() {
           <Link to={"https://www.linkedin.com/in/rafael-ibarra-6193a857/"}>
             <img src={linkedIn} alt="linkedIn"></img>
           </Link>
-        </div>
+        </div> 
         </div>
       </div>
     </div>
