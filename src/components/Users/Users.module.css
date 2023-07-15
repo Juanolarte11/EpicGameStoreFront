@@ -1,13 +1,13 @@
 .container {
-    background-color: #f9f1ea;
-    padding: 20px;
+  background-color: #1d354e;
   }
   
   .user_box {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
+
   }
   
   .head {
@@ -17,7 +17,7 @@
   }
   
   .head h1 {
-    color: #1d354e;
+    color: #ffffff;
     font-size: 24px;
     margin-bottom: 10px;
   }

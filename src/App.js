@@ -10,9 +10,11 @@ import "./App.css";
 import Cart from "./components/Cart/Cart.jsx";
 import User from "./components/Users/Users.jsx";
 import Admin from "./components/Users/Admin/Admin.jsx";
+import { Cloudinary } from "@cloudinary/url-gen";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
+  const cld = new Cloudinary({ cloud: { cloudName: 'drgco4gsh' } });
   return (
     <BrowserRouter>
       <div className="App">

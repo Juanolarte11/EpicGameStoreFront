@@ -141,10 +141,7 @@ function User() {
     getDataUsers();
   }, []);
 
-  const btnClick = () => {
-    localStorage.setItem("userData", JSON.stringify({}));
-    history.push("/home");
-  };
+ 
 
   return (
     <div className={styles.container}>
@@ -152,24 +149,11 @@ function User() {
       {user && (
         <div className={styles.user_box}>
           <div className={styles.head}>
-            <div>
-            <h1>Informacion Personal</h1>
+            <div className={styles.contForm}>
             <FormularioEditar settShowForm={settShowForm} user={user}/>
             </div>
-            
-            <h1>{user.userName}</h1>
-            <img src={user.userImage} alt={user.userName} />
-            <h2>{user.userEmail}</h2>
+            <div id="modal-root"></div>
             <div className={styles.actions}>
-              <div>
-                {showForm ? (
-                  <FormularioEditar settShowForm={settShowForm} />
-                ) : (
-                  <button onClick={() => setShowForm(true)}>
-                    Editar Perfil
-                  </button>
-                )}
-              </div>
               <h1 className={styles.sectionTitle}>Historial de Compras</h1>
               {listaDeCompras.map((ele) => {
                 return (
@@ -185,13 +169,6 @@ function User() {
                 );
               })}
             </div>
-            <button className={styles.logoutButton} onClick={btnClick}>
-              Cerrar Sesión
-            </button>
-            <br />
-            <Link to="/home" className={styles.homeLink}>
-              HOME
-            </Link>
           </div>
           <div className={styles.list}>
             <div>
