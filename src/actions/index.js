@@ -134,3 +134,19 @@ export function getDataUser(payload){
         payload,
     }
 }
+
+export function setModalLogin(payload1,payload2){
+    return{
+        type:"GET_MODAL_LOGIN",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+export function setModalRegister(payload1,payload2){
+    return{
+        type:"GET_MODAL_REGISTER",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+

@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./about.module.css";
+import style from "./About.module.css";
 import express from "./express.png";
 import node from "./node.png";
 import postgres from "./postgresql.png";
@@ -29,7 +29,7 @@ function About() {
   return (
     <div className={style.container}>
       <div className={style.info}>
-      <div className={style}>
+      <div >
       <button className={style.buttonHome} onClick={btnClick}>
          Home
       </button>
