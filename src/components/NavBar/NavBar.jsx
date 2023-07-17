@@ -49,9 +49,7 @@ export default function NavBar({ size }) {
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
 
-          {!dataUser?.userID && (
-            <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
-          )}
+          {!dataUser?.userID && <ModalRegister />}
           {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout

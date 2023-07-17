@@ -38,7 +38,7 @@ function About() {
         <img src={redux} alt="Redux" />
         <img src={sequelize} alt="Sequelize" />
       </div>
-
+      <div className={style.title}></div>
       <div className={style.card}>
         <div className={style.cardImg}>
           <img src={fotoAle} alt="Ale" />

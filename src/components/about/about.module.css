@@ -104,3 +104,8 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.title h2 {
+  font-weight: bold;
+  display: flex;
+  margin-bottom: 20px;
+}
