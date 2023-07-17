@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import SearchBar from '../searchBar/SearchBar';
 import Selector from './Selecto';
-import { useAutocomplete } from '@mui/material';
 import { useSelector } from "react-redux";
 export default function NavbarSec({ handleSort, handleReset, handleSearch, handleGenres }) {
   const genres = useSelector(state => state.genres)
@@ -14,30 +13,26 @@ export default function NavbarSec({ handleSort, handleReset, handleSearch, handl
           <button onClick={() => handleSort("AtoZ")} className={styles.navLink}>
           {'\u2191'}
           </button>
-        </li>
-        <li className={styles.navItem}>
           <button onClick={() => handleSort("ZtoA")} className={styles.navLink}>
           {'\u2193'}
           </button>
-        </li>
+        </li>        
+       
         <li className={styles.navItem}>
         <span className={styles.spans}>Price</span>
           <button onClick={() => handleSort("PriceAsc")} className={styles.navLink}>
           {'\u2191'}
           </button>
-        </li>
-        <li className={styles.navItem}>
           <button onClick={() => handleSort("PriceDesc")} className={styles.navLink}>
           {'\u2193'}
-          </button>
-        </li>
+          </button>    
+        </li>        
+            
         <li className={styles.navItem}>
         <span className={styles.spans}>Rating</span>
           <button onClick={() => handleSort("RatingAsc")} className={styles.navLink}>
           {'\u2191'}
           </button>
-        </li>
-        <li className={styles.navItem}>
           <button onClick={() => handleSort("RatingDesc")} className={styles.navLink}>
           {'\u2193'}
           </button>

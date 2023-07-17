@@ -1,29 +1,28 @@
 import "./Modal.css";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./Login.module.css";
+import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
 import ModalLogin from "../Login/ModalLogin";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setModalRegister } from "../../../../actions";
 
 const ModalRegister = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  ///////////////////
+  const isModalRegister = useSelector((state) => state.modalRegister);
+  //////////////////
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const clickLogin = () => {
-    // completar con la funcion handleOpenModalLogin
-  };
-
-  const handleOpenModal = () => {
-    setIsOpen(true);
+  const handleOpenRegister = () => {
+    dispatch(setModalRegister(true,false))
   };
 
   const handleCloseRegister = () => {
-    setIsOpen(false)
-    console.log('holis')
+    dispatch(setModalRegister(false,false))
+    
   };
 
   const handleSubmit = async (event) => {
@@ -49,10 +48,10 @@ const ModalRegister = () => {
   return (
     <div>
       <div>
-        <button onClick={handleOpenModal} className={styles.navButton}>
+        <button onClick={handleOpenRegister} className={styles.navButton}>
           Register
         </button>
-        {isOpen && (
+        {isModalRegister && (
           <div className="modal-overlay-register">
             <div className="modal-content-register">
               <button onClick={handleCloseRegister} className={styles.navButton}>
@@ -120,8 +119,8 @@ const ModalRegister = () => {
                 </div>
                 <hr />
                 <div className={styles.goLogin}>
-                  Are you registered? please
-                  <ModalLogin handleCloseRegister={handleCloseRegister}/>
+                  Are you registered? please                  
+                  <ModalLogin/>                                
                 </div>
               </div>
             </div>
