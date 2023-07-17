@@ -1,8 +1,12 @@
 import { filterByOrigin } from "./filterByOrigin.js";
 
 const initialState = {
+<<<<<<< HEAD
   modalLogin: false,
   modalRegister: false,
+=======
+  usersFiltra : [],
+>>>>>>> a3340ba (181)
   cartUser: [],
   commentVideoGame: [],
   videogames: [],
@@ -135,12 +139,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         dataUser: action.payload
       }
+<<<<<<< HEAD
 
       case "CLEAR":
       return {
         ...state,
         detail: action.payload,
       };
+=======
+      case "GETUSERSESTATUS":
+        return{
+          ...state,
+          usersFiltra: action.payload
+        }
+>>>>>>> a3340ba (181)
   
     default:
       return state;

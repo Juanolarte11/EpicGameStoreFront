@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Listvideogames.module.css';
 
 const ListVideogames = ({ lista, videogames, boton, boton2}) => {
+  
   return (
     <div className={styles.container}>
       <h2>{videogames}</h2>
