@@ -6,7 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getDataUser } from "../../../../../actions";
 
-const ButtonGoogleLogin = ({ handleCloseModal }) => {
+const ButtonGoogleLogin = ({ handleCloseLogin }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,11 +22,13 @@ const ButtonGoogleLogin = ({ handleCloseModal }) => {
           nombre: user.userName,
           userID: user.id,
           cartID: user.Carrito.id,
+          role: user.role
         };
-
+        console.log(dataUser);
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
-        handleCloseModal();
+        localStorage.setItem("Token", JSON.stringify(dataUser));
+        handleCloseLogin();
         window.location.reload();
       } else {
         alert("No user found...");

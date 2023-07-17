@@ -72,6 +72,20 @@ export function getDetail(payload){
     };
 };
 
+export function getCommentVideoGame(payload){
+    return async function(dispatch){
+        try {
+            const json = await axios.get(`/reviews/${payload}`)
+            return dispatch({
+                type: "GET_COMMENT_DETAIL",
+                payload: json.data
+            });
+        } catch (error) {
+            console.log(error);
+        }   
+    };
+};
+
 export function postVideogame(payload){
     return async function(dispatch){
         const response = await axios.post(`/videogames`, payload);
@@ -120,3 +134,19 @@ export function getDataUser(payload){
         payload,
     }
 }
+
+export function setModalLogin(payload1,payload2){
+    return{
+        type:"GET_MODAL_LOGIN",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+export function setModalRegister(payload1,payload2){
+    return{
+        type:"GET_MODAL_REGISTER",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+

@@ -1,3 +1,54 @@
+:root {
+  --melon: #e9aa94ff;
+  --salmon: #da8673ff;
+  --moonstone: #76adbeff;
+  --rust: #aa5637ff;
+  --paynes-gray: #4b6979ff;
+  --gunmetal: #2d3a44ff;
+}
+.conteiner{
+  display:  -webkit-inline-box;
+}
+.formCont{
+  display: inline;
+}
+.form{
+  background-color: rgb(54, 97, 146);
+  border-radius: 5px;
+  border: 2px solid rgb(64, 99, 128);
+  padding: 5px;
+}
 .inputFormu{
-    color: black;
+    color: rgb(255, 255, 255);
+}
+.itemForm{
+  display: flex;
+   
+}
+.itemName{
+  padding-right: 30px;
+}
+.foto{
+    width: 75px;
+    height: 75px;
+    border-radius: 5px;
+    border-color: black;
+}
+.vendor{
+  display: grid;
+  padding-top: 5px;
+  padding-left: 10px;
+  margin-top: 60px;
+  margin-left: 5px;
+  background-color: rgb(54, 97, 146);
+  border-radius: 5px;
+  border: 2px solid rgb(64, 99, 128);
+  color: rgb(255, 255, 255);
+}
+.btn{
+    height: 30px;
+    width: 100px;
+}
+.title{
+  font-size: 20px;
 }

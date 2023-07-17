@@ -1,7 +1,10 @@
 import { filterByOrigin } from "./filterByOrigin.js";
 
 const initialState = {
+  modalLogin: false,
+  modalRegister: false,
   cartUser: [],
+  commentVideoGame: [],
   videogames: [],
   dataUser: [],
   allVideogames: [],
@@ -30,6 +33,24 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         videogames: action.payload
+      };
+      case "GET_COMMENT_DETAIL":
+      return{
+        ...state,
+        commentVideoGame: action.payload
+      };
+
+      case "GET_MODAL_LOGIN":
+      return{
+        ...state,
+        modalLogin: action.payload1,
+        modalRegister: action.payload2
+      };
+      case "GET_MODAL_REGISTER":
+      return{
+        ...state,
+        modalRegister: action.payload1,
+        modalLogin: action.payload2
       };
 
     case "POST_VIDEOGAME":

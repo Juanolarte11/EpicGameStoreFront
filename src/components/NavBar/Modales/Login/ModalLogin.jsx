@@ -1,50 +1,54 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import styles from "./Login.module.css";
-import ButtonGoogleLogin from "./googleSingin/ButtonGoogleLogin";
+import React, { useState } from 'react';
+import axios from 'axios';
+import styles from './Login.module.css';
+import ButtonGoogleLogin from './googleSingin/ButtonGoogleLogin'
 import "./Modal.css";
-import { getDataUser } from "../../../../actions";
+import { getDataUser } from '../../../../actions';
+import { setModalLogin } from "../../../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import ModalRegister from '../Registro/ModalRegister';
 
-function ModalLogin() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+const ModalLogin = () => {
 
-  const clickRegister = () => {
-    //completar con la funcion openRegister
+  const isModalLogin = useSelector((state) => state.modalLogin);
+  const dispatch = useDispatch()
+
+  const [isOpenLogin, setIsOpenLogin] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleOpenLogin = () => {
+    dispatch(setModalLogin(true,false))
   };
 
-  const handleOpenModalLogin = () => {
-    setIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
+  const handleCloseLogin = () => {
+    dispatch(setModalLogin(false,false))
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const user = {
       email: email,
-      password: password,
-    };
+      password: password
+    }
     try {
-      const response = await axios.post("/users/login", user);
-      const Token = response.data.token;
-      console.log(Token);
+      const response = await axios.post('/users/login', user);
+      console.log(response.data);
+      const Token = response.data.token
+
       const dataUser = {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
         cartID: response.data.user.Carrito?.id,
-      };
+        role: response.data.user?.role,
+        image: response.data.user.userImage
+      }
       dispatch(getDataUser(dataUser));
-      localStorage.setItem("userData", JSON.stringify(dataUser));
-      localStorage.setItem("Token", JSON.stringify(Token));
-      handleCloseModal();
+      localStorage.setItem('userData', JSON.stringify(dataUser));
+      localStorage.setItem('Token', JSON.stringify(Token));
+      handleCloseLogin();
     } catch (error) {
-      alert("error");
+      alert("error")
       console.log(error);
     }
   };
@@ -52,20 +56,17 @@ function ModalLogin() {
   return (
     <div>
       <div>
-        <button onClick={handleOpenModalLogin} className={styles.navButton}>
-          Login
-        </button>
-        {isOpen && (
+        <button onClick={handleOpenLogin} className={styles.navButton}>Login</button>
+        {isModalLogin && (
           <div className="modal-overlay-login">
             <div className="modal-content-login">
-              <button onClick={handleCloseModal} className={styles.navButton}>
-                Close
-              </button>
-              <h2 className={styles.loginFormH2}>Sing In</h2>
+            <div className={styles.loginForm}>
+              <button onClick={handleCloseLogin} className={styles.navButton}>Cerrar</button>
+              <h2 className={styles.loginFormH2}>Iniciar sesión</h2>
               <form onSubmit={handleSubmit} className={styles.loginFormForm}>
                 <div className={styles.loginForm}>
                   <div className={styles.labelLoginData}>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">Correo electrónico:</label>
                   </div>
                   <div>
                     <input
@@ -78,9 +79,7 @@ function ModalLogin() {
                     />
                   </div>
                   <div>
-                    <label className={styles.loginFormLabel} htmlFor="password">
-                      Password:
-                    </label>
+                    <label className={styles.loginFormLabel} htmlFor="password">Contraseña:</label>
                   </div>
                   <div>
                     <input
@@ -89,25 +88,20 @@ function ModalLogin() {
                       id="password"
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
-                      minLength="8"
-                      pattern="(?=.*\d)(?=.*[A-Z])\w+"
-                      title="Please enter a password with at least 8 characters, one uppercase letter, and one number"
                       required
                     />
                   </div>
                 </div>
-                <button type="submit" className={styles.buttonRegister}>
-                  Login
-                </button>
+                <button type="submit" className={styles.buttonRegister}>Iniciar sesión</button>
               </form>
-              <ButtonGoogleLogin
-                className={styles.buttonGoogle}
-                handleCloseModal={handleCloseModal}
-              />
-              <br />
+              <div>
+              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseLogin={handleCloseLogin}/>
+              </div>
+              <hr/>
               <div className={styles.goLogin}>
-                No account? please
-                <a onClick={clickRegister}> REGISTER</a>
+                  Are you not registered? please                  
+                  <ModalRegister/>                                
+                </div>
               </div>
             </div>
           </div>

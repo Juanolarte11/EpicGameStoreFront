@@ -1,10 +1,10 @@
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
-import style from "../Login.module.css";
+import style from "../Register.module.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const ButtonGoogleRegister = ({ handleCloseModal }) => {
+const ButtonGoogleRegister = ({ handleCloseRegister }) => {
   const history = useHistory();
 
   const handleClick = () => {
@@ -26,7 +26,7 @@ const ButtonGoogleRegister = ({ handleCloseModal }) => {
               newUserPost
             );
             console.log(respuestaPost);
-            handleCloseModal();
+            handleCloseRegister();
             //deberia cerrarse el modal y abrirse el modalLogin
           } catch (error) {
             console.log(error);

@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import styles from "./ConteinerCars.module.css"; 
 import NavbarSec from "../NavBarSec/NavSec";
 
-export default function ConteinerCars({ allVideogames, handleClickCart, clickFavorite,buttonFavorites }) {
+export default function ConteinerCars({ allVideogames, handleClickCart, clickFavorite, buttonFavorites }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
