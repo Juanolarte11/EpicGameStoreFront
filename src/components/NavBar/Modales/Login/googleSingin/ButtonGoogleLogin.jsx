@@ -15,19 +15,20 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
       const response = await axios.get(
         `http://localhost:3001/users/emailLogin/${data.user.email}`
       );
-
-      const user = response.data;
+console.log(response);
+      const user = response.data.user;
+      const token = response.data.token;
       if (response.status === 200) {
         const dataUser = {
-          nombre: user.userName,
-          userID: user.id,
-          cartID: user.Carrito.id,
-          role: user.role
+          nombre: user?.userName,
+          userID: user?.id,
+          cartID: user?.Carrito.id,
+          role: user?.role
         };
         console.log(dataUser);
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
-        localStorage.setItem("Token", JSON.stringify(dataUser));
+        localStorage.setItem("Token", JSON.stringify(token));
         handleCloseLogin();
         window.location.reload();
       } else {
