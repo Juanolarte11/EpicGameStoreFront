@@ -135,6 +135,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         dataUser: action.payload
       }
+
+      case "CLEAR":
+      return {
+        ...state,
+        detail: action.payload,
+      };
   
     default:
       return state;

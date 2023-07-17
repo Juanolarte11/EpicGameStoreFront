@@ -48,6 +48,12 @@ export function getGenres(){
     };
 };
 
+export function clear() {
+    return async (distpach) => {
+      distpach({ type: "CLEAR", payload: [] });
+    };
+  }
+
 export function getPlatforms(){
     return async function(dispatch){
         const json = await axios.get(`/platforms`);
