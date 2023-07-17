@@ -49,5 +49,6 @@
   font-weight: bold;
   text-decoration: none;
   color: black;
-  margin-left: 50%;
+  /* margin-left: 50%; */
+  margin-right: 20px;
 }

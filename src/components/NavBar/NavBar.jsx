@@ -20,7 +20,6 @@ export default function NavBar({ size }) {
     window.location.reload();
   };
 
-
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
   useEffect(() => {
@@ -47,19 +46,11 @@ export default function NavBar({ size }) {
 
   return (
     <nav className={style.nav}>
-      {dataUser?.nombre ? (
-        <UserModal image={dataUser.image}></UserModal>
-      ) : (
-        <div>
-          <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
-        </div>
-      )}
       <div className={style.navLinks}>
-        <div className={style.nameContainer}>
-          <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+        <div className={style.title}>
+          <Link to="/home">EPICGAMESTORE</Link>
         </div>
         <div className={style.a}>
-          <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
           <Link to="/favorites">FAVORITES</Link>
         </div>
@@ -72,17 +63,33 @@ export default function NavBar({ size }) {
         </IconButton>
       </div>
 
-      <div>
+      <div className={style.logout}>
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
 
-          {!dataUser?.userID && <ModalRegister />}
-          {dataUser?.userID && (
+          {!dataUser?.userID && (
+            <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
+          )}
+          <div className={style.nameContainer}>
+            <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+          </div>
+          {dataUser?.nombre ? (
+            <UserModal image={dataUser.image}></UserModal>
+          ) : (
+            <div className={style.contImage}>
+              <img
+                className={style.userImg}
+                src={noUser}
+                alt="Imagen de perfil"
+              />
+            </div>
+          )}
+        </div>
+        {/* {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout
             </button>
-          )}
-        </div>
+          )} */}
       </div>
     </nav>
   );

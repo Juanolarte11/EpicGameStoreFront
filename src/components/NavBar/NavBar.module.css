@@ -73,6 +73,7 @@
   font-weight: bold;
   text-decoration: none;
   color: black;
+  margin-right: 20px;
 }
 .userLink {
   text-decoration: none;
@@ -81,8 +82,26 @@
 
 .name{
   color: var(--texto-color);
+  margin-right: 20px;
 }
 .nameContainer{
   width: 250px;
-  left: 0;
+  margin-right: 20px;
+  padding-right: 20px;
+}
+.title{
+margin-right: 30px;
+font-size: 20px;
+margin-left: 20px;
+}
+.userImg{
+  margin-right: 20px;
+  padding-right: 20px;
+}
+.contImage{
+  margin-right: 20px;
+  padding-right: 20px;
+}
+.logout{
+  display: flex;
 }
