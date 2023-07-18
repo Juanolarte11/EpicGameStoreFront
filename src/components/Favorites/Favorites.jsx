@@ -4,6 +4,10 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getCartUser } from "../../actions";
+import NavbarSec from "../NavBarSec/NavSec";
+import { StylesProvider } from "@material-ui/core";
+import styles from "./Favorites.module.css";
+
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -13,6 +17,8 @@ export default function Favorites() {
   const [size, setSize] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
+
+  console.log(dataUser)
 
   const obternerFavoritos = async () => {
     if (dataUser) {
@@ -79,13 +85,41 @@ export default function Favorites() {
     }
   }, []);
 
+  ///////////
+  const handleSort = (order) => {
+    localStorage.setItem("order", order);
+  };
+
+  const handleSearch = (name) => {
+  };
+
+  const handleReset = () => {
+
+    localStorage.removeItem("genres");
+    localStorage.removeItem("order");
+  };
+
+  const handleGenres = (genre) => {
+    localStorage.setItem("genres", genre.target.value);
+  };
+
+  ///////
   return (
-    <div className="">
+    <div>
       <div>
         <NavBar size={size} />
       </div>
       {favorites?.length === 0 ? (
-        <h2>No favorite games...</h2>
+        <div className={styles.container}>          
+          <div><NavbarSec
+          handleSort={handleSort}
+          handleSearch={handleSearch}
+          handleReset={handleReset}
+          handleGenres={handleGenres}
+          ></NavbarSec>
+          </div>
+          <div><h2>No favorite games...</h2></div>
+        </div>
       ) : (
         <div>
           <ConteinerCars
