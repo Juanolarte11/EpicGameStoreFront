@@ -14,8 +14,8 @@ export default function Home() {
   const dispatch = useDispatch();
   const buttonFavorites = 'Add favorites'
   const allVideogames = useSelector((state) => state.videogames);
-  const dataUser = JSON.parse(localStorage.getItem("userData"));
-  const Token = JSON.parse(localStorage.getItem("Token"));
+  const dataUser = JSON.parse(localStorage.getItem("userData"));  
+
   const [sizeCart, setSizeCart] = useState(0);
   dispatch(getGenres())
   const handleClickCart = async (gameId) => {
