@@ -3,14 +3,10 @@ import axios from 'axios';
 import styles from './Login.module.css';
 import ButtonGoogleLogin from './googleSingin/ButtonGoogleLogin'
 import "./Modal.css";
-<<<<<<< HEAD
 import { getDataUser } from '../../../../actions';
 import { setModalLogin } from "../../../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import ModalRegister from '../Registro/ModalRegister';
-=======
-import { getDataUser, getUsersAct } from '../../../../actions';
->>>>>>> a3340ba (181)
 
 const ModalLogin = () => {
 

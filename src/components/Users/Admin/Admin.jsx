@@ -12,20 +12,19 @@ import ModalForm from "./modalForm/modalForm";
 function Admin() {
     const dispatch = useDispatch();
     const token = JSON.parse(localStorage.getItem("Token"));
-    const [edit, setEdit] = useState(false);
     const [acti, setActivos] = useState(null);
     const [user, setUser] = useState({});
     const [roleUser, setRoleUser] = useState("clientes");
     const [listUsersAct, setListUsers] = useState([]);
     const listaUserFil = useSelector((state) => state.usersFiltra);
-    const listaVideogames = useSelector((state) => state.videogames);
+    const [listaVideogames, setListaVideogames] = useState([]);
     const history = useHistory();
-    const videogamesActivos = "Videogames Activos";
     const [selectedRole, setSelectedRole] = useState("");
+    const [flag, setFlag] = useState(0)
 
-    const handleModalForm = async () => {
-        setEdit(true);
-    };
+    const updateVidoagames = () => {
+        dispatch(getVideogames())
+    }
 
     useEffect(() => {
         if (acti === null) {
@@ -41,13 +40,12 @@ function Admin() {
         }
     }, [acti]);
 
-    const handleBam = async (id, isActive) => {
+    const handleBamUser = async (id, isActive) => {
         const update = {
             active: !isActive,
         };
         try {
-            axios
-                .patch(`http://localhost:3001/users/${id}`, update, {
+            axios.patch(`http://localhost:3001/users/${id}`, update, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -65,8 +63,7 @@ function Admin() {
             role: e.target.value,
         };
         try {
-            axios
-                .patch(`http://localhost:3001/users/${id}`, update, {
+            axios.patch(`http://localhost:3001/users/${id}`, update, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -79,13 +76,23 @@ function Admin() {
         }
     };
 
-    const handleActivVideogame = async (id) => {
-        alert("Videogame Activado");
+    const handleGetListVideogame = async () => {
+        axios.get("http://localhost:3001/admin/videogames", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setListaVideogames(response.data);
+                setFlag(1)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     const getDataUsers = async () => {
-        axios
-            .get("http://localhost:3001/admin/users", {
+        axios.get("http://localhost:3001/admin/users", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -102,11 +109,12 @@ function Admin() {
         const fetchData = async () => {
             await dispatch(getUsersAct(true));
             await getDataUsers();
+            await handleGetListVideogame();
             if (listaVideogames.length === 0) {
                 dispatch(getVideogames());
             }
         };
-
+        console.log("hola");
         fetchData();
     }, []);
 
@@ -126,8 +134,7 @@ function Admin() {
     };
 
     const handleRoleChange = async (e) => {
-        axios
-            .get(`http://localhost:3001/admin/users?role=${e.target.value}`, {
+        axios.get(`http://localhost:3001/admin/users?role=${e.target.value}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -149,6 +156,7 @@ function Admin() {
             {
                 <div>
                     <div className={style.container}>
+{/* <-----------------------------------------------------------------------------------usuarios------------------------------------------------->                         */}
                         <div className={style.filtreusers}>
                             <button className={style.button} onClick={handleUsuariosAct}>
                                 usuariosAct
@@ -177,31 +185,24 @@ function Admin() {
                             <div className={style.listContainer}>
                                 <ListUsers
                                     lista={listUsersAct}
-                                    boton={handleBam}
+                                    boton={handleBamUser}
                                     handleEditRole={handleEditRole}
                                 />
                             </div>
                         </div>
+{/* <----------------------------------------------------------------------------- Videogames ------------------------------------------------------------->                         */}
                         <div className={style.videogamesContainer}>
                         <button className={style.button}>
-                                usuariosAct
+                                VideogamesAct
                             </button>
                             <button className={style.button}>
-                                usuariosDes
+                                VideogamesDes
                             </button>
-                            <button
-                                className={style.button}
-                                onClick={() => {
-                                    return
-                                }}
-                            > </button>
                             <ListVideogames
                                 lista={listaVideogames}
-                                videogames={videogamesActivos}
-                                boton={handleActivVideogame}
-                                boton2={handleModalForm}
+                                token={token}
+                                updateVidoagames={updateVidoagames}
                             />
-                            {edit ? <ModalForm /> : null}
                         </div>
                         <div className={style.buttonContainer}>
                             <button className={style.button} onClick={btnClick}>

@@ -140,7 +140,6 @@ export function getDataUser(payload){
         payload,
     }
 }
-<<<<<<< HEAD
 
 export function setModalLogin(payload1,payload2){
     return{
@@ -157,7 +156,6 @@ export function setModalRegister(payload1,payload2){
     }
 }
 
-=======
 export function getUsersAct(payload){
     return async function(dispatch){
         try {
@@ -175,4 +173,3 @@ export function getUsersAct(payload){
         }
     }
 }
->>>>>>> a3340ba (181)
