@@ -7,7 +7,6 @@ import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
 import axios from "axios";
-import ModalLogin from "../NavBar/Modales/Login/ModalLogin.jsx";
 
 export default function Home() {
 
@@ -43,8 +42,13 @@ export default function Home() {
         userId: dataUser.userID,
         gameId: gameId,
       };
-      const respuesta = await axios.post("/favorites", game);
-      alert("game add favorites");
+      if(dataUser.userID){
+       const respuesta = await axios.post("/favorites", game);
+      alert("game add favorites"); 
+      }else{
+        alert('Necesitas una cuenta para agregar a favoritos')
+      }
+      
     } catch (error) {
       console.log(error);
     }
