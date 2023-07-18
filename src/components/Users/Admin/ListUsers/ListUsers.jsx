@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ListUsers.module.css';
 
-const ListUsers = ({ lista, usuarios, boton }) => {
+const ListUsers = ({ lista, boton, handleEditRole }) => {
+  console.log(lista);
   return (
     <div className={styles.container}>
-      <h2>{usuarios}</h2>
+      <h2>Usuarios</h2>
       <ul className={styles.lista}>
         {lista.map((lista) => (
           <li key={lista.id} className={styles.usuario}>
@@ -12,7 +13,12 @@ const ListUsers = ({ lista, usuarios, boton }) => {
               <span>Nombre: {lista.userName}</span>
               <span>----Rol: {lista.role}</span>
             </div>
-            <button className={styles.botonBan} onClick={() => boton(lista.id)}>Ban</button>
+            <button className={styles.botonBan} onClick={() => boton(lista.id, lista.isActive)}>{lista.isActive ? "Ban" : "Act"}</button>
+            <select onChange={(e) => handleEditRole(e, lista.id)} className={styles.select}>
+              <option value="">Seleccionar rol</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="cliente">Cliente</option>
+            </select>
           </li>
         ))}
       </ul>
@@ -21,3 +27,4 @@ const ListUsers = ({ lista, usuarios, boton }) => {
 };
 
 export default ListUsers;
+

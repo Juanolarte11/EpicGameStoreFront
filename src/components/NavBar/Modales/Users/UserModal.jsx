@@ -7,8 +7,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 function ModalUser({image}) {
   const [isOpen, setIsOpen] = useState(false);
-  const dataUser = JSON.parse(localStorage.getItem("userData"));
-  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+    const dataUser = JSON.parse(localStorage.getItem("userData"));
+    const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
 
   const handleOpenModal = () => {
     setIsOpen(true);
