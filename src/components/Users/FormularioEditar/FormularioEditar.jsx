@@ -6,18 +6,6 @@ import axios from "axios";
 import TermsAndConditions from "./TermsAndConditions";
 
 function FormularioEditar({ user }) {
-<<<<<<< HEAD
-  const history = useHistory();
-
-  const [loading, setLoading] = useState(false);
-  const token = JSON.parse(localStorage.getItem("Token"));
-  const dataUser = JSON.parse(localStorage.getItem("userData"));
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-
-  const [newUsername, setNewUsername] = useState("");
-  const [image, setImage] = useState(dataUser.image);
-=======
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
@@ -31,7 +19,6 @@ function FormularioEditar({ user }) {
 
     const [newUsername, setNewUsername] = useState("");
     const [image, setImage] = useState(dataUser?.image);
->>>>>>> b419a1f272f56b4d3fb82c75da888ee8d99c2bb8
 
   const preset_key = "images";
   const cloud_name = "drgco4gsh";
@@ -52,21 +39,6 @@ function FormularioEditar({ user }) {
     setShowModal(false);
   };
 
-<<<<<<< HEAD
-  const upLoadImage = async (e) => {
-    const file = e.target.files[0];
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", preset_key);
-    setLoading(true);
-    try {
-      const response = await axios.post(cloudinaryUrl, data);
-      console.log(response);
-      setImage(response.data.secure_url);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-=======
     const upLoadImage = async (e) => {
         const file = e.target.files[0];
         const data = new FormData();
@@ -124,47 +96,9 @@ function FormularioEditar({ user }) {
         } catch (error) {
             alert(error.message);
         }
->>>>>>> b419a1f272f56b4d3fb82c75da888ee8d99c2bb8
     }
   };
 
-<<<<<<< HEAD
-  const btnClick = () => {};
-
-  const updatesUser = () => {
-    let NewUser = {};
-    if (newUsername.length !== 0) {
-      NewUser.userName = newUsername;
-    }
-    if (image.length !== 0) {
-      NewUser.userImage = image;
-    }
-    try {
-      axios
-        .patch(`http://localhost:3001/users/${user.id}`, NewUser, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          localStorage.setItem("userData", JSON.stringify({}));
-          localStorage.setItem("Token", JSON.stringify({}));
-          alert("Datos actualizados con exito, inicia Sesion");
-          history.push("/home");
-        });
-    } catch (error) {
-      alert(error.message);
-      console.log(error);
-    }
-    console.log(NewUser);
-  };
-
-  const updateRol = () => {
-    let NewUser = { role: "vendedor" };
-    console.log(NewUser);
-    alert(
-      "Tu solicitud fue enviada, pronto resivira respuesta de un administrador del sitio"
-=======
     const updatePass = () => {
         let NewUser = {};
         if (currentPassword.length !== 0) {
@@ -343,7 +277,6 @@ function FormularioEditar({ user }) {
                 )}
             </div>
         </div>
->>>>>>> b419a1f272f56b4d3fb82c75da888ee8d99c2bb8
     );
   };
 

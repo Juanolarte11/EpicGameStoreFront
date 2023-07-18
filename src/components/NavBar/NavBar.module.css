@@ -80,12 +80,16 @@
 }
 .userImg {
   margin-right: 20px;
-  padding-right: 20px;
 }
 .contImage {
   margin-right: 20px;
+
   padding-right: 20px;
 }
+.contImage .userImg {
+  border-radius: 50%;
+}
+
 .logout {
   display: flex;
 }
