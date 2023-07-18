@@ -153,7 +153,17 @@ function User() {
             <FormularioEditar settShowForm={settShowForm} user={user}/>
             </div>
             <div id="modal-root"></div>
-            <div className={styles.actions}>
+            
+            <div className={styles.list}>
+            <div>
+              <Listado datos={cart} lista={"Carrito"} />
+            </div>
+            <div>
+              <Listado datos={favorites} lista={"Favoritos"} />
+            </div>
+          </div>
+          </div>
+          <div className={styles.actions}>
               <h1 className={styles.sectionTitle}>Historial de Compras</h1>
               {listaDeCompras.map((ele) => {
                 return (
@@ -169,15 +179,6 @@ function User() {
                 );
               })}
             </div>
-          </div>
-          <div className={styles.list}>
-            <div>
-              <Listado datos={cart} lista={"Carrito"} />
-            </div>
-            <div>
-              <Listado datos={favorites} lista={"Favoritos"} />
-            </div>
-          </div>
         </div>
       )}
     </div>
