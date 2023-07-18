@@ -1,13 +1,112 @@
 .container {
   background-color: #1d354e;
-  }
-  
-  .user_box {
-    /* background-color: #ffffff; */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+}
 
+<<<<<<< HEAD
+.user_box {
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.head h1 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin-bottom: 20px;
+}
+
+.actions button {
+  background-color: #ff8c6a;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.compra {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.compra h3 {
+  color: #1d354e;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.imageList {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list > div {
+  flex-basis: 48%;
+}
+
+.list > div h2 {
+  color: #1d354e;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.list > div ul {
+  list-style: none;
+  padding: 0;
+}
+
+.list > div li {
+  color: #666666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.list > div li:last-child {
+  margin-bottom: 0;
+}
+
+.logout-button {
+  background-color: #ff8c6a;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  background-color: #ff634f;
+}
+
+.home-link {
+  color: #1d354e;
+  text-decoration: none;
+  font-size: 18px;
+  display: inline-block;
+  margin-top: 10px;
+}
+=======
   }
   
   .head {
@@ -129,3 +228,4 @@
     cursor: pointer;
   }
   
+>>>>>>> b419a1f272f56b4d3fb82c75da888ee8d99c2bb8

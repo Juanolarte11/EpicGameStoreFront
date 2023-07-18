@@ -45,22 +45,6 @@
   align-items: center;
 }
 
-.navButton {
-  background-color: var(--segundo-color);
-  color: var(--texto-color);
-  border: none;
-  padding: 8px 16px;
-  margin-left: 10px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.navButton:hover {
-  background-color: var( --segundo-color);
-}
-
 .userIcon {
   display: flex;
   justify-content: center;
@@ -80,28 +64,28 @@
   padding-left: 1.5rem;
 }
 
-.name{
+.name {
   color: var(--texto-color);
   margin-right: 20px;
 }
-.nameContainer{
+.nameContainer {
   width: 250px;
   margin-right: 20px;
   padding-right: 20px;
 }
-.title{
-margin-right: 30px;
-font-size: 20px;
-margin-left: 20px;
+.title {
+  margin-right: 30px;
+  font-size: 25px;
+  margin-left: 20px;
 }
-.userImg{
+.userImg {
   margin-right: 20px;
   padding-right: 20px;
 }
-.contImage{
+.contImage {
   margin-right: 20px;
   padding-right: 20px;
 }
-.logout{
+.logout {
   display: flex;
 }

@@ -14,13 +14,6 @@ import axios from "axios";
 export default function NavBar({ size }) {
   const [country, setCountry] = useState("");
   const dataUser = JSON.parse(localStorage.getItem("userData"));
-  const history = useHistory()
-  const btnClick = () => {
-    localStorage.setItem("userData", JSON.stringify({}));
-    localStorage.setItem("Token", JSON.stringify({}));
-    history.push('/home')
-  };
-
 
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
@@ -43,15 +36,15 @@ export default function NavBar({ size }) {
       })
       .catch((error) => {
         console.error("IP geolocation error:", error);
-        alert(error.message)
+        alert(error.message);
       });
   };
   return (
     <nav className={style.nav}>
       <div className={style.navLinks}>
-      <div className={style.title}>
+        <div className={style.title}>
           <Link to="/home">EPICGAMESTORE</Link>
-          </div>
+        </div>
         <div className={style.a}>
           <Link to="/about">ABOUT</Link>
           <Link to="/favorites">FAVORITES</Link>
@@ -76,12 +69,16 @@ export default function NavBar({ size }) {
             {/* <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3> */}
           </div>
           {dataUser?.nombre ? (
-        <UserModal image={dataUser.image}></UserModal>
-      ) : (
-        <div className={style.contImage}>
-          <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
-        </div>
-      )}
+            <UserModal image={dataUser.image}></UserModal>
+          ) : (
+            <div className={style.contImage}>
+              <img
+                className={style.userImg}
+                src={noUser}
+                alt="Imagen de perfil"
+              />
+            </div>
+          )}
         </div>
         {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>

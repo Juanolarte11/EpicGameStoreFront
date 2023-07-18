@@ -19,7 +19,6 @@
   padding: 15px;
 }
 
-
 .container h1 {
   font-size: 30px;
   margin-bottom: 20px;
@@ -97,18 +96,17 @@
   margin-top: 2rem;
 }
 
-.cardContainer{
+.cardContainer {
   width: 300px;
 }
 
 @media (max-width: 400px) {
-  .container{
+  .container {
     width: 410px;
   }
 
-  .upInfo{
+  .upInfo {
     width: 350px;
     align-items: center;
   }
 }
-
