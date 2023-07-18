@@ -59,7 +59,7 @@ function FormularioEditar({ user }) {
     if (newUsername.length !== 0) {
       NewUser.userName = newUsername;
     }
-    if (image.length !== 0) {
+    if (image?.length !== 0) {
       NewUser.userImage = image;
     }
     try {

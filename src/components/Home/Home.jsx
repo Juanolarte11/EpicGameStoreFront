@@ -7,14 +7,15 @@ import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
 import axios from "axios";
+import ModalLogin from "../NavBar/Modales/Login/ModalLogin.jsx";
 
 export default function Home() {
 
   const dispatch = useDispatch();
   const buttonFavorites = 'Add favorites'
   const allVideogames = useSelector((state) => state.videogames);
-  const dataUser = JSON.parse(localStorage.getItem("userData"));  
-
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
+  const Token = JSON.parse(localStorage.getItem("Token"));
   const [sizeCart, setSizeCart] = useState(0);
   dispatch(getGenres())
   const handleClickCart = async (gameId) => {
@@ -42,13 +43,8 @@ export default function Home() {
         userId: dataUser.userID,
         gameId: gameId,
       };
-      if(dataUser.userID){
-       const respuesta = await axios.post("/favorites", game);
-      alert("game add favorites"); 
-      }else{
-        alert('Necesitas una cuenta para agregar a favoritos')
-      }
-      
+      const respuesta = await axios.post("/favorites", game);
+      alert("game add favorites");
     } catch (error) {
       console.log(error);
     }
