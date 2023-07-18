@@ -31,6 +31,7 @@ const ModalLogin = () => {
       email: email,
       password: password
     }
+    console.log(user);
     try {
       const response = await axios.post('/users/login', user);
       console.log(response.data);
@@ -41,12 +42,14 @@ const ModalLogin = () => {
         userID: response.data.user.id,
         cartID: response.data.user.Carrito?.id,
         role: response.data.user?.role,
-        image: response.data.user.userImage
+        image: response.data.user?.userImage
       }
+      console.log(dataUser);
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
       localStorage.setItem('Token', JSON.stringify(Token));
       handleCloseLogin();
+      window.location.reload();
     } catch (error) {
       alert("error")
       console.log(error);

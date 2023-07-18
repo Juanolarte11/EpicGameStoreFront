@@ -25,7 +25,6 @@ function ModalUser({ image }) {
 
   const imageIcon = () => {
     if (image && image.length !== 0) {
-      console.log(dataUser.image.length);
       return (
         <div>
           <img
