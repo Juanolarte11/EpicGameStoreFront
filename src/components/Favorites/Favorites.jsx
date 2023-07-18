@@ -11,6 +11,7 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
   const obternerFavoritos = async () => {
@@ -52,8 +53,11 @@ export default function Favorites() {
         "http://localhost:3001/favorites/delete",
         game
       );
-      alert("delete favorites");
+      setShowMessage(true); // Muestra el cartel
       await obternerFavoritos();
+      setTimeout(() => {
+        setShowMessage(false); // Oculta el cartel después de 2 segundos
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +96,7 @@ export default function Favorites() {
           />
         </div>
       )}
+      {showMessage && <h2>Game deleted from favorites</h2>}
     </div>
   );
 }
