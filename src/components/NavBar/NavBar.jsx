@@ -39,6 +39,8 @@ export default function NavBar({ size }) {
         alert(error.message);
       });
   };
+
+  
   return (
     <nav className={style.nav}>
       <div className={style.navLinks}>
@@ -80,11 +82,6 @@ export default function NavBar({ size }) {
             </div>
           )}
         </div>
-        {/* {dataUser?.userID && (
-            <button onClick={btnClick} className={style.navButton}>
-              Logout
-            </button>
-          )} */}
       </div>
     </nav>
   );
