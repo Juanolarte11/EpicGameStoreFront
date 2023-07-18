@@ -82,11 +82,11 @@ export default function NavBar({ size }) {
         </div>
       )}
         </div>
-        {/* {dataUser?.userID && (
+        {dataUser?.userID && (
             <button onClick={btnClick} className={style.navButton}>
               Logout
             </button>
-          )} */}
+          )}
       </div>
     </nav>
   );
