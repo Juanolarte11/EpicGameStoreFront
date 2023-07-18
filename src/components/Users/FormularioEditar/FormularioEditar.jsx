@@ -5,14 +5,17 @@ import Modal from "./Modal";
 import axios from "axios";
 import TermsAndConditions from "./TermsAndConditions";
 
-function FormularioEditar({user }) {
+function FormularioEditar({ user }) {
     const history = useHistory();
 
     const [loading, setLoading] = useState(false);
     const token = JSON.parse(localStorage.getItem("Token"));
+    const country = localStorage.getItem("country")
+
     const dataUser = JSON.parse(localStorage.getItem("userData"));
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [usDelete, setUsDelete] = useState(false)
 
     const [newUsername, setNewUsername] = useState("");
     const [image, setImage] = useState(dataUser?.image);
@@ -44,16 +47,11 @@ function FormularioEditar({user }) {
         setLoading(true);
         try {
             const response = await axios.post(cloudinaryUrl, data);
-            console.log(response);
             setImage(response.data.secure_url);
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            alert(error.message)
         }
-    };
-
-    const btnClick = () => {
-        
     };
 
     const updatesUser = () => {
@@ -65,28 +63,39 @@ function FormularioEditar({user }) {
             NewUser.userImage = image;
         }
         try {
-            axios.patch(`http://localhost:3001/users/${user.id}`,NewUser, { headers: {
-                    Authorization: `Bearer ${token}`}
+            axios.patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
-            .then((response) => {
-                localStorage.setItem("userData", JSON.stringify({}));
-                localStorage.setItem('Token', JSON.stringify({}));
-                alert("Datos actualizados con exito, inicia Sesion")
-                history.push("/home");
-            })
+                .then((response) => {
+                    localStorage.setItem("userData", JSON.stringify({}));
+                    localStorage.setItem('Token', JSON.stringify({}));
+                    alert("Datos actualizados con exito, inicia Sesion")
+                    history.push("/home");
+                })
         } catch (error) {
             alert(error.message)
-            console.log(error);
         }
-        console.log(NewUser);
     };
 
     const updateRol = () => {
         let NewUser = { role: "vendedor" };
-        console.log(NewUser);
-        alert(
-            "Tu solicitud fue enviada, pronto resivira respuesta de un administrador del sitio"
-        );
+        try {
+            axios.patch(`http://localhost:3001/users/${user.id}`, NewUser, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    localStorage.setItem("userData", JSON.stringify({}));
+                    localStorage.setItem('Token', JSON.stringify({}));
+                    alert("Datos actualizados con exito, inicia Sesion")
+                    history.push("/home");
+                })   
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
     const updatePass = () => {
@@ -97,17 +106,30 @@ function FormularioEditar({user }) {
         if (newPassword.length !== 0) {
             NewUser.newPassword = newPassword;
         }
-        console.log(NewUser);
     }
 
     const updateActive = () => {
         let NewUser = { active: false };
-        console.log(NewUser);
-        alert(
-            "Tu solicitud fue enviada, pronto resivira respuesta de un administrador del sitio"
-        );
+        try {
+            axios.patch(`http://localhost:3001/users/${user.id}`, NewUser, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    localStorage.setItem("userData", JSON.stringify({}));
+                    localStorage.setItem('Token', JSON.stringify({}));
+                    alert("Datos actualizados con exito, inicia Sesion")
+                    history.push("/home");
+                })   
+        } catch (error) {
+            alert(error.message);
+        }
     }
-
+    const hendrleDelete = () => {
+        alert("Si eliminas tu cuenta no podras registrarte de nuevo a menos que lo solicites a un Admin, ¿Estas Seguro?")
+        setUsDelete(true)
+    }
     useEffect(() => { }, [loading]);
 
     return (
@@ -123,6 +145,7 @@ function FormularioEditar({user }) {
                                 value={newUsername}
                                 onChange={(e) => setNewUsername(e.target.value)}
                                 placeholder={user.userName}
+                                className={style.inputext}
                             />
                         </div>
                     </label>
@@ -133,25 +156,29 @@ function FormularioEditar({user }) {
                                 type="email"
                                 value={user.userEmail}
                                 placeholder={user.userEmail}
+                                className={style.inputext}
                             />
                         </div>
                     </label>
                     <label className={style.inputFormu}>
                         <div className={style.itemForm}>
-                            <span className={style.itemName}>Your Picture</span>
-                            <img
-                                className={style.foto}
-                                src={user.image || image}
-                                alt=""
-                                placeholder="Tu Foto"
+                            <div className={style.conImage}>
+                                <span className={style.itemName}>Your Picture</span>
+                                <img
+                                    className={style.foto}
+                                    src={user.image || image}
+                                    alt=""
+                                    placeholder="Tu Foto"
+                                />
+                            </div>
+                            <input
+                                type="file"
+                                name="file"
+                                onChange={upLoadImage}
+                                placeholder="N/A"
+                                className={style.inputext}
                             />
                         </div>
-                        <input
-                            type="file"
-                            name="file"
-                            onChange={upLoadImage}
-                            placeholder="N/A"
-                        />
                     </label>
                     <label className={style.inputFormu}>
                         <div className={style.itemForm}>
@@ -160,6 +187,7 @@ function FormularioEditar({user }) {
                                 type="text"
                                 value={user.role}
                                 placeholder={user.role}
+                                className={style.inputext}
                             />
                         </div>
                     </label>
@@ -168,8 +196,9 @@ function FormularioEditar({user }) {
                             <span className={style.itemName}>Region</span>
                             <input
                                 type="text"
-                                value={"Mexico"}
-                                placeholder={"Mexico"}
+                                value={country}
+                                placeholder={country}
+                                className={style.inputext}
                             />
                         </div>
                     </label>
@@ -180,6 +209,7 @@ function FormularioEditar({user }) {
                                 type="text"
                                 value={"Español"}
                                 placeholder={"Español"}
+                                className={style.inputext}
                             />
                         </div>
                     </label>
@@ -190,13 +220,15 @@ function FormularioEditar({user }) {
             </div>
             <div className={style.vendor}>
                 <span className={style.title}>Quiero Ser Vendedor</span>
+                <span className={style.conditions} onClick={handleModalOpen}>Aceptar Términos y Condiciones</span>
                 <label>
                     <input
                         type="checkbox"
                         checked={isChecked}
                         onChange={handleCheckboxChange}
+                        className={style.inputext}
                     />
-                    <span onClick={handleModalOpen}>Aceptar Términos y Condiciones</span>
+                    
                 </label>
                 <button
                     className={style.btn}
@@ -221,6 +253,7 @@ function FormularioEditar({user }) {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         required
+                        className={style.inputext}
                     />
                 </label>
                 <label className={style.inputFormu}>
@@ -229,14 +262,18 @@ function FormularioEditar({user }) {
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewUsername(e.target.value)}
+                        className={style.inputext}
                     />
                 </label>
                 <button className={style.btn} onClick={updatePass}>
                     Sent
                 </button>
-                <button className={style.btn} onClick={updateActive}>
+                <button className={style.btn} onClick={hendrleDelete}>
                     Delete Acount
                 </button>
+                {usDelete && (
+                    <button className={style.btn}  onClick={updateActive}>Delete</button>
+                )}
             </div>
         </div>
     );

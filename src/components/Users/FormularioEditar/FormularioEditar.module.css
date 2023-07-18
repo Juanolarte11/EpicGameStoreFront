@@ -8,25 +8,46 @@
 }
 .conteiner{
   display:  -webkit-inline-box;
+  
 }
 .formCont{
   display: inline;
+ 
 }
 .form{
-  background-color: rgb(54, 97, 146);
+  background-color: rgba(107, 107, 107, 0.5);
   border-radius: 5px;
   border: 2px solid rgb(64, 99, 128);
   padding: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 400px;
+  width: 800px;
 }
 .inputFormu{
     color: rgb(255, 255, 255);
+    margin-top: 10px;
 }
 .itemForm{
   display: flex;
+  justify-content: space-between;
    
 }
 .itemName{
   padding-right: 30px;
+  margin-top: 10px;
+  font-size: 25px;
+}
+.inputext{
+  height: 25px;
+  width: 300px;
+}
+
+.inputext:hover{
+  background-color: rgba(65, 65, 65, 0.521);
+  color: #ffffff;
+  border-color: #ffffff;
+  cursor: pointer;
 }
 .foto{
     width: 75px;
@@ -34,13 +55,18 @@
     border-radius: 5px;
     border-color: black;
 }
+.conImage{
+  display: grid;
+}
 .vendor{
+  height: 400px;
+  width: 600px;
   display: grid;
   padding-top: 5px;
   padding-left: 10px;
   margin-top: 60px;
   margin-left: 5px;
-  background-color: rgb(54, 97, 146);
+  background-color: rgba(107, 107, 107, 0.5);
   border-radius: 5px;
   border: 2px solid rgb(64, 99, 128);
   color: rgb(255, 255, 255);
@@ -48,7 +74,21 @@
 .btn{
     height: 30px;
     width: 100px;
+    border-radius: 5px;
+}
+.btn:hover{
+  color: #ffffff;
+  background-color: rgba(65, 65, 65, 0.521);
+  border-color: #ffffff;
+  cursor: pointer;
 }
 .title{
   font-size: 20px;
+}
+.conditions{
+  color: #7187e6;
+}
+.conditions:hover{
+  color: rgb(148, 233, 92);
+  cursor: pointer
 }

@@ -12,10 +12,10 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
 
   const handleClick = () => {
     signInWithPopup(auth, provider).then(async (data) => {
+     try {
       const response = await axios.get(
         `http://localhost:3001/users/emailLogin/${data.user.email}`
       );
-console.log(response);
       const user = response.data.user;
       const token = response.data.token;
       if (response.status === 200) {
@@ -23,7 +23,8 @@ console.log(response);
           nombre: user?.userName,
           userID: user?.id,
           cartID: user?.Carrito.id,
-          role: user?.role
+          role: user?.role,
+          image: user?.userImage
         };
         console.log(dataUser);
         dispatch(getDataUser(dataUser));
@@ -31,9 +32,13 @@ console.log(response);
         localStorage.setItem("Token", JSON.stringify(token));
         handleCloseLogin();
         window.location.reload();
-      } else {
+      }
+       else {
         alert("No user found...");
       }
+     } catch (error) {
+      alert("Usuario no encontrado" + " " + error.message)
+     }
     });
   };
   return (
