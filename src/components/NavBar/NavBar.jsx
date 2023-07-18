@@ -14,12 +14,6 @@ export default function NavBar({ size }) {
   const [country, setCountry] = useState("");
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
-  const btnClick = () => {
-    localStorage.setItem("userData", JSON.stringify({}));
-    localStorage.setItem("Token", JSON.stringify({}));
-    window.location.reload();
-  };
-
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
   useEffect(() => {

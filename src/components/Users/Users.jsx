@@ -7,7 +7,6 @@
 // import Listado from "./Listado/Listado";
 // import FormularioEditar from "./FormularioEditar/FormularioEditar";
 
-
 // function User() {
 //   const dataUser = JSON.parse(localStorage.getItem("userData"));
 //   const [user, setUser] = useState({})
@@ -39,7 +38,7 @@
 //   }
 
 //   useEffect(async () => {
-//       getDataUsers()      
+//       getDataUsers()
 //   }, [])
 
 //   const btnClick = () => {
@@ -93,7 +92,6 @@
 
 // export default User;
 
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -141,8 +139,6 @@ function User() {
     getDataUsers();
   }, []);
 
- 
-
   return (
     <div className={styles.container}>
       <NavBar />
@@ -150,11 +146,11 @@ function User() {
         <div className={styles.user_box}>
           <div className={styles.head}>
             <div className={styles.contForm}>
-            <FormularioEditar settShowForm={settShowForm} user={user}/>
+              <FormularioEditar settShowForm={settShowForm} user={user} />
             </div>
             <div id="modal-root"></div>
             <div className={styles.actions}>
-              <h1 className={styles.sectionTitle}>Historial de Compras</h1>
+              <h1 className={styles.sectionTitle}>My Shopping</h1>
               {listaDeCompras.map((ele) => {
                 return (
                   <div key={ele.title} className={styles.compra}>
@@ -172,10 +168,10 @@ function User() {
           </div>
           <div className={styles.list}>
             <div>
-              <Listado datos={cart} lista={"Carrito"} />
+              <Listado datos={cart} lista={"Cart"} />
             </div>
             <div>
-              <Listado datos={favorites} lista={"Favoritos"} />
+              <Listado datos={favorites} lista={"Favorites"} />
             </div>
           </div>
         </div>
@@ -185,4 +181,3 @@ function User() {
 }
 
 export default User;
-

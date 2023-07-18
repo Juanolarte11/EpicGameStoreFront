@@ -1,14 +1,19 @@
-import React from 'react'
+import React from "react";
 import "./Modal.css";
-import { useState } from 'react';
-import styles from "./Users.module.css"
-import { Link, Redirect } from 'react-router-dom';
+import { useState } from "react";
+import styles from "./Users.module.css";
+import { Link, Redirect } from "react-router-dom";
 
-
-function ModalUser({image}) {
+function ModalUser({ image }) {
   const [isOpen, setIsOpen] = useState(false);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+
+  const btnClick = () => {
+    localStorage.setItem("userData", JSON.stringify({}));
+    localStorage.setItem("Token", JSON.stringify({}));
+    window.location.reload();
+  };
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -23,48 +28,57 @@ function ModalUser({image}) {
       console.log(dataUser.image.length);
       return (
         <div>
-          <img className={styles.userIcon} onMouseEnter={handleOpenModal} src={dataUser.image} alt="Foto de perfil" />
+          <img
+            className={styles.userIcon}
+            onMouseEnter={handleOpenModal}
+            src={dataUser.image}
+            alt="Foto de perfil"
+          />
         </div>
-      )
+      );
     } else {
       return (
-        <button onMouseEnter={handleOpenModal} className={styles.userIcon} >{iconUser}</button>
-      )
+        <button onMouseEnter={handleOpenModal} className={styles.userIcon}>
+          {iconUser}
+        </button>
+      );
     }
-  }
+  };
 
   return (
     <div>
+      <div>{!isOpen && imageIcon()}</div>
       <div>
-        {!isOpen && (
-        imageIcon()
-        )}</div>
-      <div>
-        {isOpen && (
-          <button className={styles.userIcon} >{iconUser}</button>
-        )}</div>
+        {isOpen && <button className={styles.userIcon}>{iconUser}</button>}
+      </div>
 
       {isOpen && (
         <div onMouseLeave={handleCloseModal}>
           <div className="modal-overlay">
             <div className={"modal-content"}>
               <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
-              {dataUser.role === "cliente" ? (<Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>) :
-                (<Link to={"/admin"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>)}
-              <h2>{"mis datos(posibilidad de cambio de password y nickname)"}</h2>
-              <h2>{"lista de favoritos"}</h2>
-              <h2>{"registro de compras"}</h2>
-              <h2>{"registro de ventas"}</h2>
+              {dataUser.role === "cliente" ? (
+                <Link to={"/miPerfil"}>
+                  <p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p>
+                </Link>
+              ) : (
+                <Link to={"/admin"}>
+                  <p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p>
+                </Link>
+              )}
+              <h2>{"Mis datos"}</h2>
+
+              {dataUser?.userID && (
+                <button onClick={btnClick} className="navButton">
+                  Logout
+                </button>
+              )}
             </div>
           </div>
         </div>
-
       )}
     </div>
-
-
-
-  )
+  );
 }
 
-export default ModalUser
+export default ModalUser;
