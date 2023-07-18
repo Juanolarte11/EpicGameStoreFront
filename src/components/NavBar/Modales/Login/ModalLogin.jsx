@@ -31,6 +31,7 @@ const ModalLogin = () => {
       email: email,
       password: password
     }
+    console.log(user);
     try {
       const response = await axios.post('/users/login', user);
       console.log(response.data);

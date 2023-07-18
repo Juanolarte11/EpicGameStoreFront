@@ -7,8 +7,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 function ModalUser({image}) {
   const [isOpen, setIsOpen] = useState(false);
-  const dataUser = JSON.parse(localStorage.getItem("userData"));
-  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+    const dataUser = JSON.parse(localStorage.getItem("userData"));
+    const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -48,7 +48,6 @@ function ModalUser({image}) {
         <div onMouseLeave={handleCloseModal}>
           <div className="modal-overlay">
             <div className={"modal-content"}>
-
               <p className={styles.h1}>Rol: {"a completar segun usuario"}</p>
               {dataUser.role === "cliente" ? (<Link to={"/miPerfil"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>) :
                 (<Link to={"/admin"}><p className={styles.h2}> {dataUser.nombre.toUpperCase()}</p></Link>)}

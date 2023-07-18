@@ -3,6 +3,7 @@ import { filterByOrigin } from "./filterByOrigin.js";
 const initialState = {
   modalLogin: false,
   modalRegister: false,
+  usersFiltra : [],
   cartUser: [],
   commentVideoGame: [],
   videogames: [],
@@ -135,6 +136,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         dataUser: action.payload
       }
+
+      case "CLEAR":
+      return {
+        ...state,
+        detail: action.payload,
+      };
+      case "GETUSERSESTATUS":
+        return{
+          ...state,
+          usersFiltra: action.payload
+        }
   
     default:
       return state;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, setCurrentPage, getCommentVideoGame } from "../../actions";
+import { getDetail, setCurrentPage, getCommentVideoGame, clear } from "../../actions";
 import { useHistory } from "react-router-dom";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Detail.module.css";
@@ -9,6 +9,7 @@ import NavBar from "../NavBar/NavBar.jsx";
 import axios from "axios";
 import { getCartUser } from "../../actions";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Detail(props) {
   const id = props.match.params.id;
@@ -44,6 +45,11 @@ const handlePostComment = async() =>{
   }
   await axios.post('/reviews', comentario);
 }
+
+// const handleClose = (id) => {
+//   dispatch(getDetail(id))
+//   dispatch(clear(id))
+// }
 
 const commentVideoGame = useSelector(state => state.commentVideoGame)
 console.log(commentVideoGame)
@@ -190,7 +196,10 @@ function renderComments() {
   ,[]);
 
 
-  useEffect(() => dispatch(getDetail(id)), [dispatch]);
+  useEffect(() => {
+    dispatch(getDetail(id))
+    dispatch(clear(id))
+  }, [dispatch]);
   useEffect(async() => {await obternerFavoritos()},[])
 
   useEffect(async () => {
@@ -205,61 +214,74 @@ function renderComments() {
       }
     }
   },[])
-
-  return (
-    <div>
-      <NavBar size={size} />
-      <div className={styles.detailContainer}>
-        <h1 className={styles.detailTitle}>{game?.name}</h1>
-        <img className={styles.detailImage} src={image} alt={name} />
-        <div className={styles.detailInfo}>
-          <div className={styles.contButtons}>
-            <div className={styles.contPrice}>
-              <p className={styles.gameDesc}>{decuent}</p>
-              <p className={styles.gameDivisa}>{divisa}</p>
-              <p className={styles.gamePrice}>{price}</p>
+  if(name){
+    return (
+      <div>
+        <NavBar size={size} />
+        <div className={styles.detailContainer}>
+          <h1 className={styles.detailTitle}>{game?.name}</h1>
+          <img className={styles.detailImage} src={image} alt={name} />
+          <div className={styles.detailInfo}>
+            <div className={styles.contButtons}>
+              <div className={styles.contPrice}>
+                <p className={styles.gameDesc}>{decuent}</p>
+                <p className={styles.gameDivisa}>{divisa}</p>
+                <p className={styles.gamePrice}>{price}</p>
+              </div>
+              <button className={styles.addButton} onClick={() => handleClickCart(game.id)}>Add to Cart</button>
+              {!resultado&&
+               <button className={styles.favoriteButton} 
+               onClick={() => clickFavorite(game.id)}>Add favorite</button>
+              }{resultado&&
+                <button className={styles.favoriteButton}
+                onClick={() => DeleteFavorite(game.id)}>Delete favorite</button>
+               }
+             
             </div>
-            <button className={styles.addButton} onClick={() => handleClickCart(game.id)}>Add to Cart</button>
-            {!resultado&&
-             <button className={styles.favoriteButton} 
-             onClick={() => clickFavorite(game.id)}>Add favorite</button>
-            }{resultado&&
-              <button className={styles.favoriteButton}
-              onClick={() => DeleteFavorite(game.id)}>Delete favorite</button>
-             }
-           
+            <div className={styles.rating}>{stars}</div>
+            <p className={styles.detailInfoItem}>Developer: {Developer?.name}</p>
+            <p className={styles.detailInfoItem}>Launch Date: {launchDate}</p>
           </div>
-          <div className={styles.rating}>{stars}</div>
-          <p className={styles.detailInfoItem}>Developer: {Developer?.name}</p>
-          <p className={styles.detailInfoItem}>Launch Date: {launchDate}</p>
+          <h2 className={styles.detailGenresHeading}>Genres:</h2>
+          <div className={styles.genres}>{renderGenreTags(Genres)}</div>
+  
+          <h2 className={styles.detailPlatformsHeading}>Platforms:</h2>
+          <div className={styles.genres}>{renderPlatformTags(Platforms)}</div>
+         <h2 className={styles.detailScreenshotsHeading}>Description:</h2>
+         <text className={styles.detailDescription} dangerouslySetInnerHTML={{ __html: description }}></text>
+          <h2 className={styles.detailScreenshotsHeading}>Screenshots:</h2>
+          <div className={styles.detailScreenshotsContainer}>
+            {screenshots?.split(',').map((screenshot, index) => (
+              <img key={index} className={styles.detailScreenshot} src={screenshot} alt={`Screenshot ${index + 1}`} />
+            ))}
+          </div>
+  
+          {dataUser?.nombre?  (
+          <div>
+          <h2 className={styles.detailScreenshotsHeading}>Comentarios:</h2>
+          <form onSubmit={handlePostComment}>
+          <input onChange={handleCommentUser}></input>
+          <input onChange={handleRatingUser} type="number" max="5" min="0"></input>
+          <button type="submit">Enviar comentario</button>
+          </form>
+          </div> ) : ''
+          }
+          <div className={styles.genres}>{renderComments()}</div>
+          <div>
+            <Link to={"/home"}>
+              <button >HOME</button>
+            </Link>
+          </div>
+          
         </div>
-        <h2 className={styles.detailGenresHeading}>Genres:</h2>
-        <div className={styles.genres}>{renderGenreTags(Genres)}</div>
-
-        <h2 className={styles.detailPlatformsHeading}>Platforms:</h2>
-        <div className={styles.genres}>{renderPlatformTags(Platforms)}</div>
-       <h2 className={styles.detailScreenshotsHeading}>Description:</h2>
-       <text className={styles.detailDescription} dangerouslySetInnerHTML={{ __html: description }}></text>
-        <h2 className={styles.detailScreenshotsHeading}>Screenshots:</h2>
-        <div className={styles.detailScreenshotsContainer}>
-          {screenshots?.split(',').map((screenshot, index) => (
-            <img key={index} className={styles.detailScreenshot} src={screenshot} alt={`Screenshot ${index + 1}`} />
-          ))}
-        </div>
-
-        {dataUser?.nombre?  (
-        <div>
-        <h2 className={styles.detailScreenshotsHeading}>Comentarios:</h2>
-        <form onSubmit={handlePostComment}>
-        <input onChange={handleCommentUser}></input>
-        <input onChange={handleRatingUser} type="number" max="5" min="0"></input>
-        <button type="submit">Enviar comentario</button>
-        </form>
-        </div> ) : ''
-        }
-        <div className={styles.genres}>{renderComments()}</div>
-        
       </div>
-    </div>
-  );
+    );
+  } else {
+return (
+  <div>
+    <LoadingPage/>
+  </div>
+)
+  }
+  
 };

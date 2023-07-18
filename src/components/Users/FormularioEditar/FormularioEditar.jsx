@@ -15,7 +15,7 @@ function FormularioEditar({user }) {
     const [newPassword, setNewPassword] = useState("");
 
     const [newUsername, setNewUsername] = useState("");
-    const [image, setImage] = useState(dataUser.image);
+    const [image, setImage] = useState(dataUser?.image);
 
     const preset_key = "images";
     const cloud_name = "drgco4gsh";
@@ -61,7 +61,7 @@ function FormularioEditar({user }) {
         if (newUsername.length !== 0) {
             NewUser.userName = newUsername;
         }
-        if (image.length !== 0) {
+        if (image?.length !== 0) {
             NewUser.userImage = image;
         }
         try {
