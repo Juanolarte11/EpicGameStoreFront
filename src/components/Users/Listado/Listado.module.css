@@ -3,12 +3,18 @@
     width: 80px;
 }
 .body{
-    border: solid  black;
-    margin-top: 5px;
+    /* border: solid  black; */
+    margin-top: 60px;
     overflow: auto;
     margin-right: 10px;
-    height: 600px;
-    width: 380px;
+    height: 300px;
+    width: 250px;
+    margin-left: 10px;
+    background-color: rgb(54, 97, 146);
+    border-radius: 5px;
+    border: 2px solid rgb(64, 99, 128);
+    padding: 5px;
+    color: #ffffff;
 }
 
 .boton{
@@ -25,4 +31,9 @@
 
 .url{
     text-decoration: none;
+}
+
+.item{
+    display: flex;
+    justify-content: space-between;
 }

@@ -4,12 +4,13 @@ import LandingPage from "./components/landingPage/LandingPage.jsx";
 import Home from "./components/Home/Home.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
-import About from "./components/About/About.jsx";
+import About from "./components/About/About.jsx"
 import Favorites from "./components/Favorites/Favorites.jsx";
 import "./App.css";
 import Cart from "./components/Cart/Cart.jsx";
 import User from "./components/Users/Users.jsx";
 import Admin from "./components/Users/Admin/Admin.jsx";
+import { Pay } from "./components/Pay/Pay.jsx";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/favorites" component={Favorites} />
           <Route path="/miPerfil" component={User} />
           <Route path="/admin" component={Admin} />
+          <Route path="/pay" component={Pay} />
         </Switch>
       </div>
     </BrowserRouter>

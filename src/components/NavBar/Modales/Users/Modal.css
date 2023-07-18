@@ -8,8 +8,8 @@
 
 .modal-overlay {
   position: fixed;
-  top:40%;
-  right: 2%; /* Ajusta este valor para posicionar el modal a la derecha */
+  top: 15%;
+  right: -4%; /* Ajusta este valor para posicionar el modal a la derecha */
   width: 20%; /* Ajusta este valor para cambiar el ancho del modal */
   height: 25%;
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .modal-content {
-  background-color: var(--segundo-color);
+  background-color: rgba(41, 41, 41, 0.705);
   border: 3px solid black;
   padding: 20px;
   border-radius: 10px;
@@ -27,6 +27,7 @@
   text-align: center;
   max-height: 600px;
   z-index: 9999;
+  text-align: -webkit-left;
 }
 
 .modal-content:hover {
@@ -41,4 +42,11 @@
 
 .modal-content button {
   margin-top: 20px;
+}
+.modal-content .link{
+  color: rgb(84, 23, 155);
+}
+
+.modal-content .link:hover{
+  color: rgb(155, 23, 23);
 }

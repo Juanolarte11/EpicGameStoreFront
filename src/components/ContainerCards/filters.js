@@ -1,9 +1,9 @@
 const order = (allVideogames, sortOrder, getGenres, searchQuery) => {
     let filteredVideogames = allVideogames;
-  
+    console.log(allVideogames);
     if (getGenres.length > 0) {
-      filteredVideogames = allVideogames.filter((game) =>
-        game.Genres.some((genre) => genre.genreName === getGenres)
+      filteredVideogames = allVideogames?.filter((game) =>
+        game?.Genres?.some((genre) => genre.genreName === getGenres)
       );
     }
   
@@ -32,7 +32,7 @@ const order = (allVideogames, sortOrder, getGenres, searchQuery) => {
           return 0;
       }
     });
-  
+  console.log(sortedVideogames);
     return sortedVideogames;
   };
   

@@ -15,14 +15,15 @@ function Listado({datos,lista}) {
     }else{
         newDatos = datos
     }
-
+    console.log(datos);
     return (
         <div className={style.body}>
             {datos.length && newDatos.map((juego) => {
                 return (
-                    <div>
-                        <h3>{juego.title}</h3>
-                        <img src={juego.image} alt={juego.title} key={juego.title} className={style.image}/>
+                    <div className={style.item}>
+                        <h4>{juego.title || juego.name}</h4>
+                        {/* <img src={juego.image} alt={juego.title} key={juego.title} className={style.image}/> */}
+                        <h4>{juego.price || juego.unit_price}</h4>
                     </div>
                 )
             })}

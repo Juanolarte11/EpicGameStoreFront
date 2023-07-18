@@ -2,122 +2,221 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Admin.module.css";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 import NavBar from "../../NavBar/NavBar";
 import ListUsers from "./ListUsers/ListUsers";
 import ListVideogames from "./ListVideogames/ListVideogames";
-import { getVideogames } from "../../../actions";
+import { getVideogames, getUsersAct } from "../../../actions";
 import ModalForm from "./modalForm/modalForm";
 
-
 function Admin() {
-    const dispatch = useDispatch()
-    const dataUser = JSON.parse(localStorage.getItem("userData"));
-    console.log(dataUser);
+    const dispatch = useDispatch();
     const token = JSON.parse(localStorage.getItem("Token"));
-    const [edit, setEdit] = useState(false)
-    const [user, setUser] = useState({})
-    const [listUsers, setListUsers] = useState([])
-    const listaVideogames = useSelector((state) => state.videogames);
-    const history = useHistory()
-    const usuariosActivos = "UsuariosActivos";
-    const usuariosBaneados = "UsuariosBaneados";
-    const videogamesActivos = "Videogames Activos";
-    const videogamesInactivos = "Videogames Inactivos";
-    const solicitudRol = "Solicitud De Rol"
+    const [acti, setActivos] = useState(null);
+    const [user, setUser] = useState({});
+    const [roleUser, setRoleUser] = useState("clientes");
+    const [listUsersAct, setListUsers] = useState([]);
+    const listaUserFil = useSelector((state) => state.usersFiltra);
+    const [listaVideogames, setListaVideogames] = useState([]);
+    const history = useHistory();
+    const [selectedRole, setSelectedRole] = useState("");
+    const [flag, setFlag] = useState(0)
 
-    const handleAprove = async (id) => {
-        alert("Aprovaste Rol")
+    const updateVidoagames = () => {
+        dispatch(getVideogames())
     }
-    const handleModalForm = async () => {
-        setEdit(true);
-    }
-    const handleActiv = async (id) => {
 
-    }
-    const handleBam = async (id) => {
-        const update = {
-            active: false
+    useEffect(() => {
+        if (acti === null) {
+            return;
         }
+
+        if (acti === "All") {
+            console.log("todos los usuarios");
+            getDataUsers();
+        } else {
+            dispatch(getUsersAct(acti));
+            setListUsers(listaUserFil);
+        }
+    }, [acti]);
+
+    const handleBamUser = async (id, isActive) => {
+        const update = {
+            active: !isActive,
+        };
         try {
-            axios.patch(`http://localhost:3001/users/${id}`,update, { headers: {
-                    Authorization: `Bearer ${token}`}
-            })
-            .then((response) => {
-                console.log(response);
-            })
+            axios.patch(`http://localhost:3001/users/${id}`, update, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then((response) => {
+                    console.log(response);
+                });
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
-    const handleActivVideogame = async (id) => {
-        alert("Videogame Activado")
-    }
-    const handleBamVideogame = async (id) => {
-        alert("Videogame Desactivado")
-    }
+    const handleEditRole = async (e, id) => {
+        const update = {
+            role: e.target.value,
+        };
+        try {
+            axios.patch(`http://localhost:3001/users/${id}`, update, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then((response) => {
+                    console.log(response);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    const usuarios = [
-        { id: 1, nombre: 'Usuario 1', rol: 'Admin' },
-        { id: 2, nombre: 'Usuario 2', rol: 'Moderador' },
-        { id: 3, nombre: 'Usuario 3', rol: 'Invitado' },
-    ];
-
-    const getDataUsers = async () => {
-        console.log(token);
-        axios.get("http://localhost:3001/admin/users", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+    const handleGetListVideogame = async () => {
+        axios.get("http://localhost:3001/admin/videogames", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then((response) => {
-                console.log(response.data);
-                setListUsers(response.data)
+                setListaVideogames(response.data);
+                setFlag(1)
             })
             .catch((error) => {
                 console.log(error);
             });
     };
-    useEffect(async () => {
-        await getDataUsers()
-        if (listaVideogames.length === 0) {
-            dispatch(getVideogames());
-        }
-    }, [])
+
+    const getDataUsers = async () => {
+        axios.get("http://localhost:3001/admin/users", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setListUsers(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await dispatch(getUsersAct(true));
+            await getDataUsers();
+            await handleGetListVideogame();
+            if (listaVideogames.length === 0) {
+                dispatch(getVideogames());
+            }
+        };
+        console.log("hola");
+        fetchData();
+    }, []);
 
     const btnClick = () => {
         localStorage.setItem("userData", JSON.stringify({}));
-        history.push("/home")
+        history.push("/home");
     };
 
+    const handleUsuariosAct = () => {
+        setActivos(true);
+        setListUsers(listaUserFil);
+    };
+
+    const handleUsuariosDes = () => {
+        setActivos(false);
+        setListUsers(listaUserFil);
+    };
+
+    const handleRoleChange = async (e) => {
+        axios.get(`http://localhost:3001/admin/users?role=${e.target.value}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                setListUsers(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        setSelectedRole(e.target.value);
+    };
+
+    console.log(selectedRole);
     return (
         <div>
             <NavBar />
             {
                 <div>
-                    <div>
-                        <h1>{user.nombre}</h1>
-                        <div className={style.contUsers}>
-                            <ListUsers lista={listUsers} usuarios={usuariosActivos} boton={handleBam} />
-                            <ListUsers lista={usuarios} usuarios={usuariosBaneados} boton={handleActiv} />
-                            <ListUsers lista={usuarios} usuarios={solicitudRol} boton={handleAprove} />
+                    <div className={style.container}>
+{/* <-----------------------------------------------------------------------------------usuarios------------------------------------------------->                         */}
+                        <div className={style.filtreusers}>
+                            <button className={style.button} onClick={handleUsuariosAct}>
+                                usuariosAct
+                            </button>
+                            <button className={style.button} onClick={handleUsuariosDes}>
+                                usuariosDes
+                            </button>
+                            <button
+                                className={style.button}
+                                onClick={() => setActivos("All")}
+                            >
+                                todos
+                            </button>
+                            <select
+                                className={style.select}
+                                onChange={handleRoleChange}
+                                value={selectedRole}
+                            >
+                                <option value="">ALL</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="cliente">Cliente</option>
+                            </select>
                         </div>
-                        <div className={style.contVideogames}>
-                            <ListVideogames lista={listaVideogames} videogames={videogamesActivos} boton={handleActivVideogame} boton2={handleModalForm} />
-                            {edit ? (<ModalForm />) : null}
-                            <ListVideogames lista={usuarios} videogames={videogamesInactivos} boton={handleBamVideogame} />
+                        <div className={style.user}>
+                            <h1 className={style.title}>{user.nombre}</h1>
+                            <div className={style.listContainer}>
+                                <ListUsers
+                                    lista={listUsersAct}
+                                    boton={handleBamUser}
+                                    handleEditRole={handleEditRole}
+                                />
+                            </div>
                         </div>
-                        <br />
-                        <button onClick={btnClick}>Cerrar seccion</button>
-                        <br />
-                        <Link to="/home" >
-                            HOME
-                        </Link>
+{/* <----------------------------------------------------------------------------- Videogames ------------------------------------------------------------->                         */}
+                        <div className={style.videogamesContainer}>
+                        <button className={style.button}>
+                                VideogamesAct
+                            </button>
+                            <button className={style.button}>
+                                VideogamesDes
+                            </button>
+                            <ListVideogames
+                                lista={listaVideogames}
+                                token={token}
+                                updateVidoagames={updateVidoagames}
+                            />
+                        </div>
+                        <div className={style.buttonContainer}>
+                            <button className={style.button} onClick={btnClick}>
+                                Cerrar sesión
+                            </button>
+                            <br />
+                            <Link to="/home" className={style.link}>
+                                HOME
+                            </Link>
+                        </div>
                     </div>
                 </div>
             }
-        </div>
+        </div >
     );
 }
 

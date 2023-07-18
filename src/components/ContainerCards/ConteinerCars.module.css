@@ -44,3 +44,10 @@
 .sortButtonsContainer button:hover {
   background-color: var(--segundo-color);
 }
+
+.noGame{
+  margin-left: 350px;
+}
+.textNoGame{
+  margin-left: 200px;
+}
