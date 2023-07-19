@@ -8,6 +8,7 @@ import ListUsers from "./ListUsers/ListUsers";
 import ListVideogames from "./ListVideogames/ListVideogames";
 import { getVideogames, getUsersAct } from "../../../actions";
 
+
 function Admin() {
     const dispatch = useDispatch();
     const token = JSON.parse(localStorage.getItem("Token"));
@@ -19,6 +20,7 @@ function Admin() {
     const [listaVideogames, setListaVideogames] = useState([]);
     const history = useHistory();
     const [selectedRole, setSelectedRole] = useState("");
+
 
     useEffect(() => {
         if (acti === null) {
