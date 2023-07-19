@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styles from './ListUsers.module.css';
 
 const ListUsers = ({ lista, boton, handleEditRole }) => {
-  console.log(lista);
   return (
     <div className={styles.container}>
       <h2>Usuarios</h2>
