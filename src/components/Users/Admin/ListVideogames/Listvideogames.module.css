@@ -1,6 +1,7 @@
 .container {
-  width: 400px;
+  width: 600px;
   margin: 0 auto;
+  flex-direction: column;
 }
 
 .lista {
@@ -22,21 +23,40 @@
   width: 100px; 
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #fe1212;
+  border: 1px solid #000000;
   border-radius: 4px;
-  background-color: #dc1111;
+  background-color: #fff;
   appearance: none;
   cursor: pointer;
   margin: 10px;
   margin-bottom: 15px;
+}
+.botonBan:hover {
+  background-color: #8b8282;
 }
 
 .select{
 width: 200px; 
 padding: 8px;
 font-size: 16px;
-border: 1px solid #ccc;
+border: 1px solid #000000;
 border-radius: 4px;
 background-color: #fff;
 appearance: none;
+}
+
+
+.nombre{
+  margin: 5px;
+  padding: 5px;
+}
+
+.price{
+  margin: 5px;
+  padding: 5px
+}
+
+.status{
+  margin: 5px;
+  padding: 5px
 }

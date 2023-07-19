@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './Navbar.module.css';
+import styles from './NavbarSec.module.css';
 import SearchBar from '../searchBar/SearchBar';
 import Selector from './Selecto';
 import { useSelector } from "react-redux";
+
 export default function NavbarSec({ handleSort, handleReset, handleSearch, handleGenres }) {
   const genres = useSelector(state => state.genres)
   return (

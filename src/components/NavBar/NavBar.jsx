@@ -49,7 +49,7 @@ export default function NavBar({ size }) {
         </div>
         <div className={style.a}>
           <Link to="/about">ABOUT</Link>
-          {dataUser?.userID && (<Link to="/favorites">FAVORITES</Link>)}          
+          <Link to="/favorites">FAVORITES</Link>
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">

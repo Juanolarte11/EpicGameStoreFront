@@ -7,13 +7,13 @@
   --rust: #aa5637ff;
   --paynes-gray: #4b6979ff;
   --gunmetal: #2d3a44ff;
+
 }
 
 .heading {
   color: var(--gunmetal);
   font-size: 30px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
 }
 
 .button {
@@ -38,7 +38,7 @@
 }
 
 .container {
-  background-color: #1d354e;
+  background-color: #f1f1f1;
 }
 
 .searchBarContainer {

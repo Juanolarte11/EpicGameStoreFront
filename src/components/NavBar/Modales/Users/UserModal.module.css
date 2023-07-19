@@ -48,6 +48,16 @@
   font-weight: bold;
   text-decoration: none;
   color: black;
-  /* margin-left: 50%; */
   margin-right: 20px;
+}
+
+.navButton {
+  background-color: var(--segundo-color);
+  color: var(--texto-color);
+  border: none;
+  padding: 8px 16px;
+  margin-left: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
 }
