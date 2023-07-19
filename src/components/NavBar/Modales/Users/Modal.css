@@ -8,52 +8,45 @@
 
 .modal-overlay {
   position: fixed;
-  top: 12rem;
-  right: 80px;
-  width: 150px;
-  height: 200px;
+  top: 90px;
+  right: -4%; /* Ajusta este valor para posicionar el modal a la derecha */
+  width: 20%; /* Ajusta este valor para cambiar el ancho del modal */
+  height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  text-decoration: none;
 }
 
 .modal-content {
-  background-color: var(--segundo-color);
-  border: 3px solid rgb(0, 0, 0);
+  background-color: rgba(41, 41, 41, 0.705);
+  border: 3px solid black;
   padding: 20px;
   border-radius: 10px;
   max-width: 300px;
   text-align: center;
   max-height: 600px;
   z-index: 9999;
-  text-decoration: none;
+  text-align: -webkit-left;
 }
 
 .modal-content:hover {
   box-shadow: 0 0 10px 5px rgba(82, 0, 0, 0.5);
   border: 3px rgb(164, 28, 1);
   transition: all 0.1s ease-out;
-  text-decoration: none;
 }
 
 .modal-content h2 {
   margin-top: 0;
-  text-decoration: none;
 }
 
 .modal-content button {
   margin-top: 20px;
 }
+.modal-content .link{
+  color: rgb(84, 23, 155);
+}
 
-.navButton {
-  border-radius: 5px;
-  background-color: white;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: aquamarine;
+.modal-content .link:hover{
+  color: rgb(155, 23, 23);
 }
