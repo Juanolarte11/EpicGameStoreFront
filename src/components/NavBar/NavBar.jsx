@@ -8,18 +8,12 @@ import ModalLogin from "./Modales/Login/ModalLogin";
 import ModalRegister from "./Modales/Registro/ModalRegister";
 import noUser from "../NavBar/noUser2.png";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 
 export default function NavBar({ size }) {
   const [country, setCountry] = useState("");
   const dataUser = JSON.parse(localStorage.getItem("userData"));
-
-  const btnClick = () => {
-    localStorage.setItem("userData", JSON.stringify({}));
-    localStorage.setItem("Token", JSON.stringify({}));
-    window.location.reload();
-  };
-
 
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
@@ -42,15 +36,17 @@ export default function NavBar({ size }) {
       })
       .catch((error) => {
         console.error("IP geolocation error:", error);
+        alert(error.message);
       });
   };
 
+  
   return (
     <nav className={style.nav}>
       <div className={style.navLinks}>
-      <div className={style.title}>
+        <div className={style.title}>
           <Link to="/home">EPICGAMESTORE</Link>
-          </div>
+        </div>
         <div className={style.a}>
           <Link to="/about">ABOUT</Link>
           <Link to="/favorites">FAVORITES</Link>
@@ -72,21 +68,20 @@ export default function NavBar({ size }) {
             <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
           )}
           <div className={style.nameContainer}>
-            <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
+            {/* <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3> */}
           </div>
           {dataUser?.nombre ? (
-        <UserModal image={dataUser.image}></UserModal>
-      ) : (
-        <div className={style.contImage}>
-          <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
+            <UserModal image={dataUser.image}></UserModal>
+          ) : (
+            <div className={style.contImage}>
+              <img
+                className={style.userImg}
+                src={noUser}
+                alt="Imagen de perfil"
+              />
+            </div>
+          )}
         </div>
-      )}
-        </div>
-        {/* {dataUser?.userID && (
-            <button onClick={btnClick} className={style.navButton}>
-              Logout
-            </button>
-          )} */}
       </div>
     </nav>
   );

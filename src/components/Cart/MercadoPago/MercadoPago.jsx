@@ -8,7 +8,7 @@ const MercadoPago = (props) => {
   const [loading, setLoading] = useState(false);
   const [preferenceId, setPreferenceId] = useState(null);
   
-  initMercadoPago("TEST-5e60fd10-e5a5-4835-94bc-c61f40cc8cb4");
+  initMercadoPago("TEST-d1125ce2-1363-40ea-9416-73d267773306");
   
   const arrayGames = props.arrayGames;
   const cardID = useSelector(state => state.dataUser.cardID);

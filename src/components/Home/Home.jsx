@@ -30,6 +30,8 @@ export default function Home() {
         const response = await axios.post(`http://localhost:3001/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response.data[0].Videogames.length);
+        alert("Agregado al carrito")
+        console.log(response);
       } catch (error) {
         console.log(error);
       }

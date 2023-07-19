@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Navbar.module.css';
+import styles from './NavbarSec.module.css';
 
 export default function Selector({ options, handleGenres, placeholder }) {
   return (

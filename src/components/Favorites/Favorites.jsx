@@ -12,12 +12,18 @@ export default function Favorites() {
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([])
   const dataUser = JSON.parse(localStorage.getItem("userData"))
+  const token = JSON.parse(localStorage.getItem("Token"));
    const obternerFavoritos = async() => {
     if(dataUser){
       try {
-        const respuesta = await axios.get(`/users/${dataUser.userID}`);
+        const respuesta = await axios.get(`http://localhost:3001/users/userDetail/${dataUser.userID}`, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      })
+      console.log(respuesta.data.Videogames);
         setFavorites(respuesta.data.Videogames)
-        console.log(respuesta);
+       
       } catch (error) {
         console.log(error);
       }
@@ -84,4 +90,3 @@ export default function Favorites() {
     </div>
   );
 }
-

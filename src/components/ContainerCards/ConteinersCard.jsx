@@ -4,6 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import styles from "./ConteinerCars.module.css";
 import NavbarSec from "../NavBarSec/NavSec";
 import { order } from "./filters";
+import noGame from "../Home/noGameSearch.gif"
 
 export default function ConteinerCars({
   allVideogames,
@@ -31,7 +32,7 @@ export default function ConteinerCars({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [sortOrder, genres]);
+  }, [sortOrder, genres, allVideogames]);
 
   const indexOfLastVideogame = currentPage * videogamesPerPage;
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
@@ -62,14 +63,13 @@ export default function ConteinerCars({
     localStorage.removeItem("order");
     setCurrentPage(1);
   };
-
-  const filteredVideogames = allVideogames.filter((game) =>
+  const filteredVideogames = allVideogames?.filter((game) =>
     game.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const sortedVideogames = order(filteredVideogames, sortOrder, genres, searchTerm);
 
-  const videogames = sortedVideogames.slice(
+  const videogames = sortedVideogames?.slice(
     indexOfFirstVideogame,
     indexOfLastVideogame
   );
@@ -83,19 +83,26 @@ export default function ConteinerCars({
         handleGenres={handleGenres}
       />
       <div className={styles.cardsContainer}>
-        {videogames.map((game) => (
-          <Card
-            key={game.id}
-            game={game}
-            handleClickCart={handleClickCart}
-            clickFavorite={clickFavorite}
-            buttonFavorites={buttonFavorites}
-          />
-        ))}
+        {videogames && videogames.length > 0 ? (
+          videogames.map((game) => (
+            <Card
+              key={game.id}
+              game={game}
+              handleClickCart={handleClickCart}
+              clickFavorite={clickFavorite}
+              buttonFavorites={buttonFavorites}
+            />
+          ))
+        ) : (
+          <div>
+            <h3 className={styles.textNoGame}>Sin juegos encontrados para estos filtros</h3>
+           <img className={styles.noGame} src={noGame} alt="" />
+          </div>
+        )}
       </div>
       <div className={styles.paginationContainer}>
         <Pagination
-          count={Math.ceil(sortedVideogames.length / videogamesPerPage)}
+          count={Math.ceil(sortedVideogames?.length / videogamesPerPage)}
           page={currentPage}
           onChange={handleChangePage}
         />
