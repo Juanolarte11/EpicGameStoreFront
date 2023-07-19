@@ -1,6 +1,12 @@
 .container {
+<<<<<<< HEAD
   width: 400px;
   margin: 0 auto;
+=======
+  width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+>>>>>>> c4baea4 (Ojala no se borren)
 }
 
 .lista {
@@ -22,21 +28,56 @@
   width: 100px; 
   padding: 8px;
   font-size: 16px;
+<<<<<<< HEAD
   border: 1px solid #fe1212;
   border-radius: 4px;
   background-color: #dc1111;
+=======
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #fff;
+>>>>>>> c4baea4 (Ojala no se borren)
   appearance: none;
   cursor: pointer;
   margin: 10px;
   margin-bottom: 15px;
 }
+<<<<<<< HEAD
+=======
+.botonBan:hover {
+  background-color: #8b8282;
+}
+>>>>>>> c4baea4 (Ojala no se borren)
 
 .select{
 width: 200px; 
 padding: 8px;
 font-size: 16px;
+<<<<<<< HEAD
 border: 1px solid #ccc;
 border-radius: 4px;
 background-color: #fff;
 appearance: none;
+=======
+border: 1px solid #000000;
+border-radius: 4px;
+background-color: #fff;
+appearance: none;
+}
+
+
+.nombre{
+  margin: 5px;
+  padding: 5px;
+}
+
+.price{
+  margin: 5px;
+  padding: 5px
+}
+
+.status{
+  margin: 5px;
+  padding: 5px
+>>>>>>> c4baea4 (Ojala no se borren)
 }
