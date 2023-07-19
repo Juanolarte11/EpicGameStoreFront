@@ -86,3 +86,18 @@
 .logout {
   display: flex;
 }
+
+
+@media (max-width: 900px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #141d22;
+    padding: 10px;
+    width: 900px;
+  }
+  .userIcon{
+    margin-right: 100px;
+  }
+}
