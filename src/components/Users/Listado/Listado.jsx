@@ -21,8 +21,8 @@ function Listado({datos,lista}) {
             {datos.length && newDatos.map((juego) => {
                 return (
                     <div className={style.item}>
-                        <h4>{juego.title || juego.name}</h4>
-                        {/* <img src={juego.image} alt={juego.title} key={juego.title} className={style.image}/> */}
+                        <h4 clasName={style.h4List}>{juego.title || juego.name}</h4>
+                        <img src={juego.image} alt={juego.title} key={juego.title} className={style.image}/>
                         <h4>{juego.price || juego.unit_price}</h4>
                     </div>
                 )

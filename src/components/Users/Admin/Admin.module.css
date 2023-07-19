@@ -1,8 +1,18 @@
 .user{
     display: inline-flex;
+    width: 1000px;
+    padding: 10px;
 }
-.filtreusers{
-    display: inline-flex;
+.containerUsers{
+  padding: 20px;
+  width: 1500px;
+  max-height: 600px;
+  overflow: auto; 
+  border: solid 0.5px;
+  margin: 10px;
+}
+.containerUsers::-webkit-scrollbar {
+  display: none;
 }
 .contVideogames{
     display: inline-flex;
@@ -12,6 +22,11 @@
     flex-direction: column;
     align-items: center;
     font-size: 20px;
+    background-color: #01366e;
+    padding: 30px;
+  }
+  .filtreusers{
+    padding: 10px;
   }
   
   .buttonContainer {
@@ -26,14 +41,14 @@
     font-size: 16px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #f9fcff;
+    color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #8b8282;
   }
   
   .select {
@@ -60,10 +75,15 @@
     margin-right: 20px;
   }
   
-  .videogamesContainer {
-    flex: 1;
-  }
-  
+
+    .videogamesContainer {
+      padding: 20px;
+      width: 1500px;
+      max-height: 600px;
+      overflow-y: auto; 
+      border: solid 0.5px;
+    }
+
   .link {
     margin-top: 20px;
     font-size: 16px;
@@ -74,4 +94,7 @@
   
   .link:hover {
     text-decoration: underline;
+  }
+  .listaGames{
+    background-color: black;
   }
