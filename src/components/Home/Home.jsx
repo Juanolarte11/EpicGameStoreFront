@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, getCartUser, getGenres } from "../../actions/index.js";
+import {
+  getVideogames,
+  getCartUser,
+  getGenres,
+  favoritesList,
+} from "../../actions/index.js";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import ConteinerCars from "../ContainerCards/ConteinersCard.jsx";
 import axios from "axios";
-import ModalLogin from "../NavBar/Modales/Login/ModalLogin.jsx";
+const token = JSON.parse(localStorage.getItem("Token"));
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -17,6 +22,8 @@ export default function Home() {
   const [sizeCart, setSizeCart] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const listGames = useSelector((state) => state.favoritesList);
+  console.log(listGames);
 
   dispatch(getGenres());
 
@@ -41,11 +48,29 @@ export default function Home() {
   };
 
   const clickFavorite = async (gameId) => {
+    const game = {
+      userId: dataUser.userID,
+      gameId: gameId,
+    };
+
+    const existingFavorite = await axios.get(
+      `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const verifiGameId = existingFavorite.data.Videogames;
+    const isGameInFavorites = verifiGameId.some((e) => e.id === gameId);
+
+    if (isGameInFavorites) {
+      setAlertMessage("This game is already in your favorites!");
+      setShowAlert(true);
+      return;
+    }
+
     try {
-      const game = {
-        userId: dataUser.userID,
-        gameId: gameId,
-      };
       const respuesta = await axios.post("/favorites", game);
       setAlertMessage("Game added to favorites...");
       setShowAlert(true);

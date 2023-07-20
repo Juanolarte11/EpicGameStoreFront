@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import styles from "./Mercado.module.css"
+import styles from "./Mercado.module.css";
 
 const MercadoPago = (props) => {
   const [loading, setLoading] = useState(false);
   const [preferenceId, setPreferenceId] = useState(null);
-  
-  initMercadoPago("TEST-d1125ce2-1363-40ea-9416-73d267773306");
-  
+
+  initMercadoPago("TEST-e768084a-76b6-4094-8805-c5f01ba73dab");
+
   const arrayGames = props.arrayGames;
-  const cardID = useSelector(state => state.dataUser.cardID);
-  const userId = useSelector(state => state.dataUser.userID);
-  
+  const cardID = useSelector((state) => state.dataUser.cardID);
+  const userId = useSelector((state) => state.dataUser.userID);
+
   const createPreference = async () => {
     try {
       setLoading(true); // Mostrar animación de carga
-      const order = { 
+      const order = {
         cardID,
         userId,
-        Videogames: arrayGames
+        Videogames: arrayGames,
       };
-      const response = await axios.post("http://localhost:3001/pay/create_preference", order);
+      const response = await axios.post(
+        "http://localhost:3001/pay/create_preference",
+        order
+      );
       const { id } = response.data;
       return id;
     } catch (error) {
@@ -31,22 +34,22 @@ const MercadoPago = (props) => {
       setLoading(false); // Ocultar animación de carga
     }
   };
-  
+
   const handleBuy = async () => {
     const id = await createPreference();
     if (id) {
       setPreferenceId(id);
     }
   };
-  
+
   return (
     <div>
       {!preferenceId && !loading && (
-        <button className={styles.buttonPayNow} onClick={handleBuy}>Pay Now</button>
+        <button className={styles.buttonPayNow} onClick={handleBuy}>
+          Pay Now
+        </button>
       )}
-      {loading && (
-        <div className={styles.loadingAnimation}>.</div> 
-      )}
+      {loading && <div className={styles.loadingAnimation}>.</div>}
       {preferenceId && !loading && (
         <Wallet initialization={{ preferenceId: preferenceId }} />
       )}
