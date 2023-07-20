@@ -39,6 +39,7 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
+      
       handleCloseRegister();
     } catch (error) {
       console.log(error);
