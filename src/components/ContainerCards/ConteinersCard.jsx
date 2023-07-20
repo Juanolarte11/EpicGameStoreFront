@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import styles from "./ConteinerCars.module.css";
 import NavbarSec from "../NavBarSec/NavSec";
 import { order } from "./filters";
-import noGame from "../Home/noGameSearch.gif"
+import noGame from "../Home/noGameSearch.gif";
 
 export default function ConteinerCars({
   allVideogames,
@@ -67,7 +67,12 @@ export default function ConteinerCars({
     game.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const sortedVideogames = order(filteredVideogames, sortOrder, genres, searchTerm);
+  const sortedVideogames = order(
+    filteredVideogames,
+    sortOrder,
+    genres,
+    searchTerm
+  );
 
   const videogames = sortedVideogames?.slice(
     indexOfFirstVideogame,
@@ -95,8 +100,8 @@ export default function ConteinerCars({
           ))
         ) : (
           <div>
-            <h3 className={styles.textNoGame}>Sin juegos encontrados para estos filtros</h3>
-           <img className={styles.noGame} src={noGame} alt="" />
+            <h3 className={styles.textNoGame}>No favorite games</h3>
+            <img className={styles.noGame} src={noGame} alt="" />
           </div>
         )}
       </div>

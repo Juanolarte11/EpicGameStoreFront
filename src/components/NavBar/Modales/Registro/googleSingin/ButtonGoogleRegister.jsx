@@ -1,8 +1,17 @@
+<<<<<<< HEAD
+import { auth, provider } from './config'
+import { signInWithPopup } from 'firebase/auth'
+import style from '../Login.module.css'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { sendEmail } from '../../../../../actions'
+=======
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 import style from "../Register.module.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+>>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
 
 const ButtonGoogleRegister = ({ handleCloseRegister }) => {
   const history = useHistory();

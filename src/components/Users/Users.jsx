@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -37,6 +36,7 @@ function User() {
         }
     })
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
+      console.log(response);
       setUser(response.data);
       if (response.data.role === "cliente") {
         setFavorites(response.data.Videogames);
@@ -51,6 +51,7 @@ function User() {
   useEffect(() => {
     getDataUsers();
   }, []);
+
 
 
   return (

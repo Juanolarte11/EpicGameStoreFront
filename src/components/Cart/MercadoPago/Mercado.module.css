@@ -1,25 +1,25 @@
 /* MercadoPago.module.css */
 .buttonPayNow {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.loadingAnimation {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  font-size: 20px;
+  color: #007bff;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .loadingAnimation {
-    display: inline-block;
-    animation: spin 1s linear infinite;
-    font-size: 20px;
-    color: #007bff;
+  100% {
+    transform: rotate(360deg);
   }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
+}

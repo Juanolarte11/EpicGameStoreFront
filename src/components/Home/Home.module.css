@@ -7,7 +7,6 @@
   --rust: #aa5637ff;
   --paynes-gray: #4b6979ff;
   --gunmetal: #2d3a44ff;
-
 }
 
 .heading {
@@ -38,7 +37,7 @@
 }
 
 .container {
-  background-color: #f1f1f1;
+  background-color: #d5d6d5;
 }
 
 .searchBarContainer {
@@ -114,4 +113,46 @@
   margin-top: 20px;
   padding-bottom: 20px;
   border-bottom: 40px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(800%);
+  }
+  60% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-800%);
+  }
+}
+
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  background-color: #57fb2e;
+  border: 1px solid #010101;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  z-index: 10000;
+  animation: slideIn 2s ease forwards;
+}
+
+.alert2{
+  position: fixed;
+  top: 50%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  background-color: #cf0a0a;
+  border: 1px solid #010101;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  z-index: 10000;
+  animation: slideIn 2s ease forwards;
 }
