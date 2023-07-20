@@ -1,6 +1,5 @@
 const order = (allVideogames, sortOrder, getGenres, searchQuery) => {
     let filteredVideogames = allVideogames;
-    console.log(allVideogames);
     if (getGenres.length > 0) {
       filteredVideogames = allVideogames?.filter((game) =>
         game?.Genres?.some((genre) => genre.genreName === getGenres)
@@ -13,8 +12,8 @@ const order = (allVideogames, sortOrder, getGenres, searchQuery) => {
         game.name.toLowerCase().includes(query)
       );
     }
-  
-    const sortedVideogames = filteredVideogames.sort((a, b) => {
+    
+    const sortedVideogames = filteredVideogames?.sort((a, b) => {
       switch (sortOrder) {
         case "AtoZ":
           return a.name.localeCompare(b.name);
@@ -32,7 +31,6 @@ const order = (allVideogames, sortOrder, getGenres, searchQuery) => {
           return 0;
       }
     });
-  console.log(sortedVideogames);
     return sortedVideogames;
   };
   

@@ -6,11 +6,13 @@ const ListUsers = ({ lista, boton, handleEditRole }) => {
     <div className={styles.container}>
       <h2>Usuarios</h2>
       <ul className={styles.lista}>
+        
         {lista.map((lista) => (
           <li key={lista.id} className={styles.usuario}>
             <div>
               <span>Nombre: {lista.userName}</span>
-              <span>----Rol: {lista.role}</span>
+              <span> Rol: {lista.role}</span>
+              <span> State: {lista.isActive ? "Activo" : "Inactivo"}</span>
             </div>
             <button className={styles.botonBan} onClick={() => boton(lista.id, lista.isActive)}>{lista.isActive ? "Ban" : "Act"}</button>
             <select onChange={(e) => handleEditRole(e, lista.id)} className={styles.select}>

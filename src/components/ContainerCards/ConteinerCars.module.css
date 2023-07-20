@@ -46,72 +46,71 @@
   background-color: var(--segundo-color);
 }
 
-.noGame{
-  margin-left: 350px;
+.noGame {
+  margin-left: 35px;
+  max-width: 70%;
 }
-.textNoGame{
-  margin-left: 200px;
+.textNoGame {
+  margin-top: 0;
+  margin-left: 20px;
+  font-size: 40px;
 }
 
 @media (min-width: 1200px) and (max-width: 1300px) {
-  .container{
+  .container {
     width: 1150px;
     margin-left: 35px;
   }
 }
 
-
 @media (min-width: 1100px) and (max-width: 1200px) {
-  .container{
+  .container {
     width: 1150px;
     margin-left: 10px;
   }
 }
 
 @media (min-width: 910px) and (max-width: 1050px) {
-  .container{
+  .container {
     width: 950px;
     margin-left: 15px;
   }
 }
 
-
 @media (min-width: 700px) and (max-width: 900px) {
-  .container{
+  .container {
     width: 750px;
     margin-left: 60px;
   }
 }
 
 @media (min-width: 500px) and (max-width: 700px) {
-  .container{
+  .container {
     width: 650px;
-    margin-left: 100px
+    margin-left: 100px;
   }
 }
 
 @media (min-width: 300px) and (max-width: 500px) {
-  .container{
+  .container {
     width: 300px;
     margin-left: 270px;
   }
 }
 
 @media (min-width: 200px) and (max-width: 300px) {
-  .container{
+  .container {
     width: 250px;
     margin-left: 300px;
   }
 }
 
-
 @media (max-width: 100px) {
-  .container{
+  .container {
     width: 150px;
     margin-left: 10px;
   }
 }
-
 
 @media (max-width: 910px) {
   .cardsContainer {
@@ -120,12 +119,9 @@
   }
 }
 
-
 @media (max-width: 710px) {
   .cardsContainer {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
-
