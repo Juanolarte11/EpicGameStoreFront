@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
 import axios from 'axios';
 import styles from './Login.module.css';
 import ButtonGoogleLogin from './googleSingin/ButtonGoogleLogin'
 import "./Modal.css";
 import { getDataUser } from '../../../../actions';
+import { setModalLogin } from "../../../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import ModalRegister from '../Registro/ModalRegister';
 
-function ModalLogin() {
-  const [isOpen, setIsOpen] = useState(false);
+const ModalLogin = () => {
+
+  const isModalLogin = useSelector((state) => state.modalLogin);
+  const dispatch = useDispatch()
+
+  const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
+  const handleOpenLogin = () => {
+    dispatch(setModalLogin(true,false))
   };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
+  const handleCloseLogin = () => {
+    dispatch(setModalLogin(false,false))
   };
 
   const handleSubmit = async (event) => {
@@ -26,20 +31,25 @@ function ModalLogin() {
       email: email,
       password: password
     }
+    console.log(user);
     try {
       const response = await axios.post('/users/login', user);
+      console.log(response.data);
       const Token = response.data.token
-      console.log("response error");
+
       const dataUser = {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
-        cartID: response.data.user.Carrito.id
+        cartID: response.data.user.Carritos[0].id,
+        role: response.data.user?.role,
+        image: response.data.user?.userImage
       }
+      console.log(dataUser);
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
       localStorage.setItem('Token', JSON.stringify(Token));
-      console.log("response error");
-      handleCloseModal();
+      handleCloseLogin();
+      window.location.reload();
     } catch (error) {
       alert("error")
       console.log(error);
@@ -49,11 +59,12 @@ function ModalLogin() {
   return (
     <div>
       <div>
-        <button onClick={handleOpenModal} className={styles.navButton}>Login</button>
-        {isOpen && (
+        <button onClick={handleOpenLogin} className={styles.navButton}>Login</button>
+        {isModalLogin && (
           <div className="modal-overlay-login">
             <div className="modal-content-login">
-              <button onClick={handleCloseModal} className={styles.navButton}>Cerrar</button>
+            <div className={styles.loginForm}>
+              <button onClick={handleCloseLogin} className={styles.navButton}>Cerrar</button>
               <h2 className={styles.loginFormH2}>Iniciar sesión</h2>
               <form onSubmit={handleSubmit} className={styles.loginFormForm}>
                 <div className={styles.loginForm}>
@@ -86,7 +97,15 @@ function ModalLogin() {
                 </div>
                 <button type="submit" className={styles.buttonRegister}>Iniciar sesión</button>
               </form>
-              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseModal={handleCloseModal}/>
+              <div>
+              <ButtonGoogleLogin className={styles.buttonGoogle} handleCloseLogin={handleCloseLogin}/>
+              </div>
+              <hr/>
+              <div className={styles.goLogin}>
+                  Are you not registered? please                  
+                  <ModalRegister/>                                
+                </div>
+              </div>
             </div>
           </div>
         )}

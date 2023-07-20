@@ -1,9 +1,9 @@
 import "./Modal.css";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./Login.module.css";
+import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
+<<<<<<< HEAD
 import { sendEmail } from "../../../../actions";
 import { useDispatch } from "react-redux";
 
@@ -14,17 +14,33 @@ function ModalRegister() {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+=======
+import ModalLogin from "../Login/ModalLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { setModalRegister } from "../../../../actions";
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
+const ModalRegister = () => {
+  ///////////////////
+  const isModalRegister = useSelector((state) => state.modalRegister);
+  //////////////////
+  const dispatch = useDispatch()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+>>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
+
+  const handleOpenRegister = () => {
+    dispatch(setModalRegister(true,false))
   };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
+  const handleCloseRegister = () => {
+    dispatch(setModalRegister(false,false))
+    
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const newUserPost = {
       userName: name,
       userPassword: password,
@@ -36,9 +52,13 @@ function ModalRegister() {
         newUserPost
       );
       const { newCart, newUser } = response.data;
+<<<<<<< HEAD
       const dataEmail = { email: newUserPost.userEmail };
         dispatch(sendEmail(dataEmail));
       handleCloseModal();
+=======
+      handleCloseRegister();
+>>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
     } catch (error) {
       console.log(error);
     }
@@ -47,25 +67,25 @@ function ModalRegister() {
   return (
     <div>
       <div>
-        <button onClick={handleOpenModal} className={styles.navButton}>
-          Registrar
+        <button onClick={handleOpenRegister} className={styles.navButton}>
+          Register
         </button>
-        {isOpen && (
-           <div className="modal-overlay-register">
-           <div className="modal-content-register">
-
-              <button onClick={handleCloseModal} className={styles.navButton}>
-                Cerrar
+        {isModalRegister && (
+          <div className="modal-overlay-register">
+            <div className="modal-content-register">
+              <button onClick={handleCloseRegister} className={styles.navButton}>
+                Close
               </button>
               <div className={styles.RegistrationForm}>
-                <h2 className={styles.loginFormH2}>Registro</h2>
+                <h2 className={styles.loginFormH2}>REGISTER YOUR ACCOUNT</h2>
                 <form onSubmit={handleSubmit}>
                   <div className={styles.formGroup}>
                     <div>
-                      <label htmlFor="name">Nombre:</label>
+                      <label htmlFor="name">Name:</label>
                     </div>
                     <div>
                       <input
+                        placeholder="Name..."
                         type="text"
                         id="name"
                         value={name}
@@ -80,35 +100,47 @@ function ModalRegister() {
                     </div>
                     <div>
                       <input
+                        placeholder="Email..."
                         type="email"
                         id="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+                        pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/"
                         required
                       />
                     </div>
                   </div>
                   <div className={styles.formGroup}>
                     <div>
-                      <label htmlFor="password">ContraseÃ±a:</label>
+                      <label htmlFor="password">Password:</label>
                     </div>
                     <div>
                       <input
+                        placeholder="Password..."
                         type="password"
                         id="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        minLength="8"
+                        pattern="(?=.*\d)(?=.*[A-Z])\w+"
+                        title="Please enter a password with at least 8 characters, one uppercase letter, and one number"
                         required
                       />
                     </div>
                   </div>
-                  <button className={styles.buttonRegister}>Registrarse</button>
+                  <button className={styles.buttonRegister}>Register</button>
                 </form>
                 <div>
-                   <ButtonGoogleRegister
-                  className={styles.buttonGoogle} handleCloseModal={handleCloseModal}
-                ></ButtonGoogleRegister>    
-           </div>         
+                  <ButtonGoogleRegister
+                    className={styles.buttonGoogle}
+                    handleCloseRegister={handleCloseRegister}
+                  ></ButtonGoogleRegister>
+                </div>
+                <hr />
+                <div className={styles.goLogin}>
+                  Are you registered? please                  
+                  <ModalLogin/>                                
+                </div>
               </div>
             </div>
           </div>

@@ -1,9 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import styles from "./Card.module.css";
 
+
 export default function Card({ game, handleClickCart, clickFavorite, buttonFavorites }) {
+
+  const history = useHistory();
   const { name, price, rating, image, Genres } = game;
   const divisa = "USD";
   const decuent = "-30%";
@@ -15,6 +18,10 @@ export default function Card({ game, handleClickCart, clickFavorite, buttonFavor
       return <FaStar key={index} className={styles.starEmpty} />;
     }
   });
+
+  const handleCarGame =  () => {
+    history.push(`/home/${game.id}`)
+  }
   
   function renderGenreTags(genres) {
     return genres?.map((genre, index) => (
@@ -32,7 +39,7 @@ export default function Card({ game, handleClickCart, clickFavorite, buttonFavor
         </div>
         <div className={styles.overlay}>
           <div className={styles.overlayContent}              >
-            <Link to={`/home/${game.id}`}>
+            <Link className={styles.linkName} to={`/home/${game.id}`}>
             <h3 className={styles.gameName}>{name}</h3>
             </Link>
             <div className={styles.rating}>{stars}</div>

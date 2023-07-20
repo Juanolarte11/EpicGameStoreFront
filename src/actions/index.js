@@ -50,6 +50,12 @@ export function getGenres(){
     };
 };
 
+export function clear() {
+    return async (distpach) => {
+      distpach({ type: "CLEAR", payload: [] });
+    };
+  }
+
 export function getPlatforms(){
     return async function(dispatch){
         const json = await axios.get(`/platforms`);
@@ -66,6 +72,20 @@ export function getDetail(payload){
             const json = await axios.get(`/videogames/${payload}`)
             return dispatch({
                 type: "GET_DETAIL",
+                payload: json.data
+            });
+        } catch (error) {
+            console.log(error);
+        }   
+    };
+};
+
+export function getCommentVideoGame(payload){
+    return async function(dispatch){
+        try {
+            const json = await axios.get(`/reviews/${payload}`)
+            return dispatch({
+                type: "GET_COMMENT_DETAIL",
                 payload: json.data
             });
         } catch (error) {
@@ -123,37 +143,18 @@ export function getDataUser(payload){
     }
 }
 
-export function sendEmail(payload) {
-    return async function (dispatch) {
-      try {
-        let json = await axios.post(
-          `http://localhost:3001/send-email/registersuccess`,
-          payload
-        );
-        dispatch({
-          type: SEND_EMAIL,
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-  };
-  
-  export function sendMailPaymentSuccess(Email) {
-    return async function (dispatch) {
-      try {
-        let json = await axios.post(
-          `http://localhost:3001/send-email/paymentsuccess`,
-          Email
-        );
-        
-        dispatch({
-          type: SEND_EMAIL,
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-  }
+export function setModalLogin(payload1,payload2){
+    return{
+        type:"GET_MODAL_LOGIN",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+export function setModalRegister(payload1,payload2){
+    return{
+        type:"GET_MODAL_REGISTER",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+

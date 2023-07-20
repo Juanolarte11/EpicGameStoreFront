@@ -1,0 +1,38 @@
+.container{
+  margin: 0px;
+  margin-left: 45px;
+}
+.image {
+  height: 200px;
+  width: 450px;
+}
+.body {
+  border: solid black;
+  margin-top: 5px;
+  overflow: auto;
+  height: 500px;
+  width: 600px;
+  border-radius: 8px;
+}
+
+.boton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgb(53, 181, 42);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.url {
+  text-decoration: none;
+}
+.item{
+  color:#9db1c5;
+  background-color: #1616166c;
+  padding: 5px;
+  margin: 5px;
+}

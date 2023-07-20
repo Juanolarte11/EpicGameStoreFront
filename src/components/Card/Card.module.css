@@ -8,7 +8,17 @@
   margin: 1px;
   scroll-snap-align: start;
   border-radius: 10px;
+
 }
+
+.carGame:hover{
+    box-shadow: 0 0 10px 5px #2c3e50;;
+    transition: all 0.3s ease-out;
+    transform: scale(1.125);  
+    z-index: 9999;
+
+}
+
 
 .imageContainer {
   display: flex;
@@ -39,11 +49,11 @@
   background-color: rgba(0, 0, 0, 0.8);
   opacity: 0;
   transition: opacity 0.3s ease;
-  height: 95%;
+  height: 100%;
 }
 
 .carGame:hover .overlay {
-  opacity: 1;
+  opacity: 1
 }
 
 .overlayContent {
@@ -52,9 +62,15 @@
   padding: 3px;
 }
 
+.linkName{
+  text-decoration: none;
+}
+
 .gameName {
   font-size: 18px;
   margin-left: 20px;
+  cursor:pointer;
+  color: #ffffff;
 }
 
 .starFilled {
