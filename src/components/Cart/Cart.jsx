@@ -31,11 +31,9 @@ const Cart = () => {
       try {
         console.log(dataUser)
         const cartID = dataUser.cartID;
-        console.log(cartID)
         const response = await axios.get(
           `http://localhost:3001/cart/${cartID}`
         );
-        console.log(response)
         setCart(response.data[0]?.Videogames);
         setSize(response.data[0]?.Videogames.length);
       } catch (error) {
@@ -146,7 +144,7 @@ const Cart = () => {
           </div>
           <div className={style.textTotal}>
             <span className={style.totalA}>
-              Total: {(((price * 100) / 70).toFixed(2))} USD
+              Total: {((price * 100) / 70).toFixed(2)} USD
             </span>
             <br />
             <span className={style.totalDesc}>

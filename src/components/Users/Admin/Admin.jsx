@@ -9,7 +9,6 @@ import ListVideogames from "./ListVideogames/ListVideogames";
 import { getVideogames } from "../../../actions";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-
 function Admin() {
     const dispatch = useDispatch();
     const token = JSON.parse(localStorage.getItem("Token"));
@@ -23,6 +22,7 @@ function Admin() {
     const history = useHistory();
     const [selectedRole, setSelectedRole] = useState("");
     const [userStats, setUserStats] = useState({})
+    const [statsVideogames, setUserStatsVideogames] = useState({})
 
     const data = [
         {
@@ -39,7 +39,44 @@ function Admin() {
         }
     ];
 
-    const handleGetStats = () => {
+    const dataVideogames = [
+        {
+            name: "Videogames Activos",
+            cantidad: statsVideogames.activeVideogames,
+        },
+        {
+            name: "Videogames Inactivos",
+            cantidad: statsVideogames.inactiveVideogames,
+        },
+        {
+            name: "Videogames pending",
+            cantidad: statsVideogames.pendingVideogames,
+        },
+        {
+            name: "Videogames total",
+            cantidad: statsVideogames.totalVideogames,
+        }
+    ];
+
+
+
+    const handleGetStatsVideogames = () => {
+        try {
+            axios.get("http://localhost:3001/admin/videogameStats", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    setUserStatsVideogames(response.data)
+                    console.log(response.data);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleGetStatsUsers = () => {
         try {
             axios.get("http://localhost:3001/admin/userStats", {
                 headers: {
@@ -64,7 +101,7 @@ function Admin() {
         } else {
             setListUsers(listaUserFil);
         }
-        handleGetStats()
+        handleGetStatsUsers()
     }, [acti, data]);
 
     const handleBamUser = async (id, isActive) => {
@@ -78,7 +115,8 @@ function Admin() {
                 },
             })
                 .then((response) => {
-                    getDataUsers()
+                    getDataUsers();
+                    handleGetStatsUsers();
                 });
         } catch (error) {
             console.log(error);
@@ -97,6 +135,7 @@ function Admin() {
             })
                 .then((response) => {
                     getDataUsers()
+                    handleGetStatsUsers()
                 });
         } catch (error) {
             console.log(error);
@@ -135,7 +174,8 @@ function Admin() {
     useEffect(() => {
         const fetchData = async () => {
             await getDataUsers();
-            await handleGetStats();
+            handleGetStatsVideogames();
+            await handleGetStatsUsers();
             await getListVideogame();
             if (listaVideogames.length === 0) {
                 dispatch(getVideogames());
@@ -214,7 +254,6 @@ function Admin() {
                         {/* <-----------------------------------------------------------------------------------usuarios------------------------------------------------->                         */}
                         <div className={style.containerUsers}>
                             <div className={style.listUsers}>
-                                
                                 <div className={style.filtreusers} style={{ marginBottom: "10px" }}>
                                     <button className={style.button} onClick={filterListUsersAct}>
                                         usuariosAct
@@ -224,7 +263,7 @@ function Admin() {
                                     </button>
                                     <button
                                         className={style.button}
-                                        onClick={() => setActivos("All")}
+                                        onClick={filterListUsersAll}
                                     >
                                         todos
                                     </button>
@@ -251,9 +290,9 @@ function Admin() {
                             </div>
                             <div className={style.statisticsContainer}>
                                 <h2>Estadísticas</h2>
-                                <p>Total de Usuarios: {userStats.activeUsers}</p>
-                                <p>Total de Vendedores: {userStats.inactiveUsers} </p>
-                                <p>Total de Clientes: {userStats.totalUsers}</p>
+                                <p>Total Active Users: {userStats.activeUsers}</p>
+                                <p>Total Inactive Users: {userStats.inactiveUsers} </p>
+                                <p>Total Users: {userStats.totalUsers}</p>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={data}>
@@ -282,6 +321,23 @@ function Admin() {
                                 token={token}
                                 getListVideogame={getListVideogame}
                             />
+                            <div className={style.statisticsContainer}>
+                                <h2>Estadísticas</h2>
+                                <p>Total Active Videogame: {userStats.activeUsers}</p>
+                                <p>Total Inactive Videogame: {statsVideogames.inactiveVideogames} </p>
+                                <p>Total Pensing Videogame: { statsVideogames.pendingVideogames} </p>
+                                <p>Total Videogame: {statsVideogames.totalVideogames}</p>
+                                {/* Gráfico con Recharts */}
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={dataVideogames}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="cantidad" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
                         </div>
                         <div className={style.buttonContainer}>
                             <button className={style.button} onClick={btnClick}>
