@@ -26,6 +26,9 @@ export const Pay = () => {
 
                 // localStorage.setItem("userData", JSON.stringify(newDataUser));
                 setPayStatus(true);
+            }
+            else if(status === "null"){
+                setPayStatus(null);
             } else {
                 setPayStatus(false);
             }
@@ -96,9 +99,13 @@ export const Pay = () => {
                 <div>
                     Pago rechazado
                 </div>
-            ) : (
+            ) : payStatus === null ? (
                 <div>
                     Procesando el pago...
+                </div>
+            ) : (
+                <div>
+
                 </div>
             )}
             <button onClick={payAprove}>pagado</button>
