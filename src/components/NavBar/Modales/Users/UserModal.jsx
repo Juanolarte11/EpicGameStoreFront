@@ -42,6 +42,7 @@ function ModalUser({ image }) {
     localStorage.setItem("userData", JSON.stringify({}));
     localStorage.setItem("Token", JSON.stringify({}));
     history.push("/home");
+    window.location.reload();
   };
   return (
     <div>
