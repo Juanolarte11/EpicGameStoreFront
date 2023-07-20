@@ -17,19 +17,21 @@ function Listado({datos,lista}) {
     }
     console.log(datos);
     return (
-        <div className={style.body}>
+        <div className={style.container}>
+            <Link to={url} className={style.url}>
+                <p className={style.boton}>{lista}</p>
+            </Link>
+            <div className={style.body}>
             {datos.length && newDatos.map((juego) => {
                 return (
                     <div className={style.item}>
-                        <h4 clasName={style.h4List}>{juego.title || juego.name}</h4>
+                        <h4>{juego.title || juego.name}</h4>
                         <img src={juego.image} alt={juego.title} key={juego.title} className={style.image}/>
                         <h4>{juego.price || juego.unit_price}</h4>
                     </div>
                 )
             })}
-            <Link to={url} className={style.url}>
-                <p className={style.boton}>{lista}</p>
-            </Link>
+        </div>
         </div>
     )
 }
