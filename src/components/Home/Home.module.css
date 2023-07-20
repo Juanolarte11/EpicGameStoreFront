@@ -141,3 +141,18 @@
   z-index: 10000;
   animation: slideIn 2s ease forwards;
 }
+
+.alert2{
+  position: fixed;
+  top: 50%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  background-color: #cf0a0a;
+  border: 1px solid #010101;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  z-index: 10000;
+  animation: slideIn 2s ease forwards;
+}

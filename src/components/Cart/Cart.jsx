@@ -29,6 +29,7 @@ const Cart = () => {
   const handleDataCart = async () => {
     if (cart?.length === 0) {
       try {
+        console.log(dataUser)
         const cartID = dataUser.cartID;
         const response = await axios.get(
           `http://localhost:3001/cart/${cartID}`
