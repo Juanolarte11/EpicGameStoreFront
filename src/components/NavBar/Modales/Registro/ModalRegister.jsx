@@ -4,12 +4,16 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
+import { sendEmail } from "../../../../actions";
+import { useDispatch } from "react-redux";
+
 function ModalRegister() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -32,6 +36,8 @@ function ModalRegister() {
         newUserPost
       );
       const { newCart, newUser } = response.data;
+      const dataEmail = { email: newUserPost.userEmail };
+        dispatch(sendEmail(dataEmail));
       handleCloseModal();
     } catch (error) {
       console.log(error);

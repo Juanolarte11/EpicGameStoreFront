@@ -1,4 +1,5 @@
 import { filterByOrigin } from "./filterByOrigin.js";
+import { SEND_EMAIL } from "../actions/index.js";
 
 const initialState = {
   cartUser: [],
@@ -113,7 +114,13 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         dataUser: action.payload
-      }
+      };
+
+      case SEND_EMAIL:
+        return {
+          ...state,
+          emails: action.payload,
+        };
   
     default:
       return state;

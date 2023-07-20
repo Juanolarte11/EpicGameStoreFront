@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const SEND_EMAIL = "SEND_EMAIL";
+
 export function getVideogames (){
     return async function(dispatch){
         const json = await axios.get("/videogames"); 
@@ -120,3 +122,38 @@ export function getDataUser(payload){
         payload,
     }
 }
+
+export function sendEmail(payload) {
+    return async function (dispatch) {
+      try {
+        let json = await axios.post(
+          `http://localhost:3001/send-email/registersuccess`,
+          payload
+        );
+        dispatch({
+          type: SEND_EMAIL,
+          payload: json.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+  
+  export function sendMailPaymentSuccess(Email) {
+    return async function (dispatch) {
+      try {
+        let json = await axios.post(
+          `http://localhost:3001/send-email/paymentsuccess`,
+          Email
+        );
+        
+        dispatch({
+          type: SEND_EMAIL,
+          payload: json.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  }

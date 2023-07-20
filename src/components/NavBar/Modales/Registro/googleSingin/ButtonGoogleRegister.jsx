@@ -3,6 +3,7 @@ import { signInWithPopup } from 'firebase/auth'
 import style from '../Login.module.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { sendEmail } from '../../../../../actions'
 
 const ButtonGoogleRegister = ({ handleCloseModal }) => {
 
