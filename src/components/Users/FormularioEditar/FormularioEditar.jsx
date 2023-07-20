@@ -95,7 +95,6 @@ function FormularioEditar({ user }) {
             })
                 .then((response) => {
                     localStorage.setItem("userData", JSON.stringify({}));
-                    localStorage.setItem('Token', JSON.stringify({}));
                     alert("Datos actualizados con exito, inicia Sesion")
                     history.push("/home");
                 })   
