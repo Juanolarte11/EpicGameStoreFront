@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Modal.css";
 import { useState } from 'react';
-import styles from "./Users.module.css";
+import styles from "./UserModal.module.css";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 

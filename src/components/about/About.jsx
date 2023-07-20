@@ -18,6 +18,7 @@ import fotoGilbert from "./fotoGilbert.jpeg";
 import colombia from "./colombia.png";
 import fotoJeffrey from "./fotoJeffrey.jpeg";
 import fotoSeba from "./fotoSeba.jpeg";
+import NavBar from "../NavBar/NavBar";
 
 function About() {
   const history = useHistory();
@@ -27,12 +28,8 @@ function About() {
   };
   return (
     <div className={style.container}>
+      <NavBar></NavBar>
       <div className={style.info}>
-        <div>
-          <button className={style.buttonHome} onClick={btnClick}>
-            Home
-          </button>
-        </div>
         <div className={style.upInfo}>
           <h1>
             Hello, we are the developers of the EpicGamesStore. It is a pleasure

@@ -70,9 +70,7 @@ const Cart = () => {
       <div>
         <NavBar size={size} />
       </div>
-      <div className={style.total}>
-
-       
+      <div className={style.total}>     
       <div className={style.listCart}>
       {cart?.length > 0 ? (
         cart.map((item) => (
@@ -128,7 +126,7 @@ const Cart = () => {
         <br/>
         <span className={style.totalDesc}>desc {((price*100/70).toFixed(2)- price?.toFixed(2)).toFixed(2)} USD</span>
         <br/>
-        <span>Total with desc: {price?.toFixed(2)} USD</span>
+        <h2>Total with desc: {price?.toFixed(2)} USD</h2>
         {price > 0 && (
         <div className={style.pay}>
           <MercadoPago arrayGames={cart} />
