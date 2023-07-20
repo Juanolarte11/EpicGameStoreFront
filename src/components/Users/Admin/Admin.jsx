@@ -78,7 +78,8 @@ function Admin() {
                 },
             })
                 .then((response) => {
-                    getDataUsers()
+                    getDataUsers();
+                    // handleGetStats();
                 });
         } catch (error) {
             console.log(error);
@@ -224,7 +225,7 @@ function Admin() {
                                     </button>
                                     <button
                                         className={style.button}
-                                        onClick={() => setActivos("All")}
+                                        onClick={filterListUsersAll}
                                     >
                                         todos
                                     </button>
@@ -251,9 +252,9 @@ function Admin() {
                             </div>
                             <div className={style.statisticsContainer}>
                                 <h2>Estadísticas</h2>
-                                <p>Total de Usuarios: {userStats.activeUsers}</p>
-                                <p>Total de Vendedores: {userStats.inactiveUsers} </p>
-                                <p>Total de Clientes: {userStats.totalUsers}</p>
+                                <p>Total Active Users: {userStats.activeUsers}</p>
+                                <p>Total Inactive Users: {userStats.inactiveUsers} </p>
+                                <p>Total Users: {userStats.totalUsers}</p>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={data}>
