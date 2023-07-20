@@ -11,20 +11,13 @@
 
 .head {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .head h1 {
   color: #ffffff;
   font-size: 24px;
   margin-bottom: 10px;
-}
-
-.head h2 {
-  color: #666666;
-  font-size: 18px;
-  margin-bottom: 20px;
 }
 
 .actions {
@@ -45,20 +38,17 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  justify-content: space-between;
-  margin-left: 130px;
-  margin-right: 130px;
 }
 
 .compra h3 {
-  color: #ffffff;
+  color: #1d354e;
   font-size: 16px;
   margin-left: 10px;
 }
 
 .imageList {
-  width: 200px;
-  height: 300px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 4px;
 }

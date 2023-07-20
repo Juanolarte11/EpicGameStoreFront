@@ -84,7 +84,7 @@ function User() {
                     className={styles.imageList}
                   />
                   <h3>{ele.title}</h3>
-                  <button className={styles.ver}>Ver Juego</button>
+                  <button className={styles.ver}>Game...</button>
                   <h3>{ele.precio}</h3>
                 </div>
               );

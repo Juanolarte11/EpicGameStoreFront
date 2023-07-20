@@ -4,6 +4,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getCartUser } from "../../actions";
+import styles from "./Favorites.module.css";
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ export default function Favorites() {
   const [size, setSize] = useState([]);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const token = JSON.parse(localStorage.getItem("Token"));
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   const obternerFavoritos = async () => {
     if (dataUser) {
       try {
@@ -60,7 +65,10 @@ export default function Favorites() {
         "http://localhost:3001/favorites/delete",
         game
       );
-      alert("delete favorites");
+
+      setAlertMessage("Game delete to favorites...");
+      setShowAlert(true);
+
       await obternerFavoritos();
     } catch (error) {
       console.log(error);
@@ -82,11 +90,21 @@ export default function Favorites() {
       } catch (error) {}
     }
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [showAlert]);
+
   return (
     <div className="">
       <div>
         <NavBar size={size} />
       </div>
+      {showAlert && <div className={styles.alert}>{alertMessage}</div>}
       <div>
         <ConteinerCars
           allVideogames={favorites}

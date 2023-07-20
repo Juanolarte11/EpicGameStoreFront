@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames, getCartUser, getGenres } from "../../actions/index.js";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
@@ -16,10 +15,14 @@ export default function Home() {
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const Token = JSON.parse(localStorage.getItem("Token"));
   const [sizeCart, setSizeCart] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
   dispatch(getGenres());
+
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
-      console.log("logeate");
+      console.log("login please...");
     } else {
       try {
         const data = {
@@ -29,8 +32,8 @@ export default function Home() {
         const response = await axios.post(`http://localhost:3001/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response.data[0].Videogames.length);
-        alert("Agregado al carrito");
-        console.log(response);
+        setAlertMessage("Game added to Cart...");
+        setShowAlert(true);
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +47,8 @@ export default function Home() {
         gameId: gameId,
       };
       const respuesta = await axios.post("/favorites", game);
-      alert("game add favorites");
+      setAlertMessage("Game added to favorites...");
+      setShowAlert(true);
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +68,15 @@ export default function Home() {
     }
     dispatch(getVideogames());
   }, [dispatch]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [showAlert]);
+
   return (
     <div>
       {allVideogames.length === 0 ? (
@@ -73,6 +86,7 @@ export default function Home() {
           <div>
             <NavBar size={sizeCart} />
           </div>
+          {showAlert && <div className={styles.alert}>{alertMessage}</div>}
           <ConteinerCars
             allVideogames={allVideogames}
             handleClickCart={handleClickCart}
