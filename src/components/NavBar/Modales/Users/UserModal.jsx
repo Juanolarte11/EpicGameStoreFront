@@ -53,8 +53,8 @@ function ModalUser({ image }) {
         <div onMouseLeave={handleCloseModal}>
           <div className="modal-overlay">
             <div className={"modal-content"}>
-              <p className={styles.h1}>Name: {dataUser.nombre.toUpperCase()}</p>
-              <p className={styles.h1}>Rol: {dataUser.role.toUpperCase()}</p>
+              <p className={styles.h1}>Name: {dataUser?.nombre?.toUpperCase()}</p>
+              <p className={styles.h1}>Rol: {dataUser?.role?.toUpperCase()}</p>
               {dataUser.role === "cliente" ? (
                 <Link to={"/miPerfil"}>
                   <p className={styles.h1}>{"MI PERFIL"}</p>
