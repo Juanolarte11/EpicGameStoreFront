@@ -156,20 +156,3 @@ export function setModalRegister(payload1,payload2){
     }
 }
 
-export function getUsersAct(payload){
-    return async function(dispatch){
-        try {
-            if (payload === "All") {
-                return
-            }
-            console.log(payload);
-            const response = await axios.get(`http://localhost:3001/admin/users?active=${payload}`)
-            return dispatch({
-                type: "GETUSERSESTATUS",
-                payload: response.data
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
