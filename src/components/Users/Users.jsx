@@ -38,6 +38,7 @@ function User() {
           },
         }
       );
+      console.log(response.data);
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
       setUser(response.data);
       if (response.data.role === "cliente") {
