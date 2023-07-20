@@ -1,4 +1,5 @@
 import { filterByOrigin } from "./filterByOrigin.js";
+import { SEND_EMAIL } from "../actions/index.js";
 
 const initialState = {
   modalLogin: false,
