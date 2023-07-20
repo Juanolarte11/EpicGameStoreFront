@@ -1,18 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./searchBar.module.css";
 
 export default function SearchBar({ handleSearch }) {
   const [name, setName] = useState("");
 
-  async function handleInputChange(e) {
-    const name = e.target.value;
-    setName(name);
-
-    handleSubmit();
-  }
-  const handleSubmit = (e) => {
+  useEffect(() => {
     handleSearch(name);
+  }, [name, handleSearch]);
+
+  const handleInputChange = (e) => {
+    const string = e.target.value;
+    setName(string);
   };
 
   return (
@@ -22,15 +20,9 @@ export default function SearchBar({ handleSearch }) {
           type="text"
           className={`${styles.input} input`}
           placeholder="Search..."
-          onInput={handleInputChange}
+          value={name}
+          onChange={handleInputChange}
         />
-        <button
-          type="submit"
-          className={`${styles.searchButton} searchButton`}
-          onClick={handleSubmit}
-        >
-          <span className={styles.arrow}>&#10132;</span>
-        </button>
       </div>
     </div>
   );

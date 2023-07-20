@@ -3,36 +3,51 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import joystick from "./joystick.jpg";
-import ModalLogin from "../Login/ModalLogin";
-import RegisterLogin from "../Registro/RegisterLogin";
-import noUser from "../NavBar/noUser.png";
+import UserModal from "./Modales/Users/UserModal";
+import ModalLogin from "./Modales/Login/ModalLogin";
+import ModalRegister from "./Modales/Registro/ModalRegister";
+import noUser from "../NavBar/noUser2.png";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 export default function NavBar({ size }) {
+  const [country, setCountry] = useState("");
   const dataUser = JSON.parse(localStorage.getItem("userData"));
 
-  const iconUser = dataUser ? dataUser?.nombre?.charAt(0).toUpperCase() : "";
+  const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
-  const btnClick = () => {
-    localStorage.setItem("userData", JSON.stringify({}));
-    window.location.reload();
+  useEffect(() => {
+    const storedCountry = localStorage.getItem("country");
+    if (storedCountry) {
+      setCountry(storedCountry);
+    } else {
+      fetchCountryFromAPI();
+    }
+  }, []);
+
+  const fetchCountryFromAPI = () => {
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        const country = response.data.country_name;
+        setCountry(country);
+        localStorage.setItem("country", country);
+      })
+      .catch((error) => {
+        console.error("IP geolocation error:", error);
+        alert(error.message);
+      });
   };
 
+  
   return (
     <nav className={style.nav}>
-      {dataUser.nombre ? (
-        <Link to="/users" className={style.userLink}>
-          <span className={style.userIcon}>{iconUser}</span>
-        </Link>
-      ) : (
-        <img className={style.userImg} src={noUser} alt="Imagen de perfil" />
-      )}
-
-      <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3>
-
       <div className={style.navLinks}>
+        <div className={style.title}>
+          <Link to="/home">EPICGAMESTORE</Link>
+        </div>
         <div className={style.a}>
-          <Link to="/home">HOME</Link>
           <Link to="/about">ABOUT</Link>
           <Link to="/favorites">FAVORITES</Link>
         </div>
@@ -45,15 +60,26 @@ export default function NavBar({ size }) {
         </IconButton>
       </div>
 
-      <div>
+      <div className={style.logout}>
         <div className={style.navButtons}>
           {!dataUser?.userID && <ModalLogin />}
 
-          {!dataUser?.userID && <RegisterLogin />}
-          {dataUser?.userID && (
-            <button onClick={btnClick} className={style.navButton}>
-              Logout
-            </button>
+          {!dataUser?.userID && (
+            <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
+          )}
+          <div className={style.nameContainer}>
+            {/* <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3> */}
+          </div>
+          {dataUser?.nombre ? (
+            <UserModal image={dataUser.image}></UserModal>
+          ) : (
+            <div className={style.contImage}>
+              <img
+                className={style.userImg}
+                src={noUser}
+                alt="Imagen de perfil"
+              />
+            </div>
           )}
         </div>
       </div>

@@ -28,7 +28,7 @@
   margin: auto;
   margin-bottom: 10px;
   padding: 1px 10px;
-  background-color: blue;
+  background-color: rgb(112, 114, 114);
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -36,7 +36,7 @@
 }
 .searchButton:hover{
   color:var(--fondo-color);
-  background-color: var(--segundo-color);
+  background-color: var(--fondo-color);
   border-radius: 5px;
 }
 

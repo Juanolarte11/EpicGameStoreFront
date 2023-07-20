@@ -37,14 +37,14 @@
 }
 
 .container {
-  background-color: var(--gunmetal);
+  background-color: #d5d6d5;
 }
 
 .searchBarContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Adjust the height as needed */
+  height: 100vh;
 }
 
 .card-container {
@@ -69,8 +69,6 @@
 }
 
 .filter-container {
-  /* display: grid;
-    grid-template-columns: 1fr auto 1fr; */
   grid-gap: 10px;
   align-items: center;
   margin: 20px;
@@ -115,4 +113,31 @@
   margin-top: 20px;
   padding-bottom: 20px;
   border-bottom: 40px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(800%);
+  }
+  60% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-800%);
+  }
+}
+
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  background-color: #57fb2e;
+  border: 1px solid #010101;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  z-index: 10000;
+  animation: slideIn 2s ease forwards;
 }

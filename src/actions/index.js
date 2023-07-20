@@ -48,6 +48,12 @@ export function getGenres(){
     };
 };
 
+export function clear() {
+    return async (distpach) => {
+      distpach({ type: "CLEAR", payload: [] });
+    };
+  }
+
 export function getPlatforms(){
     return async function(dispatch){
         const json = await axios.get(`/platforms`);
@@ -64,6 +70,20 @@ export function getDetail(payload){
             const json = await axios.get(`/videogames/${payload}`)
             return dispatch({
                 type: "GET_DETAIL",
+                payload: json.data
+            });
+        } catch (error) {
+            console.log(error);
+        }   
+    };
+};
+
+export function getCommentVideoGame(payload){
+    return async function(dispatch){
+        try {
+            const json = await axios.get(`/reviews/${payload}`)
+            return dispatch({
+                type: "GET_COMMENT_DETAIL",
                 payload: json.data
             });
         } catch (error) {
@@ -120,3 +140,19 @@ export function getDataUser(payload){
         payload,
     }
 }
+
+export function setModalLogin(payload1,payload2){
+    return{
+        type:"GET_MODAL_LOGIN",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+export function setModalRegister(payload1,payload2){
+    return{
+        type:"GET_MODAL_REGISTER",
+        payload1: payload1,
+        payload2: payload2 
+    }
+}
+
