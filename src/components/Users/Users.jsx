@@ -54,6 +54,8 @@ function User() {
     getDataUsers();
   }, []);
 
+
+
   return (
     <div className={styles.container}>
       <NavBar />

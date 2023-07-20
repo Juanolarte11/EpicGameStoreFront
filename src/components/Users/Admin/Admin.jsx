@@ -16,6 +16,7 @@ function Admin() {
     const [user, setUser] = useState({});
     const [listGames, setListGames] = useState([])
     const [listUsersAct, setListUsers] = useState([]);
+    const [listUsersFil, setListUsersFil] = useState([])
     const listaUserFil = useSelector((state) => state.usersFiltra);
     const [listaVideogames, setListaVideogames] = useState([]);
     const history = useHistory();
@@ -31,7 +32,6 @@ function Admin() {
             console.log("todos los usuarios");
             getDataUsers();
         } else {
-            dispatch(getUsersAct(acti));
             setListUsers(listaUserFil);
         }
     }, [acti]);
@@ -47,7 +47,7 @@ function Admin() {
                 },
             })
                 .then((response) => {
-                    console.log(response);
+                    getDataUsers()
                 });
         } catch (error) {
             console.log(error);
@@ -65,7 +65,7 @@ function Admin() {
                 },
             })
                 .then((response) => {
-                    console.log(response);
+                    getDataUsers()
                 });
         } catch (error) {
             console.log(error);
@@ -93,6 +93,7 @@ function Admin() {
             },
         })
             .then((response) => {
+                console.log(response.data);
                 setListUsers(response.data);
             })
             .catch((error) => {
@@ -102,7 +103,6 @@ function Admin() {
 
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getUsersAct(true));
             await getDataUsers();
             await getListVideogame();
             if (listaVideogames.length === 0) {
@@ -124,14 +124,19 @@ function Admin() {
         history.push("/home");
     };
 
-    const handleUsuariosAct = () => {
-        setActivos(true);
-        setListUsers(listaUserFil);
+    const filterListUsersAct = () => {
+        const newList = listUsersAct.filter((game) => game.isActive)
+        setListUsersFil(newList)
     };
 
-    const handleUsuariosDes = () => {
-        setActivos(false);
-        setListUsers(listaUserFil);
+    const filterListUsersInac = () => {
+        const newList = listUsersAct.filter((game) => game.isActive === false)
+        setListUsersFil(newList)
+    };
+
+    const filterListUsersAll = () => {
+        const newList = listUsersAct
+        setListUsersFil(newList)
     };
 
     const handleRoleChange = async (e) => {

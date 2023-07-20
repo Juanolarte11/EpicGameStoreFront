@@ -98,3 +98,10 @@
   .listaGames{
     background-color: black;
   }
+  .listUsers{
+    text-align: center;
+  }
+  .statisticsContainer{
+    width: 500px;
+    margin-right: 50px;
+  }
