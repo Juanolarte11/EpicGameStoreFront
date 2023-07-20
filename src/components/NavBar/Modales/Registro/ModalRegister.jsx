@@ -3,31 +3,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-<<<<<<< HEAD
 import { sendEmail } from "../../../../actions";
-import { useDispatch } from "react-redux";
-
-function ModalRegister() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
-  const dispatch = useDispatch();
-=======
-import ModalLogin from "../Login/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
+import ModalLogin from "../Login/ModalLogin";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { setModalRegister } from "../../../../actions";
 
-const ModalRegister = () => {
-  ///////////////////
-  const isModalRegister = useSelector((state) => state.modalRegister);
-  //////////////////
-  const dispatch = useDispatch()
+function ModalRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
->>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
+  const dispatch = useDispatch();
+  const isModalRegister = useSelector(state => state.modalRegister);
 
   const handleOpenRegister = () => {
     dispatch(setModalRegister(true,false))
@@ -52,13 +39,9 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
-<<<<<<< HEAD
       const dataEmail = { email: newUserPost.userEmail };
         dispatch(sendEmail(dataEmail));
-      handleCloseModal();
-=======
       handleCloseRegister();
->>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
     } catch (error) {
       console.log(error);
     }
