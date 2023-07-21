@@ -42,13 +42,15 @@ const ModalLogin = () => {
         userID: response.data.user.id,
         cartID: response.data.user.Carritos[0].id,
         role: response.data.user?.role,
-        image: response.data.user?.userImage
+        image: response.data.user?.userImage,
+        mail: response.data.user?.userEmail
       }
       console.log(dataUser);
       dispatch(getDataUser(dataUser));
       localStorage.setItem('userData', JSON.stringify(dataUser));
       localStorage.setItem('Token', JSON.stringify(Token));
       handleCloseLogin();
+      console.log(dataUser);
       window.location.reload();
     } catch (error) {
       alert("error")

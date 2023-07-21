@@ -1,42 +1,55 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
-import ConteinerCars from "../ContainerCards/ConteinersCard"
+import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import { useDispatch } from 'react-redux';
+import { sendMailPaymentSuccess, getCartUser } from '../../actions';
 
 export const Pay = () => {
     const dataUser = JSON.parse(localStorage.getItem("userData"));
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const status = searchParams.get('status');
-    const [payStatus, setPayStatus] = useState(null);
+    const [paymentStatus, setPaymentStatus] = useState(null);
     const token = JSON.parse(localStorage.getItem("Token"));
-    const [allVideogames, setAllVideogames] = useState([])
-    const pay = async () => {
-        try {
-            if (status === "approved") {
-                // const response = await axios.post(`http://localhost:3001/pay/successfulPurchase/${dataUser.cartID}`); // Corrijo la URL
-                // let newDataUser = {
-                //     nombre: dataUser.nombre,
-                //     userID: dataUser.userID,
-                //     cartID: response.data,
-                //     role: dataUser.role,
-                //     image: dataUser.image
-                // };
+    const [mail, setMail] = useState({});
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-                // localStorage.setItem("userData", JSON.stringify(newDataUser));
-                setPayStatus(true);
-            }
-            else if(status === "null"){
-                setPayStatus(null);
+    useEffect(() => {
+        const paySuccess = async () => {
+            // await getDataUsers();
+            if (status === "approved") {
+                try {
+                    const response = await axios.get(`http://localhost:3001/pay/succesfulPurchase/${dataUser.cartID}`);
+                    console.log(response);
+                    let newDataUser = {
+                        nombre: dataUser.nombre,
+                        userID: dataUser.userID,
+                        cartID: response.data,
+                        role: dataUser.role,
+                        image: dataUser.image
+                    };
+                    localStorage.setItem("userData", JSON.stringify(newDataUser));
+                    let payload = {
+                        email: dataUser.mail
+                    };
+                    console.log(payload.email);
+                    dispatch(sendMailPaymentSuccess(payload));
+                    setPaymentStatus("success");
+                } catch (error) {
+                    console.log(error);
+                    setPaymentStatus("failure");
+                }
+            } else if (status === "null") {
+                setPaymentStatus("pending");
             } else {
-                setPayStatus(false);
+                setPaymentStatus("failure");
             }
-        } catch (error) {
-            console.log("Error en la solicitud:", error);
-            setPayStatus(false);
-        }
-    };
+        };
+        paySuccess();
+    }, [status]);
+
     const getDataUsers = async () => {
         try {
             const response = await axios.get(
@@ -47,68 +60,55 @@ export const Pay = () => {
                     },
                 }
             );
-            setAllVideogames(response.data.Videogames)
-            console.log(response);
+            setMail(response.data.userEmail);
+            console.log(response.data);
         } catch (error) {
             alert(error.message);
             console.log(error.message);
         }
     };
 
-    const payAprove = async () => {
-        let body = {
-            cartId: dataUser.cartID,
-            userId: dataUser.userID
-        }
-        try {
-            if (payStatus) {
-                
-                const response = await axios.post("/pay", body)
-                let newUser = {
-                    cartID : response.data.id,
-                    image: dataUser.image,
-                    nombre: dataUser.nombre,
-                    role: dataUser.role,
-                    userID: dataUser.userID,
-                }
-                localStorage.setItem("userData", JSON.stringify(newUser))
-            }
-        } catch (error) {
+    const clickHome = () => {
+        history.push("/home");
+    };
 
-        }
-    }
-
-    useEffect(() => {
-        pay();
-        getDataUsers();
-    }, [status, payStatus]);
+    const clickReturnCart = () => {
+        history.push("/cart");
+    };
 
     return (
         <div>
             <NavBar />
-            {payStatus === true ? (
+            {paymentStatus === "success" && (
                 <div>
                     <div>
-                        Pago exitoso
+                       ¡¡ TU PAGO SE ACREDITO CON ÉXITO !!
                     </div>
-                    <ConteinerCars
-                        allVideogames={allVideogames}
-                    />
-                </div>
-            ) : payStatus === false ? (
-                <div>
-                    Pago rechazado
-                </div>
-            ) : payStatus === null ? (
-                <div>
-                    Procesando el pago...
-                </div>
-            ) : (
-                <div>
-
+                    <div>
+                        <button onClick={clickHome}>HOME</button>
+                    </div>
                 </div>
             )}
-            <button onClick={payAprove}>pagado</button>
+            {paymentStatus === "failure" && (
+                <div>
+                   ¡¡ LO SENTIMOS EL PAGO NO SE ACREDITO !!
+                   <div>
+                        <button onClick={clickReturnCart}>REINTENTAR</button>
+                    </div>
+                   <div>
+                        <button onClick={clickHome}>HOME</button>
+                    </div>
+                </div>
+            )}
+            {paymentStatus === "pending" && (
+                <div>
+                   ¡¡ LA ACREDITACION DEL PAGO ESTÁ PENDIENTE !!
+                   <span>Te notificaremos cuando se acredite</span>
+                   <div>
+                        <button onClick={clickHome}>HOME</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
