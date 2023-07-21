@@ -79,13 +79,8 @@
 }
 
 .heading {
-<<<<<<< HEAD
-  font-size: 36px;
-  color: var(--primero-color);
-=======
   font-size: 42px;
   color: black;
->>>>>>> f21cac06d68fda8c16b956bce27c6f3ce3b65374
   margin-bottom: 20px;
 }
 
