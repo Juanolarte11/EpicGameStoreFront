@@ -1,12 +1,16 @@
 .container {
-  background-color: #1d354e;
+  background-color: #90c1f3;
 }
 
 .user_box {
   display: flex;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(11, 255, 2, 0.974);
   padding: 20px;
+}
+.sectionTitle {
+  color: white;
+  background-color: blueviolet;
 }
 
 .head {
@@ -16,7 +20,8 @@
 
 .head h1 {
   color: #ffffff;
-  font-size: 24px;
+  background-color: blueviolet;
+  font-size: 30px;
   margin-bottom: 10px;
 }
 

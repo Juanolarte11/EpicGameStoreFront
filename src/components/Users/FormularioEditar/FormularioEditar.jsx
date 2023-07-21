@@ -99,6 +99,7 @@ const updatesUser = () => {
             alert(error.message);
         }
     }
+  };
 
   const updatePass = () => {
     let NewUser = {};
@@ -234,6 +235,6 @@ const updatesUser = () => {
       </div>
     </div>
   );
-}
+
 
 export default FormularioEditar;

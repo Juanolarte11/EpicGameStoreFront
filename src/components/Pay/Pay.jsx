@@ -12,13 +12,12 @@ export const Pay = () => {
     const status = searchParams.get('status');
     const [paymentStatus, setPaymentStatus] = useState(null);
     const token = JSON.parse(localStorage.getItem("Token"));
-    const [mail, setMail] = useState({});
+    const [mail, setMail] = useState(dataUser.mail);
     const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
         const paySuccess = async () => {
-            // await getDataUsers();
             if (status === "approved") {
                 try {
                     const response = await axios.get(`http://localhost:3001/pay/succesfulPurchase/${dataUser.cartID}`);
@@ -28,13 +27,16 @@ export const Pay = () => {
                         userID: dataUser.userID,
                         cartID: response.data,
                         role: dataUser.role,
-                        image: dataUser.image
+                        image: dataUser.image,
+                        mail: dataUser.mail
                     };
+                    setMail(response.data.userEmail)
                     localStorage.setItem("userData", JSON.stringify(newDataUser));
                     let payload = {
-                        email: dataUser.mail
+                        email: mail
                     };
-                    console.log(payload.email);
+                    await getDataUsers();
+                    console.log(payload);
                     dispatch(sendMailPaymentSuccess(payload));
                     setPaymentStatus("success");
                 } catch (error) {
@@ -73,7 +75,7 @@ export const Pay = () => {
     };
 
     const clickReturnCart = () => {
-        history.push("/cart");
+        history.push("/home");
     };
 
     return (

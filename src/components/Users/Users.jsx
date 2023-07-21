@@ -15,35 +15,39 @@ function User() {
   const [showForm, setShowForm] = useState(false);
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem("Token"));
-  
+
   const settShowForm = () => {
     setShowForm(true);
   };
 
-  const listaDeCompras = [
-    {
-      img: "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-      title: "Tomb Raider (2013)",
-      precio: 46.9,
-    },
-  ];
+  // const listaDeCompras = [
+  //   {
+  //     img: "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
+  //     title: "Tomb Raider (2013)",
+  //     precio: 46.9,
+  //   },
+  // ];
 
   const getDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/userDetail/${dataUser.userID}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-    })
+      );
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
       console.log(response);
       setUser(response.data);
+      console.log(response.data);
       if (response.data.role === "cliente") {
         setFavorites(response.data.Videogames);
         setCart(respoCart.data[0].Videogames);
       }
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
       console.log(error.message);
     }
   };
@@ -61,20 +65,20 @@ function User() {
             <div className={styles.contForm}>
               <FormularioEditar settShowForm={settShowForm} user={user} />
             </div>
-            
           </div>
           <div id="modal-root"></div>
-            <div className={styles.list}>
-              <div>
-                <Listado datos={cart} lista={"Carrito"} />
-              </div>
-              <div>
-                <Listado datos={favorites} lista={"Favoritos"} />
-              </div>
+          <div className={styles.list}>
+            <div>
+              <Listado datos={cart} lista={"Carrito"} />
             </div>
+            <div>
+              <Listado datos={favorites} lista={"Favoritos"} />
+            </div>
+          </div>
           <div className={styles.actions}>
             <h1 className={styles.sectionTitle}>Shopping history</h1>
-            {listaDeCompras.map((ele) => {
+
+            {/* {listaDeCompras.map((ele) => {
               return (
                 <div key={ele.title} className={styles.compra}>
                   <img
@@ -87,7 +91,7 @@ function User() {
                   <h3>{ele.precio}</h3>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       )}
