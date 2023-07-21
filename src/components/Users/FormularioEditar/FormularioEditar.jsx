@@ -69,10 +69,16 @@ function FormularioEditar({ user }) {
                 }
             })
                 .then((response) => {
-                    localStorage.setItem("userData", JSON.stringify({}));
+                    const newDataUser = {
+                        nombre: response.data.userName,
+                        userID: response.data.id,
+                        cartID: response.data.Carritos[0].id,
+                        role: response.data.role,
+                        image: response.data.userImage
+                      }
+                    localStorage.setItem("userData", JSON.stringify(newDataUser));
                     localStorage.setItem('Token', JSON.stringify({}));
                     alert("Datos actualizados con exito, inicia Sesion")
-                    history.push("/home");
                 })
         } catch (error) {
             alert(error.message)
