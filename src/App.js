@@ -29,7 +29,7 @@ function App() {
           <Route path="/miPerfil" component={User} />
           <Route path="/admin" component={Admin} />
           <Route path="/pay" component={Pay} />
-          <Route path="/vendor" component={Vendor} />
+          <Route path="/vendor" component={Vendor}  />
         </Switch>
       </div>
     </BrowserRouter>
