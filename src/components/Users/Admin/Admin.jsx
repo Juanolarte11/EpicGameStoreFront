@@ -260,6 +260,11 @@ function Admin() {
         setListGames(newList)
     }
 
+    const filterListVideogamesPending = () => {
+        const newList = listaVideogames.filter((game) => game.status === "pendingApproval")
+        setListGames(newList)
+    }
+
     const filterListVideogamesAll = () => {
         const newList = listaVideogames
         setListGames(newList)
@@ -346,6 +351,9 @@ function Admin() {
                             </button>
                             <button className={style.button} onClick={() => filterListVideogamesInac()}>
                                 VideogamesDes
+                            </button>
+                            <button className={style.button} onClick={() => filterListVideogamesPending()}>
+                                VideogamesPending
                             </button>
                             <button className={style.button} onClick={() => filterListVideogamesAll()}>
                                 All

@@ -11,17 +11,18 @@ const ModalRegister = () => {
   ///////////////////
   const isModalRegister = useSelector((state) => state.modalRegister);
   //////////////////
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleOpenRegister = () => {
-    dispatch(setModalRegister(true, false));
+    dispatch(setModalRegister(true,false))
   };
 
   const handleCloseRegister = () => {
-    dispatch(setModalRegister(false, false));
+    dispatch(setModalRegister(false,false))
+    
   };
 
   const handleSubmit = async (event) => {
@@ -53,10 +54,7 @@ const ModalRegister = () => {
         {isModalRegister && (
           <div className="modal-overlay-register">
             <div className="modal-content-register">
-              <button
-                onClick={handleCloseRegister}
-                className={styles.navButton}
-              >
+              <button onClick={handleCloseRegister} className={styles.navButton}>
                 Close
               </button>
               <div className={styles.RegistrationForm}>
@@ -121,8 +119,8 @@ const ModalRegister = () => {
                 </div>
                 <hr />
                 <div className={styles.goLogin}>
-                  Are you registered? please
-                  <ModalLogin />
+                  Are you registered? please                  
+                  <ModalLogin/>                                
                 </div>
               </div>
             </div>
@@ -131,6 +129,6 @@ const ModalRegister = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ModalRegister;

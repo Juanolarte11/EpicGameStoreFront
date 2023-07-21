@@ -113,28 +113,27 @@
 
 @keyframes slideIn {
   0% {
-    transform: translateY(1500%);
+    transform: translateY(800%);
   }
   60% {
     transform: translateY(0%);
   }
   100% {
-    transform: translateY(-1500%);
+    transform: translateY(-800%);
   }
 }
 
 .alert {
   position: fixed;
   top: 50%;
-  left: 47%;
+  left: 42%;
   transform: translate(-50%, -50%);
   background-color: #57fb2e;
   border: 1px solid #010101;
   border-radius: 4px;
   padding: 10px;
-  border: 2px solid black;
   font-size: 24px;
   text-align: center;
   z-index: 10000;
-  animation: slideIn 2.5s ease forwards;
+  animation: slideIn 2s ease forwards;
 }

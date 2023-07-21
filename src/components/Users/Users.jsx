@@ -40,6 +40,7 @@ function User() {
       );
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
       setUser(response.data);
+      console.log(response.data);
       if (response.data.role === "cliente") {
         setFavorites(response.data.Videogames);
         setCart(respoCart.data[0].Videogames);
@@ -75,6 +76,7 @@ function User() {
           </div>
           <div className={styles.actions}>
             <h1 className={styles.sectionTitle}>Shopping history</h1>
+
             {listaDeCompras.map((ele) => {
               return (
                 <div key={ele.title} className={styles.compra}>

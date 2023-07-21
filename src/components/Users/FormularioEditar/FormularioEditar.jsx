@@ -6,7 +6,6 @@ import axios from "axios";
 import TermsAndConditions from "./TermsAndConditions";
 
 function FormularioEditar({ user }) {
-  const country = localStorage.getItem("country");
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
@@ -14,6 +13,7 @@ function FormularioEditar({ user }) {
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const country = localStorage.getItem("country");
 
   const [newUsername, setNewUsername] = useState("");
   const [image, setImage] = useState(dataUser.image);
@@ -53,6 +53,8 @@ function FormularioEditar({ user }) {
     }
   };
 
+  const btnClick = () => {};
+
   const updatesUser = () => {
     let NewUser = {};
     if (newUsername.length !== 0) {
@@ -85,7 +87,7 @@ function FormularioEditar({ user }) {
     let NewUser = { role: "vendedor" };
     console.log(NewUser);
     alert(
-      "Tu solicitud fue enviada, pronto resivira respuesta de un administrador del sitio"
+      "Your request has been sent, you will soon receive a response from a site administrator"
     );
   };
 

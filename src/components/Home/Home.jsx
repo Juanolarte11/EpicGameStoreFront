@@ -22,8 +22,7 @@ export default function Home() {
 
   const handleClickCart = async (gameId) => {
     if (!dataUser.userID) {
-      setAlertMessage("Please login...");
-      setShowAlert(true);
+      console.log("login please...");
     } else {
       try {
         const data = {

@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default function NavBar({ size }) {
   const [country, setCountry] = useState("");
-  const dataUser = localStorage.getItem("userData");
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
 
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 
@@ -40,6 +40,7 @@ export default function NavBar({ size }) {
       });
   };
 
+  
   return (
     <nav className={style.nav}>
       <div className={style.navLinks}>
@@ -48,7 +49,7 @@ export default function NavBar({ size }) {
         </div>
         <div className={style.a}>
           <Link to="/about">ABOUT</Link>
-          {dataUser?.userID && <Link to="/favorites">FAVORITES</Link>}
+          {dataUser?.userID && <Link to="/favorites">FAVORITES</Link>}       
         </div>
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
