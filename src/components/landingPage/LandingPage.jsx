@@ -17,7 +17,7 @@ function LandingPage() {
         <div className={styles.contentWrapper}>
           <h1 className={styles.heading}>Welcome to EpicGameStore!</h1>
           <Link to="/home">
-            <button className={styles.enterButton}>Play</button>
+            <button className={styles.enterButton}>GO!</button>
           </Link>
         </div>
         <img className={styles.img} src={portada} alt="Logo Portada" />

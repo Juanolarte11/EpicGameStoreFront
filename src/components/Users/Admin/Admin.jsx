@@ -24,7 +24,8 @@ function Admin() {
     const [userStats, setUserStats] = useState({})
     const [statsVideogames, setUserStatsVideogames] = useState({})
 
-    const data = [
+
+    const dataStatusUsers = [
         {
             name: "Usuarios Activos",
             cantidad: userStats.activeUsers,
@@ -32,6 +33,21 @@ function Admin() {
         {
             name: "Usuarios Inactivos",
             cantidad: userStats.inactiveUsers,
+        },
+        {
+            name: "Total Usuarios",
+            cantidad: userStats.totalUsers,
+        }
+    ];
+
+    const dataRolUsers = [
+        {
+            name: "Vendedores",
+            cantidad: userStats.totalVendors,
+        },
+        {
+            name: "Clientes",
+            cantidad: userStats.totalClients,
         },
         {
             name: "Total Usuarios",
@@ -102,7 +118,7 @@ function Admin() {
             setListUsers(listaUserFil);
         }
         handleGetStatsUsers()
-    }, [acti, data]);
+    }, [acti, dataStatusUsers]);
 
     const handleBamUser = async (id, isActive) => {
         const update = {
@@ -210,6 +226,10 @@ function Admin() {
     };
 
     const filterListUsersAll = () => {
+        if(listUsersAct.length === 0){
+            console.log("holaaaa");
+            getDataUsers()
+        }
         const newList = listUsersAct
         setListUsersFil(newList)
     };
@@ -254,6 +274,7 @@ function Admin() {
                         {/* <-----------------------------------------------------------------------------------usuarios------------------------------------------------->                         */}
                         <div className={style.containerUsers}>
                             <div className={style.listUsers}>
+
                                 <div className={style.filtreusers} style={{ marginBottom: "10px" }}>
                                     <button className={style.button} onClick={filterListUsersAct}>
                                         usuariosAct
@@ -295,14 +316,27 @@ function Admin() {
                                 <p>Total Users: {userStats.totalUsers}</p>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
-                                    <BarChart data={data}>
+                                    <BarChart data={dataStatusUsers}>
                                         <XAxis dataKey="name" />
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey="cantidad" fill="#8884d8" />
+                                        <Bar dataKey="cantidad" fill="#b4d1f0" />
                                     </BarChart>
                                 </ResponsiveContainer>
+                                <div className={style.statisticsContainer}>
+                                <h2>Estadísticas Rol Vendedores</h2>
+                                {/* Gráfico con Recharts */}
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={dataRolUsers}>
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="cantidad" fill="#858a8f" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
                             </div>
                         </div>
                         {/* <----------------------------------------------------------------------------- Videogames ------------------------------------------------------------->                         */}
@@ -320,6 +354,7 @@ function Admin() {
                                 lista={listGames}
                                 token={token}
                                 getListVideogame={getListVideogame}
+                                handleGetStatsVideogames={handleGetStatsVideogames}
                             />
                             <div className={style.statisticsContainer}>
                                 <h2>Estadísticas</h2>

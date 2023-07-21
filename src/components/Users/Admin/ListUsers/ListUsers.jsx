@@ -19,6 +19,7 @@ const ListUsers = ({ lista, boton, handleEditRole }) => {
             <select onChange={(e) => handleEditRole(e, lista.id)} className={styles.select}>
               <option value="">Seleccionar rol</option>
               <option value="vendedor">Vendedor</option>
+              <option value="admin">Admin</option>
               <option value="cliente">Cliente</option>
             </select>
           </li>
