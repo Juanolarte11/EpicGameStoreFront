@@ -20,14 +20,6 @@ function User() {
     setShowForm(true);
   };
 
-  const listaDeCompras = [
-    {
-      img: "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-      title: "Tomb Raider (2013)",
-      precio: 46.9,
-    },
-  ];
-
   const getDataUsers = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/users/userDetail/${dataUser.userID}`, {
@@ -72,23 +64,6 @@ function User() {
                 <Listado datos={favorites} lista={"Favoritos"} />
               </div>
             </div>
-          <div className={styles.actions}>
-            <h1 className={styles.sectionTitle}>Shopping history</h1>
-            {listaDeCompras.map((ele) => {
-              return (
-                <div key={ele.title} className={styles.compra}>
-                  <img
-                    src={ele.img}
-                    alt={ele.title}
-                    className={styles.imageList}
-                  />
-                  <h3>{ele.title}</h3>
-                  <button className={styles.ver}>Ver Juego</button>
-                  <h3>{ele.precio}</h3>
-                </div>
-              );
-            })}
-          </div>
         </div>
       )}
     </div>

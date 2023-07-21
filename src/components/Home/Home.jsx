@@ -50,7 +50,7 @@ export default function Home() {
       userId: dataUser?.userID,
       gameId: gameId,
     };
-    if (dataUser.userID) {
+    if (dataUser?.userID) {
       const existingFavorite = await axios.get(
         `http://localhost:3001/users/userDetail/${dataUser.userID}`,
         {

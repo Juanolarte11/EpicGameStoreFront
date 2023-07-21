@@ -19,7 +19,7 @@ export default function ConteinerCars({
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [genres, setGenres] = useState("");
-  const dataUser = localStorage.getItem("userData");
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
   const token = JSON.parse(localStorage.getItem("Token"));
   const gameFavorites = useSelector((state) => state.gameFavorites);
 
@@ -88,7 +88,7 @@ export default function ConteinerCars({
   );
 
   useEffect(async () => {
-    if (dataUser?.userID) {
+    if (dataUser.userID) {
       const existingFavorite = await axios.get(
         `http://localhost:3001/users/userDetail/${dataUser.userID}`,
         {

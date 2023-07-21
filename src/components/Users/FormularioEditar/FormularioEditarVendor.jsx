@@ -219,7 +219,7 @@ function FormularioEditar({ user }) {
                     </button>
                 </div>
             </div>
-            <div className={style.vendor}>
+            {/* <div className={style.vendor}>
                 <span className={style.title}>Cambiar Contraseña</span>
                 <label className={style.inputFormu}>
                     Contraseña actual:
@@ -249,7 +249,7 @@ function FormularioEditar({ user }) {
                 {usDelete && (
                     <button className={style.btn}  onClick={updateActive}>Delete</button>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 }

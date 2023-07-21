@@ -7,6 +7,7 @@ import TermsAndConditions from "./TermsAndConditions";
 
 function FormularioEditar({ user }) {
   const history = useHistory();
+  const country = localStorage.getItem("country")
 
   const [loading, setLoading] = useState(false);
   const token = JSON.parse(localStorage.getItem("Token"));
@@ -42,82 +43,92 @@ function FormularioEditar({ user }) {
     data.append("upload_preset", preset_key);
     setLoading(true);
     try {
-        const response = await axios.post(cloudinaryUrl, data);
-        setImage(response.data.secure_url);
-        setLoading(false);
+      const response = await axios.post(cloudinaryUrl, data);
+      setImage(response.data.secure_url);
+      setLoading(false);
     } catch (error) {
-        alert(error.message)
+      alert(error.message);
     }
-};   
-
-const updatesUser = () => {
-        let NewUser = {};
-        if (newUsername.length !== 0) {
-            NewUser.userName = newUsername;
-        }
-        if (image?.length !== 0) {
-            NewUser.userImage = image;
-        }
-        try {
-            axios.patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                .then((response) => {
-                    const newDataUser = {
-                        nombre: response.data.userName,
-                        userID: response.data.id,
-                        cartID: response.data.Carritos[0].id,
-                        role: response.data.role,
-                        image: response.data.userImage
-                      }
-                    localStorage.setItem("userData", JSON.stringify(newDataUser));
-                    localStorage.setItem('Token', JSON.stringify({}));
-                    alert("Datos actualizados con exito, inicia Sesion")
-                })
-        } catch (error) {
-            alert(error.message)
-        }
-    };
-
-    const updateRol = () => {
-        let NewUser = { role: "vendedor" };
-        try {
-            axios.patch(`http://localhost:3001/users/${user.id}`, NewUser, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                .then((response) => {
-                    localStorage.setItem("userData", JSON.stringify({}));
-                    localStorage.setItem('Token', JSON.stringify({}));
-                    alert("Datos actualizados con exito, inicia Sesion")
-                    history.push("/home");
-                })   
-        } catch (error) {
-            alert(error.message);
-        }
-    }
-
-  const updatePass = () => {
-    let NewUser = {};
-    if (currentPassword.length !== 0) {
-      NewUser.userPassword = currentPassword;
-    }
-    if (newPassword.length !== 0) {
-      NewUser.newPassword = newPassword;
-    }
-    console.log(NewUser);
   };
 
-  const updateActive = () => {
-    let NewUser = { active: false };
-    console.log(NewUser);
-    alert(
-      "Your request has been sent, you will soon receive a response from an administrator"
-    );
-  };    
+  const updatesUser = () => {
+    let NewUser = {};
+    if (newUsername.length !== 0) {
+      NewUser.userName = newUsername;
+    }
+    if (image?.length !== 0) {
+      NewUser.userImage = image;
+    }
+    try {
+      axios
+        .patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const newDataUser = {
+            nombre: response.data.userName,
+            userID: response.data.id,
+            cartID: response.data.Carritos[0].id,
+            role: response.data.role,
+            image: response.data.userImage,
+            mail: response.data.userEmail,
+          };
+          localStorage.setItem("userData", JSON.stringify(newDataUser));
+          alert("¡Datos actualizados con exito!");
+          window.location.reload();
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const updateRol = () => {
+    let NewUser = { role: "vendedor" };
+    try {
+      axios
+        .patch(`http://localhost:3001/users/${user.id}`, NewUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const newDataUser = {
+            nombre: response.data.userName,
+            userID: response.data.id,
+            cartID: response.data.Carritos[0].id,
+            role: response.data.role,
+            image: response.data.userImage,
+            mail: response.data.userEmail,
+          };
+          localStorage.setItem("userData", JSON.stringify(newDataUser));
+          alert("¡Datos actualizados con exito!");
+          window.location.reload();
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  // const updatePass = () => {
+  //   let NewUser = {};
+  //   if (currentPassword.length !== 0) {
+  //     NewUser.userPassword = currentPassword;
+  //   }
+  //   if (newPassword.length !== 0) {
+  //     NewUser.newPassword = newPassword;
+  //   }
+  //   console.log(NewUser);
+  // };
+
+  // const updateActive = () => {
+  //   let NewUser = { active: false };
+  //   console.log(NewUser);
+  //   alert(
+  //     "Your request has been sent, you will soon receive a response from an administrator"
+  //   );
+  // };
 
   useEffect(() => {}, [loading]);
 
@@ -173,7 +184,7 @@ const updatesUser = () => {
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
               <span className={style.itemName}>Country</span>
-              <input type="text" value={"Mexico"} placeholder={"Mexico"} />
+              <input type="text" value={country} placeholder={country} />
             </div>
           </label>
           <label className={style.inputFormu}>
@@ -207,7 +218,7 @@ const updatesUser = () => {
             <button onClick={handleModalClose}>Close</button>
           </Modal>
         )}
-        <span className={style.title}>Change Password</span>
+        {/* <span className={style.title}>Change Password</span>
         <label className={style.inputFormu}>
           Actual password:
           <input
@@ -225,12 +236,12 @@ const updatesUser = () => {
             onChange={(e) => setNewUsername(e.target.value)}
           />
         </label>
-        <button className={style.btn} onClick={updatePass}>
-          Sent
-        </button>
+        {/* <button className={style.btn} onClick={updatePass}> */}
+          {/* Sent */}
+        {/* </button>
         <button className={style.btn} onClick={updateActive}>
           Delete Acount
-        </button>
+        </button> */} 
       </div>
     </div>
   );
