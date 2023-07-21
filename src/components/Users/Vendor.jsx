@@ -97,7 +97,7 @@ function Vendor (){
           </div>
           {showCreateVideogame && <CreateVideogame />}
           <div>
-            <h3>Recuerda que un admin debe aprobar el juego para que lo puedas editar</h3>
+            <h3>Recuerda que si el juego esta banneado o pendiente de aprobación no se puede editar</h3>
             {noEditGames.map((videogame) => (
                 <div key={videogame.id}>
                 <h2>{videogame.name}</h2>
