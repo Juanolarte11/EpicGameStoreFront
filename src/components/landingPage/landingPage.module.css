@@ -76,7 +76,7 @@
 
 .heading {
   font-size: 36px;
-  color: var(--texto-color);
+  color: var(--primero-color);
   margin-bottom: 20px;
 }
 
@@ -105,4 +105,21 @@
   margin-right: 10px;
   color: var(--texto-color);
   text-decoration: none;
+}
+
+
+@keyframes animation_landing {
+  0%,100%{
+    border-radius: 45%  55% 70% 35% / 70%  30% 90%  40% ;
+  }  
+  25%{
+    border-radius: 55%  45% 30% 35% / 50%  30% 60%  10% ;
+  }  
+  50%{
+    border-radius: 65%  35% 35% 65% / 40%  60% 30%  70% ;
+  }
+  75%{
+    border-radius: 35%  65% 60% 45% / 70%  30% 60%  10% ;
+  }
+  
 }

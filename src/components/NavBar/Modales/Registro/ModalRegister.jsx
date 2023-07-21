@@ -5,7 +5,7 @@ import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
 import ModalLogin from "../Login/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { setModalRegister } from "../../../../actions";
+import { setModalRegister, sendEmail } from "../../../../actions";
 
 const ModalRegister = () => {
   ///////////////////
@@ -39,6 +39,9 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
+      const dataEmail = { email: newUserPost.userEmail };
+      console.log(dataEmail)
+      dispatch(sendEmail(dataEmail));
       handleCloseRegister();
     } catch (error) {
       console.log(error);

@@ -156,3 +156,37 @@ export function setModalRegister(payload1,payload2){
     }
 }
 
+export function sendMailPaymentSuccess(Email) {
+    return async function (dispatch) {
+      try {
+        let json = await axios.post(
+          `http://localhost:3001/send-email/paymentsuccess`,
+          Email
+        );
+        dispatch({
+          type: "SEND_EMAIL",
+          payload: json.data,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  }
+
+export function sendEmail(payload) {
+    console.log(payload)
+  return async function (dispatch) {
+    try {
+      let json = await axios.post(
+        `http://localhost:3001/send-email/registersuccess`,
+        payload
+      );
+      dispatch({
+        type: "SEND_EMAIL",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}  

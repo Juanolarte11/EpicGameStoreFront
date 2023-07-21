@@ -147,6 +147,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           usersFiltra: action.payload
         }
+      case "SEND_EMAIL":
+      return {
+        ...state,
+        emails: action.payload,
+      };
   
     default:
       return state;
