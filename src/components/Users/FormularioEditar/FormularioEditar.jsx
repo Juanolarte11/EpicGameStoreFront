@@ -78,7 +78,7 @@ function FormularioEditar({ user }) {
                       }
                     localStorage.setItem("userData", JSON.stringify(newDataUser));
                     localStorage.setItem('Token', JSON.stringify({}));
-                    alert("Datos actualizados con exito, inicia Sesion")
+                    alert("Felicidades ya eres Vendedor")
                 })
         } catch (error) {
             alert(error.message)

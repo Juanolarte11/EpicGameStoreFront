@@ -10,7 +10,7 @@ function Listado({datos,lista}) {
     }else{
         url = "/favorites"
     }
-    if(datos.length > 3){
+    if(datos?.length > 3){
         newDatos = datos.slice(0, 10)
     }else{
         newDatos = datos
