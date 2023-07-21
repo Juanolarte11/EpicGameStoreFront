@@ -39,24 +39,4 @@
   border-radius: 4px;
   background-color: #fff;
   appearance: none;
-}
-
-.state {
-  margin: 10px;
-  color: aliceblue;
-}
-
-.rol {
-  margin: 10px;
-  color: aliceblue;
-}
-
-.name {
-  margin: 10px;
-  color: aliceblue;
-}
-.containerDescript{
-
-  width: 800px;
-  padding: 10px;
-}
+  }

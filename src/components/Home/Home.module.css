@@ -138,7 +138,7 @@
 .alert {
   position: fixed;
   top: 50%;
-  left: 42%;
+  left: 37.5%;
   transform: translate(-50%, -50%);
   background-color: #57fb2e;
   border: 1px solid #010101;
