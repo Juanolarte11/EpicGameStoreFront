@@ -1,5 +1,4 @@
 import { filterByOrigin } from "./filterByOrigin.js";
-import { SEND_EMAIL } from "../actions/index.js";
 
 const initialState = {
   modalLogin: false,
@@ -148,6 +147,10 @@ const reducer = (state = initialState, action) => {
           ...state,
           usersFiltra: action.payload
         }
+      case "SEND_EMAIL":
+      return {
+        ...state,
+      };
   
     default:
       return state;

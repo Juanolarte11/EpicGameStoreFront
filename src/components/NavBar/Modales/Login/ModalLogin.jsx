@@ -40,7 +40,7 @@ const ModalLogin = () => {
       const dataUser = {
         nombre: response.data.user.userName,
         userID: response.data.user.id,
-        cartID: response.data.user.Carritos[0].id,
+        cartID: response.data.user.Carrito?.id,
         role: response.data.user?.role,
         image: response.data.user?.userImage
       }
