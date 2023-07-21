@@ -1,12 +1,12 @@
 @keyframes slideIn {
   0% {
-    transform: translateY(-800%);
+    transform: translateY(-1500%);
   }
   60% {
     transform: translateY(0%);
   }
   100% {
-    transform: translateY(800%);
+    transform: translateY(1500%);
   }
 }
 
