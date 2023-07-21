@@ -62,14 +62,18 @@ appearance: none;
 .nombre{
   margin: 5px;
   padding: 5px;
+  margin-top: 10px;
+  color: aliceblue;
 }
 
 .price{
   margin: 5px;
-  padding: 5px
+  padding: 5px;
+  color: aliceblue;
 }
 
 .status{
   margin: 5px;
-  padding: 5px
+  padding: 5px;
+  color: aliceblue;
 }
