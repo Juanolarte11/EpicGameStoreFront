@@ -52,8 +52,6 @@ function User() {
     getDataUsers();
   }, []);
 
-
-
   return (
     <div className={styles.container}>
       <NavBar />
@@ -75,7 +73,7 @@ function User() {
               </div>
             </div>
           <div className={styles.actions}>
-            <h1 className={styles.sectionTitle}>Historial de Compras</h1>
+            <h1 className={styles.sectionTitle}>Shopping history</h1>
             {listaDeCompras.map((ele) => {
               return (
                 <div key={ele.title} className={styles.compra}>

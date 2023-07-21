@@ -8,7 +8,7 @@ import ModalLogin from "./Modales/Login/ModalLogin";
 import ModalRegister from "./Modales/Registro/ModalRegister";
 import noUser from "../NavBar/noUser2.png";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 import axios from "axios";
 
 export default function NavBar({ size }) {
@@ -19,6 +19,7 @@ export default function NavBar({ size }) {
 
   useEffect(() => {
     const storedCountry = localStorage.getItem("country");
+    
     if (storedCountry) {
       setCountry(storedCountry);
     } else {
@@ -51,13 +52,14 @@ export default function NavBar({ size }) {
           <Link to="/about">ABOUT</Link>
           {dataUser?.userID && <Link to="/favorites">FAVORITES</Link>}       
         </div>
+        {dataUser?.userID &&
         <IconButton aria-label="mostrar items" color="inherit">
           <Badge badgeContent={size} color="secondary">
             <Link to="/cart">
               <ShoppingCartIcon fontSize="large" color="inherit" />
             </Link>
           </Badge>
-        </IconButton>
+        </IconButton>}
       </div>
 
       <div className={style.logout}>
@@ -68,7 +70,6 @@ export default function NavBar({ size }) {
             <ModalRegister handleOpenModalLogin={handleOpenModalLogin} />
           )}
           <div className={style.nameContainer}>
-            {/* <h3 className={style.name}>{dataUser?.nombre?.toUpperCase()}</h3> */}
           </div>
           {dataUser?.nombre ? (
             <UserModal image={dataUser.image}></UserModal>

@@ -12,6 +12,7 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([]);
+
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const token = JSON.parse(localStorage.getItem("Token"));
 
@@ -65,7 +66,6 @@ export default function Favorites() {
         "http://localhost:3001/favorites/delete",
         game
       );
-
       setAlertMessage("Game delete to favorites...");
       setShowAlert(true);
 
@@ -100,7 +100,7 @@ export default function Favorites() {
   }, [showAlert]);
 
   return (
-    <div className="">
+    <div className={styles.containerFavorites}>
       <div>
         <NavBar size={size} />
       </div>

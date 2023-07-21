@@ -5,19 +5,29 @@ import styles from "./ConteinerCars.module.css";
 import NavbarSec from "../NavBarSec/NavSec";
 import { order } from "./filters";
 import noGame from "../Home/noGameSearch.gif";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setGameFavorite } from "../../actions";
+
+
 
 export default function ConteinerCars({
   allVideogames,
   handleClickCart,
-  clickFavorite,
-  buttonFavorites,
+  clickFavorite
 }) {
+  const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [genres, setGenres] = useState("");
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
+  const token = JSON.parse(localStorage.getItem("Token"));
+  const gameFavorites = useSelector((state) => state.gameFavorites);
 
   const videogamesPerPage = 15;
+
+  const [flagCard, setflagCard] = useState(0)
 
   useEffect(() => {
     let localOrder = localStorage.getItem("order");
@@ -79,7 +89,34 @@ export default function ConteinerCars({
     indexOfLastVideogame
   );
 
-  return (
+  useEffect(async () => {
+    if(dataUser.userID){
+    const existingFavorite = await axios.get(
+      `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  dispatch(setGameFavorite(existingFavorite.data.Videogames))
+  }
+},[])
+
+const handlerFavorite = (id) =>{
+  let isGameInFavorites = gameFavorites.some((e) => e.id === id);
+  if(isGameInFavorites){
+    return 'Delete favorite'
+  }else{
+    return 'Add favorite'
+  }
+}
+
+useState(()=>{
+
+},[flagCard])
+
+return (
     <div className={styles.container}>
       <NavbarSec
         handleSort={handleSort}
@@ -88,23 +125,26 @@ export default function ConteinerCars({
         handleGenres={handleGenres}
       />
       <div className={styles.cardsContainer}>
-        {videogames && videogames.length > 0 ? (
-          videogames.map((game) => (
-            <Card
-              key={game.id}
-              game={game}
-              handleClickCart={handleClickCart}
-              clickFavorite={clickFavorite}
-              buttonFavorites={buttonFavorites}
-            />
-          ))
-        ) : (
-          <div>
-            <h3 className={styles.textNoGame}>No favorite games</h3>
-            <img className={styles.noGame} src={noGame} alt="" />
-          </div>
-        )}
-      </div>
+
+      {videogames && videogames.length > 0 ? (
+      videogames.map((game) => {
+      return (
+        <Card
+          key={game.id}
+          game={game}
+          handleClickCart={handleClickCart}
+          clickFavorite={clickFavorite}
+          buttonFavorites={handlerFavorite(game.id)}
+        />
+      );    
+  })
+) : (
+  <div>
+    <h3 className={styles.textNoGame}>No favorite games</h3>
+    <img className={styles.noGame} src={noGame} alt="" />
+  </div>
+)}
+</div> 
       <div className={styles.paginationContainer}>
         <Pagination
           count={Math.ceil(sortedVideogames?.length / videogamesPerPage)}
