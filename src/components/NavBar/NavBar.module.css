@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #141d22;
+  background-image: linear-gradient(to right, #8716c2, #11181d, #169ad3);
   padding: 10px;
 }
 .navLinks {
@@ -87,7 +87,6 @@
   display: flex;
 }
 
-
 @media (max-width: 900px) {
   .nav {
     display: flex;
@@ -97,16 +96,16 @@
     padding: 10px;
     width: 900px;
   }
-  .userIcon{
+  .userIcon {
     margin-right: 100px;
   }
 }
 
-@media (min-width: 900px) and (max-width: 1050px){
+@media (min-width: 900px) and (max-width: 1050px) {
   .nav {
     width: 1000px;
   }
-  .userIcon{
+  .userIcon {
     margin-right: 100px;
   }
 }

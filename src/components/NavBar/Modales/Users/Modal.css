@@ -8,26 +8,28 @@
 
 .modal-overlay {
   position: fixed;
-  top: 90px;
-  right: -4%; /* Ajusta este valor para posicionar el modal a la derecha */
-  width: 20%; /* Ajusta este valor para cambiar el ancho del modal */
+  top: 120px;
+  right: -20px;
+  width: 20%;
   height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  color: black;
+  text-decoration: none;
 }
 
 .modal-content {
-  background-color: rgba(41, 41, 41, 0.705);
+  background-color: rgba(255, 255, 255, 0.785);
   border: 3px solid black;
   padding: 20px;
   border-radius: 10px;
   max-width: 300px;
-  text-align: center;
   max-height: 600px;
   z-index: 9999;
   text-align: -webkit-left;
+  color: black;
 }
 
 .modal-content:hover {
@@ -43,10 +45,10 @@
 .modal-content button {
   margin-top: 20px;
 }
-.modal-content .link{
+.modal-content .link {
   color: rgb(84, 23, 155);
 }
 
-.modal-content .link:hover{
+.modal-content .link:hover {
   color: rgb(155, 23, 23);
 }

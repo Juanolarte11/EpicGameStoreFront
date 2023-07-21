@@ -15,7 +15,7 @@ function User() {
   const [showForm, setShowForm] = useState(false);
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem("Token"));
-  
+
   const settShowForm = () => {
     setShowForm(true);
   };
@@ -30,20 +30,22 @@ function User() {
 
   const getDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/userDetail/${dataUser.userID}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-    })
+      );
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
-      console.log(response);
       setUser(response.data);
       if (response.data.role === "cliente") {
         setFavorites(response.data.Videogames);
         setCart(respoCart.data[0].Videogames);
       }
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
       console.log(error.message);
     }
   };
@@ -51,8 +53,6 @@ function User() {
   useEffect(() => {
     getDataUsers();
   }, []);
-
-
 
   return (
     <div className={styles.container}>
@@ -63,19 +63,18 @@ function User() {
             <div className={styles.contForm}>
               <FormularioEditar settShowForm={settShowForm} user={user} />
             </div>
-            
           </div>
           <div id="modal-root"></div>
-            <div className={styles.list}>
-              <div>
-                <Listado datos={cart} lista={"Carrito"} />
-              </div>
-              <div>
-                <Listado datos={favorites} lista={"Favoritos"} />
-              </div>
+          <div className={styles.list}>
+            <div>
+              <Listado datos={cart} lista={"Carrito"} />
             </div>
+            <div>
+              <Listado datos={favorites} lista={"Favoritos"} />
+            </div>
+          </div>
           <div className={styles.actions}>
-            <h1 className={styles.sectionTitle}>Historial de Compras</h1>
+            <h1 className={styles.sectionTitle}>Shopping history</h1>
             {listaDeCompras.map((ele) => {
               return (
                 <div key={ele.title} className={styles.compra}>
@@ -85,7 +84,7 @@ function User() {
                     className={styles.imageList}
                   />
                   <h3>{ele.title}</h3>
-                  <button className={styles.ver}>Ver Juego</button>
+                  <button className={styles.ver}>Game...</button>
                   <h3>{ele.precio}</h3>
                 </div>
               );

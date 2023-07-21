@@ -111,8 +111,7 @@ export default function Home() {
           <div>
             <NavBar size={sizeCart} />
           </div>
-          { dataUser?.userID && showAlert ?  (<div className={styles.alert}>{alertMessage}</div> ): ''}
-          {!dataUser?.userID && showAlert  ?  (<div className={styles.alert2}>Please login !</div>):''}
+          {showAlert && <div className={styles.alert}>{alertMessage}</div>}
           <ConteinerCars
             allVideogames={allVideogames}
             handleClickCart={handleClickCart}
