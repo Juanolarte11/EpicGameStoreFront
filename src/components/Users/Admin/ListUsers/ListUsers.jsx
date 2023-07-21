@@ -5,7 +5,7 @@ const ListUsers = ({ lista, boton, handleEditRole }) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}></div>
-      <h2>Usuarios</h2>
+      <h2 className={styles.name}>Usuarios</h2>
       <ul className={styles.lista}>
         
         {lista.map((lista) => (

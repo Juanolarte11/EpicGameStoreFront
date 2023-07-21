@@ -55,7 +55,7 @@ const ListVideogames = ({ lista, token, handleGetStatsVideogames, getListVideoga
   
   return (
     <div className={styles.container}>
-      <h2>Videogames</h2>
+      <h2 className={styles.nombre}>Videogames</h2>
       <ul className={styles.lista}>
         {lista.map((lista) => (
           <li key={lista.id} className={styles.usuario}>
