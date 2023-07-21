@@ -47,45 +47,44 @@ export default function Home() {
 
   const clickFavorite = async (gameId) => {
     const game = {
-      userId: dataUser.userID,
+      userId: dataUser?.userID,
       gameId: gameId,
     };
-      if(dataUser.userID){
-    const existingFavorite = await axios.get(
-      `http://localhost:3001/users/userDetail/${dataUser.userID}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const verifiGameId = existingFavorite.data.Videogames;
-    const isGameInFavorites = verifiGameId.some((e) => e.id === gameId);
-      
-    if (isGameInFavorites) {
-      const respuesta = await axios.post(
-        "http://localhost:3001/favorites/delete",
-        game
+    if (dataUser.userID) {
+      const existingFavorite = await axios.get(
+        `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      setAlertMessage("Game delete to favorites...");
-      setShowAlert(true);
-      return 'Add game'
-    }
-    
-    if(!isGameInFavorites){
-      try {
-        const respuesta = await axios.post("/favorites", game);
-        setAlertMessage("Game added to favorites...");
-        setShowAlert(true);
-        return 'Delete game'
-      } catch (error) {
-        console.log(error);
-      }      
-    }    
-    }else{
-      setShowAlert(true);
-    }
+      const verifiGameId = existingFavorite.data.Videogames;
+      const isGameInFavorites = verifiGameId.some((e) => e.id === gameId);
 
+      if (isGameInFavorites) {
+        const respuesta = await axios.post(
+          "http://localhost:3001/favorites/delete",
+          game
+        );
+        setAlertMessage("Game delete to favorites...");
+        setShowAlert(true);
+        return "Add game";
+      }
+
+      if (!isGameInFavorites) {
+        try {
+          const respuesta = await axios.post("/favorites", game);
+          setAlertMessage("Game added to favorites...");
+          setShowAlert(true);
+          return "Delete game";
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else {
+      setShowAlert(true);
+    }
   };
 
   useEffect(async () => {
@@ -120,11 +119,27 @@ export default function Home() {
           <div>
             <NavBar size={sizeCart} />
           </div>
-          { dataUser?.userID && showAlert && alertMessage == `Game delete to favorites...` ?  (<div className={styles.alert3}>{alertMessage}</div> ): ''}
+          {dataUser?.userID &&
+          showAlert &&
+          alertMessage == `Game delete to favorites...` ? (
+            <div className={styles.alert3}>{alertMessage}</div>
+          ) : (
+            ""
+          )}
 
-          { dataUser?.userID && showAlert && alertMessage == `Game added to favorites...` ?  (<div className={styles.alert}>{alertMessage}</div> ): ''}
+          {dataUser?.userID &&
+          showAlert &&
+          alertMessage == `Game added to favorites...` ? (
+            <div className={styles.alert}>{alertMessage}</div>
+          ) : (
+            ""
+          )}
 
-          {!dataUser?.userID && showAlert ?  (<div className={styles.alert2}>Please login !</div>):''}
+          {!dataUser?.userID && showAlert ? (
+            <div className={styles.alert2}>Please login !</div>
+          ) : (
+            ""
+          )}
 
           <ConteinerCars
             allVideogames={allVideogames}
