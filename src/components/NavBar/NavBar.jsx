@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default function NavBar({ size }) {
   const [country, setCountry] = useState("");
-  const dataUser = JSON.parse(localStorage.getItem("userData"));
+  const dataUser = localStorage.getItem("userData");
 
   const handleOpenModalLogin = ModalLogin.handleOpenModalLogin;
 

@@ -6,6 +6,7 @@ import axios from "axios";
 import TermsAndConditions from "./TermsAndConditions";
 
 function FormularioEditar({ user }) {
+  const country = localStorage.getItem("country");
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
@@ -51,8 +52,6 @@ function FormularioEditar({ user }) {
       console.log(error);
     }
   };
-
-  const btnClick = () => {};
 
   const updatesUser = () => {
     let NewUser = {};
@@ -163,7 +162,7 @@ function FormularioEditar({ user }) {
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
               <span className={style.itemName}>Country</span>
-              <input type="text" value={"Mexico"} placeholder={"Mexico"} />
+              <input type="text" value={country} placeholder={country} />
             </div>
           </label>
           <label className={style.inputFormu}>
