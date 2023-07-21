@@ -1,10 +1,9 @@
 import { filterByOrigin } from "./filterByOrigin.js";
-import { SEND_EMAIL } from "../actions/index.js";
 
 const initialState = {
   modalLogin: false,
   modalRegister: false,
-  usersFiltra: [],
+  usersFiltra : [],
   cartUser: [],
   commentVideoGame: [],
   videogames: [],
@@ -12,97 +11,91 @@ const initialState = {
   allVideogames: [],
   genres: [],
   platforms: [],
-  favoritesList: [],
   detail: [],
   currentPage: 1,
-  origin: "all",
+  origin: "all"
 };
-
+  
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_VIDEOGAMES":
       return {
         ...state,
         videogames: action.payload,
-        allVideogames: action.payload, // Update the allVideogames property with the initial videogames array
+        allVideogames: action.payload // Update the allVideogames property with the initial videogames array
       };
-    case "GET_CART_USER":
-      return {
-        ...state,
-        cartUser: action.payload,
-      };
+      case "GET_CART_USER":
+        return {
+          ...state,
+          cartUser: action.payload,
+        };
 
     case "GET_VIDEOGAMES_NAME":
-      return {
+      return{
         ...state,
-        videogames: action.payload,
+        videogames: action.payload
       };
-    case "GET_COMMENT_DETAIL":
-      return {
+      case "GET_COMMENT_DETAIL":
+      return{
         ...state,
-        commentVideoGame: action.payload,
-      };
-    case "FAVORITES_LIST":
-      return {
-        ...state,
-        favoritesList: action.payload,
+        commentVideoGame: action.payload
       };
 
-    case "GET_MODAL_LOGIN":
-      return {
+      case "GET_MODAL_LOGIN":
+      return{
         ...state,
         modalLogin: action.payload1,
-        modalRegister: action.payload2,
+        modalRegister: action.payload2
       };
-    case "GET_MODAL_REGISTER":
-      return {
+      case "GET_MODAL_REGISTER":
+      return{
         ...state,
         modalRegister: action.payload1,
-        modalLogin: action.payload2,
+        modalLogin: action.payload2
       };
 
     case "POST_VIDEOGAME":
-      return {
-        ...state,
-      };
+      return{
+        ...state
+      }
 
     case "SET_ORIGIN":
-      return {
+      return{
         ...state,
-        origin: action.payload,
-      };
-
+        origin : action.payload
+      }
+    
     case "GET_GENRES":
-      return {
+      return{
         ...state,
-        genres: action.payload,
+        genres: action.payload
       };
 
     case "GET_PLATFORMS":
-      return {
+      return{
         ...state,
-        platforms: action.payload,
+        platforms: action.payload
       };
 
     case "GET_DETAIL":
-      return {
+      return{
         ...state,
-        detail: action.payload,
+        detail: action.payload
       };
-
+  
     case "FILTER_BY_ORIGIN":
       const origin = action.payload;
       const allVideogames = state.allVideogames; // Access the original array of all videogames
       const filteredVideogames = filterByOrigin(allVideogames, origin);
       return {
         ...state,
-        videogames: origin === "all" ? allVideogames : filteredVideogames,
+        videogames: origin === "all" ? allVideogames : filteredVideogames
       };
-
+  
     case "SORT_BY_RATING":
       const ratingOrder = action.payload;
       const sortedByRating = [...state.videogames]; // Create a copy of the videogames array
-
+  
       sortedByRating.sort((a, b) => {
         if (ratingOrder === "lToH") {
           return a.rating - b.rating; // Sort in ascending order (lowest to highest)
@@ -112,22 +105,22 @@ const reducer = (state = initialState, action) => {
           return 0; // No sorting required
         }
       });
-
+  
       return {
         ...state,
-        videogames: sortedByRating,
+        videogames: sortedByRating
       };
 
-    case "SET_CURRENT_PAGE":
-      return {
+    case "SET_CURRENT_PAGE": 
+      return{
         ...state,
-        currentPage: action.payload,
-      };
-
+        currentPage: action.payload
+      }
+  
     case "SORT_BY_ALPHABET":
       const alphabetOrder = action.payload;
       const sortedByAlphabet = [...state.videogames]; // Create a copy of the videogames array
-
+  
       sortedByAlphabet.sort((a, b) => {
         if (alphabetOrder === "aToZ") {
           return a.name.localeCompare(b.name); // Sort in ascending order (A to Z)
@@ -138,26 +131,30 @@ const reducer = (state = initialState, action) => {
         }
       });
 
-    case "GETDATAUSER":
-      return {
+      case "GETDATAUSER": 
+      return{
         ...state,
-        dataUser: action.payload,
-      };
+        dataUser: action.payload
+      }
 
-    case "CLEAR":
+      case "CLEAR":
       return {
         ...state,
         detail: action.payload,
       };
-    case "GETUSERSESTATUS":
+      case "GETUSERSESTATUS":
+        return{
+          ...state,
+          usersFiltra: action.payload
+        }
+      case "SEND_EMAIL":
       return {
         ...state,
-        usersFiltra: action.payload,
       };
-
+  
     default:
       return state;
-  }
+  };
 };
-
+  
 export default reducer;

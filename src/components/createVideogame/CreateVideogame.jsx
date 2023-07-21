@@ -241,6 +241,35 @@ export default function CreateVideogame() {
                 )}
               </div>
               <div>
+                <label>Developer: </label>
+                <textarea
+                  value={input.developer}
+                  name="developer"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label>Price: </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  min={0}
+                  value={input.price}
+                  name="price"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label>Stock: </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={input.stock}
+                  name="stock"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
                 <label>Image: </label>
                 <input
                   type="url"

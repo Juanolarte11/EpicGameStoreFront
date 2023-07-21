@@ -108,12 +108,20 @@ export function getCommentVideoGame(payload) {
   };
 }
 
-export function postVideogame(payload) {
-  return async function (dispatch) {
-    const response = await axios.post(`/videogames`, payload);
-    return response;
-  };
-}
+export function postVideogame(payload){
+    const token = JSON.parse(localStorage.getItem("Token"));
+    return async function(dispatch){
+        console.log(2);
+        const response = await axios.post(`/videogames/`, payload, 
+        {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response);
+        return response
+    }
+};
 
 export function filterVideogamesByOrigin(payload) {
   return {
@@ -190,3 +198,38 @@ export function getUsersAct(payload) {
     }
   };
 }
+
+export function sendMailPaymentSuccess(Email) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post(
+        `http://localhost:3001/send-email/paymentsuccess`,
+        Email
+      );
+      dispatch({
+        type: "SEND_EMAIL",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function sendEmail(payload) {
+  console.log(payload)
+return async function (dispatch) {
+  try {
+    let json = await axios.post(
+      `http://localhost:3001/send-email/registersuccess`,
+      payload
+    );
+    dispatch({
+      type: "SEND_EMAIL",
+      payload: json.data,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+}  

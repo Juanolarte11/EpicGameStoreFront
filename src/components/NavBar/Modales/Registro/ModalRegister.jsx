@@ -5,7 +5,7 @@ import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
 import ModalLogin from "../Login/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { setModalRegister } from "../../../../actions";
+import { setModalRegister, sendEmail } from "../../../../actions";
 
 const ModalRegister = () => {
   ///////////////////
