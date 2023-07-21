@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
+import { sendEmail } from "../../../../actions";
+import { useDispatch } from "react-redux";
 import ModalLogin from "../Login/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalRegister, sendEmail } from "../../../../actions";
@@ -39,10 +41,12 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
+
       const dataEmail = { email: newUserPost.userEmail };
-      console.log(dataEmail)
-      dispatch(sendEmail(dataEmail));
+        dispatch(sendEmail(dataEmail));
+      handleCloseModal();
       handleCloseRegister();
+
     } catch (error) {
       console.log(error);
     }

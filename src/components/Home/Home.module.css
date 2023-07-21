@@ -36,10 +36,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  background-color: #d5d6d5;
-}
-
 .searchBarContainer {
   display: flex;
   justify-content: center;
@@ -133,21 +129,6 @@
   left: 37.5%;
   transform: translate(-50%, -50%);
   background-color: #57fb2e;
-  border: 1px solid #010101;
-  border-radius: 4px;
-  padding: 10px;
-  font-size: 24px;
-  text-align: center;
-  z-index: 10000;
-  animation: slideIn 2s ease forwards;
-}
-
-.alert2{
-  position: fixed;
-  top: 50%;
-  left: 37.5%;
-  transform: translate(-50%, -50%);
-  background-color: #cf0a0a;
   border: 1px solid #010101;
   border-radius: 4px;
   padding: 10px;
