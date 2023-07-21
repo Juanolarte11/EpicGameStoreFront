@@ -39,6 +39,7 @@ function User() {
         }
       );
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
+      console.log(response);
       setUser(response.data);
       console.log(response.data);
       if (response.data.role === "cliente") {
@@ -86,7 +87,7 @@ function User() {
                     className={styles.imageList}
                   />
                   <h3>{ele.title}</h3>
-                  <button className={styles.ver}>Game...</button>
+                  <button className={styles.ver}>Ver Juego</button>
                   <h3>{ele.precio}</h3>
                 </div>
               );

@@ -28,7 +28,8 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
           userID: user?.id,
           cartID: user?.Carritos[0].id,
           role: user?.role,
-          image: user?.userImage
+          image: user?.userImage,
+          mail: user?.userEmail
         };       
 
         dispatch(getDataUser(dataUser));
