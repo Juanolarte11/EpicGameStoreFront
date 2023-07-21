@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const SEND_EMAIL = "SEND_EMAIL";
+
 export function getVideogames() {
   return async function (dispatch) {
     const json = await axios.get("/videogames");
