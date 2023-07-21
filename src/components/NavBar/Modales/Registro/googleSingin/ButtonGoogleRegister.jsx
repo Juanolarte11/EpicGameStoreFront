@@ -22,7 +22,7 @@ const ButtonGoogleRegister = ({ handleCloseRegister }) => {
           };
           try {
             const respuestaPost = await axios.post(
-              "http://localhost:3001/users/",
+              "/users/",
               newUserPost
             );
             console.log(respuestaPost);

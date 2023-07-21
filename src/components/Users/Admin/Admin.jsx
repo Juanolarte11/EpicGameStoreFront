@@ -78,7 +78,7 @@ function Admin() {
 
     const handleGetStatsVideogames = () => {
         try {
-            axios.get("http://localhost:3001/admin/videogameStats", {
+            axios.get("/admin/videogameStats", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -94,7 +94,7 @@ function Admin() {
 
     const handleGetStatsUsers = () => {
         try {
-            axios.get("http://localhost:3001/admin/userStats", {
+            axios.get("/admin/userStats", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -125,7 +125,7 @@ function Admin() {
             active: !isActive,
         };
         try {
-            axios.patch(`http://localhost:3001/users/${id}`, update, {
+            axios.patch(`/users/${id}`, update, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -144,7 +144,7 @@ function Admin() {
             role: e.target.value,
         };
         try {
-            axios.patch(`http://localhost:3001/users/${id}`, update, {
+            axios.patch(`/users/${id}`, update, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -159,7 +159,7 @@ function Admin() {
     };
 
     const getListVideogame = async () => {
-        axios.get("http://localhost:3001/admin/videogames", {
+        axios.get("/admin/videogames", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -173,7 +173,7 @@ function Admin() {
     };
 
     const getDataUsers = async () => {
-        axios.get("http://localhost:3001/admin/users", {
+        axios.get("/admin/users", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -235,7 +235,7 @@ function Admin() {
     };
 
     const handleRoleChange = async (e) => {
-        axios.get(`http://localhost:3001/admin/users?role=${e.target.value}`, {
+        axios.get(`/admin/users?role=${e.target.value}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

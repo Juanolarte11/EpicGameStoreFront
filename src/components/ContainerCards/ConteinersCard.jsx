@@ -90,7 +90,7 @@ export default function ConteinerCars({
   useEffect(async () => {
     if (dataUser.userID) {
       const existingFavorite = await axios.get(
-        `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+        `/users/userDetail/${dataUser.userID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

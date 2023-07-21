@@ -16,7 +16,7 @@ const ListVideogames = ({ lista, token, handleGetStatsVideogames, getListVideoga
       active: state
     };
     try {
-        axios.patch(`http://localhost:3001/videogames/${id}`, update, {
+        axios.patch(`/videogames/${id}`, update, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

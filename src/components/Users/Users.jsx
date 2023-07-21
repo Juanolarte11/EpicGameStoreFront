@@ -22,7 +22,7 @@ function User() {
 
   const getDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/userDetail/${dataUser.userID}`, {
+      const response = await axios.get(`/users/userDetail/${dataUser.userID}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

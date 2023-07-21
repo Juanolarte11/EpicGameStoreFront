@@ -21,7 +21,7 @@ export const Pay = () => {
             // await getDataUsers();
             if (status === "approved") {
                 try {
-                    const response = await axios.get(`http://localhost:3001/pay/succesfulPurchase/${dataUser.cartID}`);
+                    const response = await axios.get(`/pay/succesfulPurchase/${dataUser.cartID}`);
                     console.log(response);
                     let newDataUser = {
                         nombre: dataUser.nombre,
@@ -53,7 +53,7 @@ export const Pay = () => {
     const getDataUsers = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+                `/users/userDetail/${dataUser.userID}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -35,7 +35,7 @@ function ModalRegister() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3001/users/",
+        "/users/",
         newUserPost
       );
       const { newCart, newUser } = response.data;

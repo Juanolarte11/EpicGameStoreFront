@@ -153,7 +153,7 @@ export default function Detail(props) {
           gameID: gameId,
           userId: dataUser.userID,
         };
-        const response = await axios.post(`http://localhost:3001/cart`, data);
+        const response = await axios.post(`/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSize(response.data[0].Videogames.length);
       } catch (error) {
@@ -183,7 +183,7 @@ export default function Detail(props) {
         gameId: gameId,
       };
       const respuesta = await axios.post(
-        "http://localhost:3001/favorites/delete",
+        "/favorites/delete",
         game
       );
       alert("delete favorites");
@@ -208,7 +208,7 @@ export default function Detail(props) {
       try {
         const cartID = dataUser.cartID;
         const response = await axios.get(
-          `http://localhost:3001/cart/${cartID}`
+          `/cart/${cartID}`
         );
         setCart(response.data[0]?.Videogames);
         setSize(response.data[0]?.Videogames.length);

@@ -36,7 +36,7 @@ function Vendor() {
     console.log("Edited attributes:", editedGames[videogameId]);
     try {
       const response = await axios.patch(
-        `http://localhost:3001/videogames/${videogameId}`,
+        `/videogames/${videogameId}`,
         editedGames[videogameId],
         {
           headers: {
@@ -54,7 +54,7 @@ function Vendor() {
   const getDataUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/vendorDetail/${dataUser.userID}`,
+        `/users/vendorDetail/${dataUser.userID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

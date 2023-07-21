@@ -23,7 +23,7 @@ const MercadoPago = (props) => {
         Videogames: arrayGames,
       };
       const response = await axios.post(
-        "http://localhost:3001/pay/create_preference",
+        "/create_preference",
         order
       );
       const { id } = response.data;

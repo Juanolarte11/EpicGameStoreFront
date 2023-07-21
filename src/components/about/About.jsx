@@ -33,7 +33,7 @@ function About() {
       try {
         const cartID = dataUser.cartID;
         const response = await axios.get(
-          `http://localhost:3001/cart/${cartID}`
+          `/cart/${cartID}`
         );
         setCart(response.data[0]?.Videogames);
         setSize(response.data[0]?.Videogames.length);

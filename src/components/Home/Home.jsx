@@ -34,7 +34,7 @@ export default function Home() {
           gameID: gameId,
           userId: dataUser.userID,
         };
-        const response = await axios.post(`http://localhost:3001/cart`, data);
+        const response = await axios.post(`/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response.data[0].Videogames.length);
         setAlertMessage("Game added to Cart...");
@@ -52,7 +52,7 @@ export default function Home() {
     };
     if (dataUser?.userID) {
       const existingFavorite = await axios.get(
-        `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+        `/users/userDetail/${dataUser.userID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ export default function Home() {
 
       if (isGameInFavorites) {
         const respuesta = await axios.post(
-          "http://localhost:3001/favorites/delete",
+          "/favorites/delete",
           game
         );
         setAlertMessage("Game delete to favorites...");
@@ -91,7 +91,7 @@ export default function Home() {
     if (dataUser) {
       try {
         const response = await axios.get(
-          `http://localhost:3001/cart/${dataUser.cartID}`
+          `/cart/${dataUser.cartID}`
         );
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response?.data[0]?.Videogames?.length);

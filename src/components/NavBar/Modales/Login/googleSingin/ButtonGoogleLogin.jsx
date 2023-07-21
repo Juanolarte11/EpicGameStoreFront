@@ -14,7 +14,7 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
     signInWithPopup(auth, provider).then(async (data) => {
      try {
       const response = await axios.get(
-        `http://localhost:3001/users/emailLogin/${data.user.email}`
+        `/users/emailLogin/${data.user.email}`
       );
       
    
