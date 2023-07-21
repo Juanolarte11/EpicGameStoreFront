@@ -3,7 +3,7 @@ import styles from './Listvideogames.module.css';
 import axios from 'axios';
 
 
-const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => {
+const ListVideogames = ({ lista, token, handleGetStatsVideogames, getListVideogame}) => {
 
   const handleInaVideogame = async (id,state) => {
     
@@ -24,6 +24,7 @@ const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => 
             .then((response) => {
                 console.log(response);
                 getListVideogame()
+                handleGetStatsVideogames()
             });
     } catch (error) {
         console.log(error);

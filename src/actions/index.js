@@ -108,12 +108,20 @@ export function getCommentVideoGame(payload) {
   };
 }
 
-export function postVideogame(payload) {
-  return async function (dispatch) {
-    const response = await axios.post(`/videogames`, payload);
-    return response;
-  };
-}
+export function postVideogame(payload){
+    const token = JSON.parse(localStorage.getItem("Token"));
+    return async function(dispatch){
+        console.log(2);
+        const response = await axios.post(`/videogames/`, payload, 
+        {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response);
+        return response
+    }
+};
 
 export function filterVideogamesByOrigin(payload) {
   return {
