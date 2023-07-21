@@ -46,13 +46,14 @@ function FormularioEditar({ user }) {
         data.append("upload_preset", preset_key);
         setLoading(true);
         try {
-            const response = await axios.post(cloudinaryUrl, data);
-            setImage(response.data.secure_url);
-            setLoading(false);
+          const response = await axios.post(cloudinaryUrl, data);
+          console.log(response);
+          setImage(response.data.secure_url);
+          setLoading(false);
         } catch (error) {
-            alert(error.message)
+          console.log(error);
         }
-    };
+      };
 
     const updatesUser = () => {
         let NewUser = {};
