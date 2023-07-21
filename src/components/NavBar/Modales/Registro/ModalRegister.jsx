@@ -39,8 +39,6 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
-      const dataEmail = { email: newUserPost.userEmail };
-        dispatch(sendEmail(dataEmail));
       handleCloseRegister();
     } catch (error) {
       console.log(error);
