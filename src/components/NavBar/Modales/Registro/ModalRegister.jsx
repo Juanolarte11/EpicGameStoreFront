@@ -3,18 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-<<<<<<< HEAD
-import { sendEmail } from "../../../../actions";
-import { useDispatch } from "react-redux";
-
-function ModalRegister() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
-  const dispatch = useDispatch();
-=======
 import ModalLogin from "../Login/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalRegister } from "../../../../actions";
@@ -23,19 +11,17 @@ const ModalRegister = () => {
   ///////////////////
   const isModalRegister = useSelector((state) => state.modalRegister);
   //////////////////
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
->>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
 
   const handleOpenRegister = () => {
-    dispatch(setModalRegister(true,false))
+    dispatch(setModalRegister(true, false));
   };
 
   const handleCloseRegister = () => {
-    dispatch(setModalRegister(false,false))
-    
+    dispatch(setModalRegister(false, false));
   };
 
   const handleSubmit = async (event) => {
@@ -52,13 +38,7 @@ const ModalRegister = () => {
         newUserPost
       );
       const { newCart, newUser } = response.data;
-<<<<<<< HEAD
-      const dataEmail = { email: newUserPost.userEmail };
-        dispatch(sendEmail(dataEmail));
-      handleCloseModal();
-=======
       handleCloseRegister();
->>>>>>> 9b2f7f6281890e0dd0f375a6fc0251d379314fce
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +53,10 @@ const ModalRegister = () => {
         {isModalRegister && (
           <div className="modal-overlay-register">
             <div className="modal-content-register">
-              <button onClick={handleCloseRegister} className={styles.navButton}>
+              <button
+                onClick={handleCloseRegister}
+                className={styles.navButton}
+              >
                 Close
               </button>
               <div className={styles.RegistrationForm}>
@@ -138,8 +121,8 @@ const ModalRegister = () => {
                 </div>
                 <hr />
                 <div className={styles.goLogin}>
-                  Are you registered? please                  
-                  <ModalLogin/>                                
+                  Are you registered? please
+                  <ModalLogin />
                 </div>
               </div>
             </div>
@@ -148,6 +131,6 @@ const ModalRegister = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ModalRegister;
