@@ -31,7 +31,7 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
           image: user?.userImage,
           mail: user?.userEmail
         };       
-
+        console.log(dataUser);
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
         localStorage.setItem("Token", JSON.stringify(token));

@@ -260,6 +260,11 @@ function Admin() {
         setListGames(newList)
     }
 
+    const filterListVideogamesPending = () => {
+        const newList = listaVideogames.filter((game) => game.status === "pendingApproval")
+        setListGames(newList)
+    }
+
     const filterListVideogamesAll = () => {
         const newList = listaVideogames
         setListGames(newList)
@@ -274,7 +279,6 @@ function Admin() {
                         {/* <-----------------------------------------------------------------------------------usuarios------------------------------------------------->                         */}
                         <div className={style.containerUsers}>
                             <div className={style.listUsers}>
-
                                 <div className={style.filtreusers} style={{ marginBottom: "10px" }}>
                                     <button className={style.button} onClick={filterListUsersAct}>
                                         usuariosAct
@@ -310,10 +314,10 @@ function Admin() {
                                 </div>
                             </div>
                             <div className={style.statisticsContainer}>
-                                <h2>Estadísticas</h2>
-                                <p>Total Active Users: {userStats.activeUsers}</p>
-                                <p>Total Inactive Users: {userStats.inactiveUsers} </p>
-                                <p>Total Users: {userStats.totalUsers}</p>
+                                <h2 className={style.name}>Estadísticas</h2>
+                                <p  className={style.name}>Total Active Users: {userStats.activeUsers}</p>
+                                <p className={style.rol}>Total Inactive Users: {userStats.inactiveUsers} </p>
+                                <p  className={style.state}>Total Users: {userStats.totalUsers}</p>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={dataStatusUsers}>
@@ -321,11 +325,11 @@ function Admin() {
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey="cantidad" fill="#b4d1f0" />
+                                        <Bar dataKey="cantidad" fill="#6eb1fa" />
                                     </BarChart>
                                 </ResponsiveContainer>
                                 <div className={style.statisticsContainer}>
-                                <h2>Estadísticas Rol Vendedores</h2>
+                                <h2 className={style.name}>Estadísticas Rol Vendedores</h2>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={dataRolUsers}>
@@ -333,7 +337,7 @@ function Admin() {
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey="cantidad" fill="#858a8f" />
+                                        <Bar dataKey="cantidad" fill="#6eb1fa" />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
@@ -347,6 +351,9 @@ function Admin() {
                             <button className={style.button} onClick={() => filterListVideogamesInac()}>
                                 VideogamesDes
                             </button>
+                            <button className={style.button} onClick={() => filterListVideogamesPending()}>
+                                VideogamesPending
+                            </button>
                             <button className={style.button} onClick={() => filterListVideogamesAll()}>
                                 All
                             </button>
@@ -357,11 +364,11 @@ function Admin() {
                                 handleGetStatsVideogames={handleGetStatsVideogames}
                             />
                             <div className={style.statisticsContainer}>
-                                <h2>Estadísticas</h2>
-                                <p>Total Active Videogame: {userStats.activeUsers}</p>
-                                <p>Total Inactive Videogame: {statsVideogames.inactiveVideogames} </p>
-                                <p>Total Pensing Videogame: { statsVideogames.pendingVideogames} </p>
-                                <p>Total Videogame: {statsVideogames.totalVideogames}</p>
+                                <h2 className={style.name}>Estadísticas</h2>
+                                <p className={style.name}>Total Active Videogame: {userStats.activeUsers}</p>
+                                <p className={style.name}>Total Inactive Videogame: {statsVideogames.inactiveVideogames} </p>
+                                <p className={style.name}>Total Pensing Videogame: { statsVideogames.pendingVideogames} </p>
+                                <p className={style.name}>Total Videogame: {statsVideogames.totalVideogames}</p>
                                 {/* Gráfico con Recharts */}
                                 <ResponsiveContainer width="100%" height={300}>
                                     <BarChart data={dataVideogames}>
@@ -369,7 +376,7 @@ function Admin() {
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey="cantidad" fill="#8884d8" />
+                                        <Bar dataKey="cantidad" fill="#ffffff" />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
