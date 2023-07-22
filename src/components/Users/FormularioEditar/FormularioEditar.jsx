@@ -88,7 +88,7 @@ function FormularioEditar({ user }) {
     let NewUser = { role: "vendedor" };
     try {
       axios
-        .patch(`https://epicgamestore-b96dc1080e77.herokuapp.com/users/${dataUser.userID}`, NewUser, {
+        .patch(`/users/${dataUser.userID}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
