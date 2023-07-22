@@ -102,7 +102,7 @@ export default function ConteinerCars({
   }, []);
 
   const handlerFavorite = (id) => {
-    let isGameInFavorites = gameFavorites.some((e) => e.id === id);
+    let isGameInFavorites = gameFavorites?.some((e) => e.id === id);
     if (isGameInFavorites) {
       return "Delete favorite";
     } else {
