@@ -61,7 +61,7 @@ function FormularioEditar({ user }) {
     }
     try {
       axios
-        .patch(`/${dataUser.userID}`, NewUser, {
+        .patch(`/users/${dataUser.userID}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
