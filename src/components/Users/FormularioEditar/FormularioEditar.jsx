@@ -205,7 +205,7 @@ function FormularioEditar({ user }) {
           </button>
         </div>
       </div>
-      <div className={style.vendor}>
+{/*       <div className={style.vendor}>
         <span className={style.title}>Roll Sales</span>
         <label>
           <input
@@ -224,7 +224,7 @@ function FormularioEditar({ user }) {
             <p>{TermsAndConditions}</p>
             <button onClick={handleModalClose}>Close</button>
           </Modal>
-        )}
+        )} */}
         {/* <span className={style.title}>Change Password</span>
         <label className={style.inputFormu}>
           Actual password:
