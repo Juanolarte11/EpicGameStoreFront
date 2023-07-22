@@ -84,6 +84,13 @@ function FormularioEditar({ user }) {
     }
   };
 
+    const btnClick = () => {
+    localStorage.setItem("userData", JSON.stringify({}));
+    localStorage.setItem("Token", JSON.stringify({}));
+    history.push("/home");
+    window.location.reload();
+  };
+  
   const updateRol = () => {
             alert("¡El admin revisara tu peticion!");
           window.location.reload();
@@ -208,7 +215,7 @@ function FormularioEditar({ user }) {
           />
           <span onClick={handleModalOpen}>Accept Terms and Conditions</span>
         </label>
-        <button className={style.btn} onClick={updateRol} disabled={!isChecked}>
+        <button className={style.btn} onClick={btnClick} disabled={!isChecked}>
           Solicitar
         </button>
         {showModal && (
