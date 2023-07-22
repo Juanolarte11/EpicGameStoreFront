@@ -85,30 +85,30 @@ function FormularioEditar({ user }) {
   };
 
   const updateRol = () => {
-    let NewUser = { role: "vendedor" };
-    try {
-      axios
-        .patch(`/users/${dataUser.userID}`, NewUser, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          const newDataUser = {
-            nombre: response.data.userName,
-            userID: response.data.id,
-            cartID: response.data.Carritos[0].id,
-            role: response.data.role,
-            image: response.data.userImage,
-            mail: response.data.userEmail,
-          };
-          localStorage.setItem("userData", JSON.stringify(newDataUser));
-          alert("¡Datos actualizados con exito!");
+            alert("¡El admin revisara tu peticion!");
           window.location.reload();
-        });
-    } catch (error) {
-      alert(error.message);
-    }
+    // let NewUser = { role: "vendedor" };
+    // try {
+    //   axios
+    //     .patch(`/users/${dataUser.userID}`, NewUser, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       const newDataUser = {
+    //         nombre: response.data.userName,
+    //         userID: response.data.id,
+    //         cartID: response.data.Carritos[0].id,
+    //         role: response.data.role,
+    //         image: response.data.userImage,
+    //         mail: response.data.userEmail,
+    //       };
+    //       localStorage.setItem("userData", JSON.stringify(newDataUser));
+    //     });
+    // } catch (error) {
+    //   alert(error.message);
+    // }
   };
 
   // const updatePass = () => {
