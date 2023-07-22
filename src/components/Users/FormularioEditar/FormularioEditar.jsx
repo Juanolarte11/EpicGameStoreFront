@@ -88,7 +88,7 @@ function FormularioEditar({ user }) {
     let NewUser = { role: "vendedor" };
     try {
       axios
-        .patch(`/users/${user.id}`, NewUser, {
+        .patch(`/users/${dataUser.userID}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
