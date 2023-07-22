@@ -61,7 +61,7 @@ function FormularioEditar({ user }) {
     }
     try {
       axios
-        .patch(`/users/${dataUser.userID}`, NewUser, {
+        .patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -88,7 +88,7 @@ function FormularioEditar({ user }) {
     let NewUser = { role: "vendedor" };
     try {
       axios
-        .patch(`/${user.id}`, NewUser, {
+        .patch(`/users/${user.id}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
