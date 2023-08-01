@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import style from "./about.module.css";
 import express from "./express.png";
 import node from "./node.png";
