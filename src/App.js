@@ -11,6 +11,7 @@ import Cart from "./components/Cart/Cart.jsx";
 import User from "./components/Users/Users.jsx";
 import Admin from "./components/Users/Admin/Admin.jsx";
 import { Pay } from "./components/Pay/Pay.jsx";
+import Vendor from "./components/Users/Vendor.jsx";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/miPerfil" component={User} />
           <Route path="/admin" component={Admin} />
           <Route path="/pay" component={Pay} />
+          <Route path="/vendor" component={Vendor} />
         </Switch>
       </div>
     </BrowserRouter>

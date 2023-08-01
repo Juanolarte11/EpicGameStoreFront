@@ -3,11 +3,32 @@ import styles from './Listvideogames.module.css';
 import axios from 'axios';
 
 
-const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => {
+const ListVideogames = ({ lista, token, handleGetStatsVideogames, getListVideogame}) => {
+
+  console.log(lista);
+  const handleBamVideogame = (id) => {
+    const update = {
+      active: "banned"
+    };
+    try {
+      axios.patch(`http://localhost:3001/videogames/${id}`, update, {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          })
+          .then((response) => {
+              console.log(response);
+              getListVideogame()
+              handleGetStatsVideogames()
+          });
+  } catch (error) {
+      console.log(error);
+  }
+  }
 
   const handleInaVideogame = async (id,state) => {
     
-    if(state === "inactive"){
+    if(state === "inactive" || state === "pendingApproval" || state === "banned"){
       state = "active"
     }else{
       state = "inactive" 
@@ -24,6 +45,7 @@ const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => 
             .then((response) => {
                 console.log(response);
                 getListVideogame()
+                handleGetStatsVideogames()
             });
     } catch (error) {
         console.log(error);
@@ -33,7 +55,7 @@ const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => 
   
   return (
     <div className={styles.container}>
-      <h2>Videogames</h2>
+      <h2 className={styles.nombre}>Videogames</h2>
       <ul className={styles.lista}>
         {lista.map((lista) => (
           <li key={lista.id} className={styles.usuario}>
@@ -42,7 +64,8 @@ const ListVideogames = ({ lista, token, updateVidoagames, getListVideogame}) => 
               <span className={styles.price}>Price: {lista.price}</span>
               <span className={styles.status}>status: {lista.status}</span>
             </div>
-            <button className={styles.botonBan} onClick={() => handleInaVideogame(lista.id,lista.status )}>{lista.status === "inactive" ? "Act" : "Ban"}</button>
+            <button className={styles.botonBam} onClick={() => handleBamVideogame(lista.id)}>Bam</button>
+            <button className={styles.botonBan} onClick={() => handleInaVideogame(lista.id,lista.status )}>{lista.status === "inactive" || lista.status === "pendingApproval" || lista.status === "banned"  ? "Act" : "Inac"}</button>
           </li>
         ))}
       </ul>

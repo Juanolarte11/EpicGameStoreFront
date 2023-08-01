@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Register.module.css";
 import ButtonGoogleRegister from "./googleSingin/ButtonGoogleRegister";
-import ModalLogin from "../Login/ModalLogin";
+import { sendEmail } from "../../../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { setModalRegister, sendEmail } from "../../../../actions";
+import ModalLogin from "../Login/ModalLogin";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { setModalRegister } from "../../../../actions";
 
-const ModalRegister = () => {
-  ///////////////////
-  const isModalRegister = useSelector((state) => state.modalRegister);
-  //////////////////
-  const dispatch = useDispatch()
+function ModalRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const isModalRegister = useSelector(state => state.modalRegister);
 
   const handleOpenRegister = () => {
     dispatch(setModalRegister(true,false))
@@ -41,7 +41,7 @@ const ModalRegister = () => {
       const { newCart, newUser } = response.data;
       const dataEmail = { email: newUserPost.userEmail };
         dispatch(sendEmail(dataEmail));
-      handleCloseRegister();
+        handleCloseRegister();
     } catch (error) {
       console.log(error);
     }

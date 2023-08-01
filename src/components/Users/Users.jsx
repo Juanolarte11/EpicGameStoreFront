@@ -20,13 +20,13 @@ function User() {
     setShowForm(true);
   };
 
-  const listaDeCompras = [
-    {
-      img: "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
-      title: "Tomb Raider (2013)",
-      precio: 46.9,
-    },
-  ];
+  // const listaDeCompras = [
+  //   {
+  //     img: "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
+  //     title: "Tomb Raider (2013)",
+  //     precio: 46.9,
+  //   },
+  // ];
 
   const getDataUsers = async () => {
     try {
@@ -39,7 +39,9 @@ function User() {
         }
       );
       const respoCart = await axios.get(`/cart/${dataUser.cartID}`);
+      console.log(response);
       setUser(response.data);
+      console.log(response.data);
       if (response.data.role === "cliente") {
         setFavorites(response.data.Videogames);
         setCart(respoCart.data[0].Videogames);
@@ -75,7 +77,8 @@ function User() {
           </div>
           <div className={styles.actions}>
             <h1 className={styles.sectionTitle}>Shopping history</h1>
-            {listaDeCompras.map((ele) => {
+
+            {/* {listaDeCompras.map((ele) => {
               return (
                 <div key={ele.title} className={styles.compra}>
                   <img
@@ -84,11 +87,11 @@ function User() {
                     className={styles.imageList}
                   />
                   <h3>{ele.title}</h3>
-                  <button className={styles.ver}>Game...</button>
+                  <button className={styles.ver}>Ver Juego</button>
                   <h3>{ele.precio}</h3>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       )}

@@ -40,20 +40,6 @@ export function getVideogamesByName(payload) {
   };
 }
 
-export function favoritesList(payload) {
-  return async function (dispatch) {
-    try {
-      const json = await axios.get(`/users/userDetail/${payload}`);
-      return dispatch({
-        type: "FAVORITES_LIST",
-        payload: json.data.Videogames,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
 export function getGenres() {
   return async function (dispatch) {
     const json = await axios.get(`/genres`);
@@ -156,6 +142,39 @@ export function getDataUser(payload) {
   };
 }
 
+export function sendEmail(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post(
+        `http://localhost:3001/send-email/registersuccess`,
+        payload
+      );
+      dispatch({
+        type: SEND_EMAIL,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function sendMailPaymentSuccess(Email) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post(
+        `http://localhost:3001/send-email/paymentsuccess`,
+        Email
+      );
+      dispatch({
+        type: SEND_EMAIL,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 export function setModalLogin(payload1, payload2) {
   return {
     type: "GET_MODAL_LOGIN",
@@ -170,58 +189,3 @@ export function setModalRegister(payload1, payload2) {
     payload2: payload2,
   };
 }
-
-export function getUsersAct(payload) {
-  return async function (dispatch) {
-    try {
-      if (payload === "All") {
-        return;
-      }
-      console.log(payload);
-      const response = await axios.get(
-        `http://localhost:3001/admin/users?active=${payload}`
-      );
-      return dispatch({
-        type: "GETUSERSESTATUS",
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function sendMailPaymentSuccess(Email) {
-  return async function (dispatch) {
-    try {
-      let json = await axios.post(
-        `http://localhost:3001/send-email/paymentsuccess`,
-        Email
-      );
-      dispatch({
-        type: "SEND_EMAIL",
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-}
-
-export function sendEmail(payload) {
-  console.log(payload)
-return async function (dispatch) {
-  try {
-    let json = await axios.post(
-      `http://localhost:3001/send-email/registersuccess`,
-      payload
-    );
-    dispatch({
-      type: "SEND_EMAIL",
-      payload: json.data,
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-}  
