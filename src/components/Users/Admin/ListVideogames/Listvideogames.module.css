@@ -19,19 +19,6 @@
   padding: 10px;
 }
 
-.botonBam{
-  background-color: rgb(238, 30, 30);
-  width: 100px; 
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #000000;
-  border-radius: 4px;
-  appearance: none;
-  cursor: pointer;
-  margin: 10px;
-  margin-bottom: 15px;
-}
-
 .botonBan {
   width: 100px; 
   padding: 8px;
@@ -62,18 +49,14 @@ appearance: none;
 .nombre{
   margin: 5px;
   padding: 5px;
-  margin-top: 10px;
-  color: aliceblue;
 }
 
 .price{
   margin: 5px;
-  padding: 5px;
-  color: aliceblue;
+  padding: 5px
 }
 
 .status{
   margin: 5px;
-  padding: 5px;
-  color: aliceblue;
+  padding: 5px
 }

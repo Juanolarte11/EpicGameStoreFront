@@ -32,7 +32,7 @@ const Cart = () => {
         console.log(dataUser)
         const cartID = dataUser.cartID;
         const response = await axios.get(
-          `http://localhost:3001/cart/${cartID}`
+          `/cart/${cartID}`
         );
         setCart(response.data[0]?.Videogames);
         setSize(response.data[0]?.Videogames.length);
@@ -50,7 +50,7 @@ const Cart = () => {
         cartID: cartIdLocal,
       };
       const response = await axios.post(
-        `http://localhost:3001/cart/delete`,
+        `/cart/delete`,
         data
       );
       setCart(response.data[0]?.Videogames);

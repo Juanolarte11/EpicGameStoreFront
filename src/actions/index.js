@@ -146,7 +146,7 @@ export function sendEmail(payload) {
   return async function (dispatch) {
     try {
       let json = await axios.post(
-        `http://localhost:3001/send-email/registersuccess`,
+        `/send-email/registersuccess`,
         payload
       );
       dispatch({
@@ -163,7 +163,7 @@ export function sendMailPaymentSuccess(Email) {
   return async function (dispatch) {
     try {
       let json = await axios.post(
-        `http://localhost:3001/send-email/paymentsuccess`,
+        `/send-email/paymentsuccess`,
         Email
       );
       dispatch({
@@ -187,5 +187,33 @@ export function setModalRegister(payload1, payload2) {
     type: "GET_MODAL_REGISTER",
     payload1: payload1,
     payload2: payload2,
+  };
+}
+
+
+export function getUsersAct(payload) {
+    return async function (dispatch) {
+      try {
+        if (payload === "All") {
+          return;
+        }
+        console.log(payload);
+        const response = await axios.get(
+          `/admin/users?active=${payload}`
+        );
+        return dispatch({
+          type: "GETUSERSESTATUS",
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+export function setGameFavorite(payload){
+  return {
+    type: "GET_GAME_FAVORITES",
+    payload: payload,
   };
 }

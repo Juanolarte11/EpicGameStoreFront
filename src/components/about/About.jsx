@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./about.module.css";
 import express from "./express.png";
 import node from "./node.png";
@@ -19,16 +19,31 @@ import colombia from "./colombia.png";
 import fotoJeffrey from "./fotoJeffrey.jpeg";
 import fotoSeba from "./fotoSeba.jpeg";
 import NavBar from "../NavBar/NavBar";
+import axios from "axios";
+
 
 function About() {
   const history = useHistory();
+  const [cart, setCart] = useState([]);
+  const [size, setSize] = useState([]);
+  const dataUser = JSON.parse(localStorage.getItem("userData"));
 
-  const btnClick = () => {
-    history.push("/home");
-  };
+  useEffect(async () => {
+    if (cart?.length === 0) {
+      try {
+        const cartID = dataUser.cartID;
+        const response = await axios.get(
+          `/cart/${cartID}`
+        );
+        setCart(response.data[0]?.Videogames);
+        setSize(response.data[0]?.Videogames.length);
+      } catch (error) {}
+    }
+  }, []);
+
   return (
     <div className={style.container}>
-      <NavBar></NavBar>
+      <NavBar size={size} />
       <div className={style.info}>
         <div className={style.upInfo}>
           <h1>

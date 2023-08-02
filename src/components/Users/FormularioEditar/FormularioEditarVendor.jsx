@@ -64,7 +64,7 @@ function FormularioEditar({ user }) {
             NewUser.userImage = image;
         }
         try {
-            axios.patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
+            axios.patch(`/users/${dataUser.userID}`, NewUser, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -83,7 +83,7 @@ function FormularioEditar({ user }) {
     const updateRol = () => {
         let NewUser = { role: "vendedor" };
         try {
-            axios.patch(`http://localhost:3001/users/${user.id}`, NewUser, {
+            axios.patch(`/users/${user.id}`, NewUser, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -112,7 +112,7 @@ function FormularioEditar({ user }) {
     const updateActive = () => {
         let NewUser = { active: false };
         try {
-            axios.patch(`http://localhost:3001/users/${user.id}`, NewUser, {
+            axios.patch(`/users/${user.id}`, NewUser, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -219,7 +219,7 @@ function FormularioEditar({ user }) {
                     </button>
                 </div>
             </div>
-            <div className={style.vendor}>
+            {/* <div className={style.vendor}>
                 <span className={style.title}>Cambiar Contraseña</span>
                 <label className={style.inputFormu}>
                     Contraseña actual:
@@ -249,7 +249,7 @@ function FormularioEditar({ user }) {
                 {usDelete && (
                     <button className={style.btn}  onClick={updateActive}>Delete</button>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 }

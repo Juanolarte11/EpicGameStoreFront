@@ -1,27 +1,30 @@
 .container {
-  background-color: #90c1f3;
+  background-color: #1d354e;
 }
 
-.user_box {
-  display: flex;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(11, 255, 2, 0.974);
-  padding: 20px;
+.formulario{
+  padding: 10px;
 }
-.sectionTitle {
-  color: white;
-  background-color: blueviolet;
+
+.contForm{
+  padding: 2vw;
+
+}
+.user_box {
+  display: grid;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .head {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .head h1 {
   color: #ffffff;
-  background-color: blueviolet;
-  font-size: 30px;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
@@ -60,7 +63,6 @@
 
 .list {
   display: flex;
-  justify-content: space-between;
 }
 
 .list > div {
@@ -108,5 +110,18 @@
   text-decoration: none;
   font-size: 18px;
   display: inline-block;
+  margin-top: 10px;
+}
+
+.navButtonVend {
+  background-color: var(--segundo-color);
+  color: #ffffff;
+  width: 10%;
+  border: none;
+  padding: 8px 16px;
+  margin-left: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
   margin-top: 10px;
 }

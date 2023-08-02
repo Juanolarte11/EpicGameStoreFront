@@ -12,6 +12,7 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
   const [size, setSize] = useState([]);
+
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const token = JSON.parse(localStorage.getItem("Token"));
 
@@ -22,7 +23,7 @@ export default function Favorites() {
     if (dataUser) {
       try {
         const respuesta = await axios.get(
-          `http://localhost:3001/users/userDetail/${dataUser.userID}`,
+          `/users/userDetail/${dataUser.userID}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -46,7 +47,7 @@ export default function Favorites() {
           gameID: gameId,
           userId: dataUser.userID,
         };
-        const response = await axios.post(`http://localhost:3001/cart`, data);
+        const response = await axios.post(`/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSize(response.data[0].Videogames.length);
       } catch (error) {
@@ -62,10 +63,9 @@ export default function Favorites() {
         gameId: gameId,
       };
       const respuesta = await axios.post(
-        "http://localhost:3001/favorites/delete",
+        "/favorites/delete",
         game
       );
-
       setAlertMessage("Game delete to favorites...");
       setShowAlert(true);
 
@@ -83,7 +83,7 @@ export default function Favorites() {
       try {
         const cartID = dataUser.cartID;
         const response = await axios.get(
-          `http://localhost:3001/cart/${cartID}`
+          `/cart/${cartID}`
         );
         setCart(response.data[0]?.Videogames);
         setSize(response.data[0]?.Videogames.length);
@@ -100,7 +100,7 @@ export default function Favorites() {
   }, [showAlert]);
 
   return (
-    <div className="">
+    <div className={styles.containerFavorites}>
       <div>
         <NavBar size={size} />
       </div>

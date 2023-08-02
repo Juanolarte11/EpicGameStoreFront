@@ -12,6 +12,7 @@ const initialState = {
   genres: [],
   platforms: [],
   detail: [],
+  gameFavorites: [],
   currentPage: 1,
   origin: "all"
 };
@@ -151,7 +152,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
       };
-  
+
+      case "GET_GAME_FAVORITES":
+        return{
+          ...state,
+          gameFavorites : action.payload
+        }
     default:
       return state;
   };

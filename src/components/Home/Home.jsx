@@ -15,7 +15,6 @@ const token = JSON.parse(localStorage.getItem("Token"));
 
 export default function Home() {
   const dispatch = useDispatch();
-  const buttonFavorites = "Add favorites";
   const allVideogames = useSelector((state) => state.videogames);
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const Token = JSON.parse(localStorage.getItem("Token"));
@@ -23,7 +22,6 @@ export default function Home() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const listGames = useSelector((state) => state.favoritesList);
-  console.log(listGames);
 
   dispatch(getGenres());
 
@@ -36,7 +34,7 @@ export default function Home() {
           gameID: gameId,
           userId: dataUser.userID,
         };
-        const response = await axios.post(`http://localhost:3001/cart`, data);
+        const response = await axios.post(`/cart`, data);
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response.data[0].Videogames.length);
         setAlertMessage("Game added to Cart...");
@@ -49,33 +47,43 @@ export default function Home() {
 
   const clickFavorite = async (gameId) => {
     const game = {
-      userId: dataUser.userID,
+      userId: dataUser?.userID,
       gameId: gameId,
     };
+    if (dataUser?.userID) {
+      const existingFavorite = await axios.get(
+        `/users/userDetail/${dataUser.userID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const verifiGameId = existingFavorite.data.Videogames;
+      const isGameInFavorites = verifiGameId.some((e) => e.id === gameId);
 
-    const existingFavorite = await axios.get(
-      `http://localhost:3001/users/userDetail/${dataUser.userID}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      if (isGameInFavorites) {
+        const respuesta = await axios.post(
+          "/favorites/delete",
+          game
+        );
+        setAlertMessage("Game delete to favorites...");
+        setShowAlert(true);
+        return "Add game";
       }
-    );
-    const verifiGameId = existingFavorite.data.Videogames;
-    const isGameInFavorites = verifiGameId.some((e) => e.id === gameId);
 
-    if (isGameInFavorites) {
-      setAlertMessage("This game is already in your favorites!");
+      if (!isGameInFavorites) {
+        try {
+          const respuesta = await axios.post("/favorites", game);
+          setAlertMessage("Game added to favorites...");
+          setShowAlert(true);
+          return "Delete game";
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else {
       setShowAlert(true);
-      return;
-    }
-
-    try {
-      const respuesta = await axios.post("/favorites", game);
-      setAlertMessage("Game added to favorites...");
-      setShowAlert(true);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -83,7 +91,7 @@ export default function Home() {
     if (dataUser) {
       try {
         const response = await axios.get(
-          `http://localhost:3001/cart/${dataUser.cartID}`
+          `/cart/${dataUser.cartID}`
         );
         dispatch(getCartUser(dataUser.userID));
         setSizeCart(response?.data[0]?.Videogames?.length);
@@ -111,12 +119,32 @@ export default function Home() {
           <div>
             <NavBar size={sizeCart} />
           </div>
-          {showAlert && <div className={styles.alert}>{alertMessage}</div>}
+          {dataUser?.userID &&
+          showAlert &&
+          alertMessage == `Game delete to favorites...` ? (
+            <div className={styles.alert3}>{alertMessage}</div>
+          ) : (
+            ""
+          )}
+
+          {dataUser?.userID &&
+          showAlert &&
+          alertMessage == `Game added to favorites...` ? (
+            <div className={styles.alert}>{alertMessage}</div>
+          ) : (
+            ""
+          )}
+
+          {!dataUser?.userID && showAlert ? (
+            <div className={styles.alert2}>Please login !</div>
+          ) : (
+            ""
+          )}
+
           <ConteinerCars
             allVideogames={allVideogames}
             handleClickCart={handleClickCart}
             clickFavorite={clickFavorite}
-            buttonFavorites={buttonFavorites}
           />
         </div>
       )}

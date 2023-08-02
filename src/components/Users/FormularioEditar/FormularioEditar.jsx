@@ -7,18 +7,16 @@ import TermsAndConditions from "./TermsAndConditions";
 
 function FormularioEditar({ user }) {
   const history = useHistory();
+  const country = localStorage.getItem("country")
 
   const [loading, setLoading] = useState(false);
   const token = JSON.parse(localStorage.getItem("Token"));
-  const country = localStorage.getItem("country");
-
   const dataUser = JSON.parse(localStorage.getItem("userData"));
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [usDelete, setUsDelete] = useState(false);
 
   const [newUsername, setNewUsername] = useState("");
-  const [image, setImage] = useState(dataUser?.image);
+  const [image, setImage] = useState(dataUser.image);
 
   const preset_key = "images";
   const cloud_name = "drgco4gsh";
@@ -38,7 +36,6 @@ function FormularioEditar({ user }) {
   const handleModalClose = () => {
     setShowModal(false);
   };
-
   const upLoadImage = async (e) => {
     const file = e.target.files[0];
     const data = new FormData();
@@ -64,7 +61,7 @@ function FormularioEditar({ user }) {
     }
     try {
       axios
-        .patch(`http://localhost:3001/users/${dataUser.userID}`, NewUser, {
+        .patch(`/users/${dataUser.userID}`, NewUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,77 +73,76 @@ function FormularioEditar({ user }) {
             cartID: response.data.Carritos[0].id,
             role: response.data.role,
             image: response.data.userImage,
+            mail: response.data.userEmail,
           };
           localStorage.setItem("userData", JSON.stringify(newDataUser));
-          localStorage.setItem("Token", JSON.stringify({}));
-          alert("Datos actualizados con exito, inicia Sesion");
+          alert("¡Datos actualizados con exito!");
+          window.location.reload();
         });
     } catch (error) {
       alert(error.message);
     }
   };
 
+    const btnClick = () => {
+    localStorage.setItem("userData", JSON.stringify({}));
+    localStorage.setItem("Token", JSON.stringify({}));
+    history.push("/home");
+    window.location.reload();
+  };
+  
   const updateRol = () => {
-    let NewUser = { role: "vendedor" };
-    try {
-      axios
-        .patch(`http://localhost:3001/users/${user.id}`, NewUser, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          localStorage.setItem("userData", JSON.stringify({}));
-          localStorage.setItem("Token", JSON.stringify({}));
-          alert("Datos actualizados con exito, inicia Sesion");
-          history.push("/home");
-        });
-    } catch (error) {
-      alert(error.message);
-    }
+            alert("¡El admin revisara tu peticion!");
+          window.location.reload();
+    // let NewUser = { role: "vendedor" };
+    // try {
+    //   axios
+    //     .patch(`/users/${dataUser.userID}`, NewUser, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       const newDataUser = {
+    //         nombre: response.data.userName,
+    //         userID: response.data.id,
+    //         cartID: response.data.Carritos[0].id,
+    //         role: response.data.role,
+    //         image: response.data.userImage,
+    //         mail: response.data.userEmail,
+    //       };
+    //       localStorage.setItem("userData", JSON.stringify(newDataUser));
+    //     });
+    // } catch (error) {
+    //   alert(error.message);
+    // }
   };
 
-  const updatePass = () => {
-    let NewUser = {};
-    if (currentPassword.length !== 0) {
-      NewUser.userPassword = currentPassword;
-    }
-    if (newPassword.length !== 0) {
-      NewUser.newPassword = newPassword;
-    }
-  };
+  // const updatePass = () => {
+  //   let NewUser = {};
+  //   if (currentPassword.length !== 0) {
+  //     NewUser.userPassword = currentPassword;
+  //   }
+  //   if (newPassword.length !== 0) {
+  //     NewUser.newPassword = newPassword;
+  //   }
+  //   console.log(NewUser);
+  // };
 
-  const updateActive = () => {
-    let NewUser = { active: false };
-    try {
-      axios
-        .patch(`http://localhost:3001/users/${user.id}`, NewUser, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          localStorage.setItem("userData", JSON.stringify({}));
-          localStorage.setItem("Token", JSON.stringify({}));
-          alert("Datos actualizados con exito, inicia Sesion");
-          history.push("/home");
-        });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-  const hendrleDelete = () => {
-    alert(
-      "Si eliminas tu cuenta no podras registrarte de nuevo a menos que lo solicites a un Admin, ¿Estas Seguro?"
-    );
-    setUsDelete(true);
-  };
+  // const updateActive = () => {
+  //   let NewUser = { active: false };
+  //   console.log(NewUser);
+  //   alert(
+  //     "Your request has been sent, you will soon receive a response from an administrator"
+  //   );
+  // };
+
   useEffect(() => {}, [loading]);
 
   return (
     <div className={style.conteiner}>
       <div className={style.formCont}>
-        <h1>Informacion Personal</h1>
+        <h1>Personal Information</h1>
         <div className={style.form}>
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
@@ -156,7 +152,6 @@ function FormularioEditar({ user }) {
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
                 placeholder={user.userName}
-                className={style.inputext}
               />
             </div>
           </label>
@@ -167,61 +162,42 @@ function FormularioEditar({ user }) {
                 type="email"
                 value={user.userEmail}
                 placeholder={user.userEmail}
-                className={style.inputext}
               />
             </div>
           </label>
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
-              <div className={style.conImage}>
-                <span className={style.itemName}>Your Picture</span>
-                <img
-                  className={style.foto}
-                  src={user.image || image}
-                  alt=""
-                  placeholder="Tu Foto"
-                />
-              </div>
-              <input
-                type="file"
-                name="file"
-                onChange={upLoadImage}
-                placeholder="N/A"
-                className={style.inputext}
+              <span className={style.itemName}>Your Picture</span>
+              <img
+                className={style.foto}
+                src={user.image || image}
+                alt=""
+                placeholder="You Picture..."
               />
             </div>
+            <input
+              type="file"
+              name="file"
+              onChange={upLoadImage}
+              placeholder="N/A"
+            />
           </label>
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
               <span className={style.itemName}>Rol</span>
-              <input
-                type="text"
-                value={user.role}
-                placeholder={user.role}
-                className={style.inputext}
-              />
+              <input type="text" value={user.role} placeholder={user.role} />
             </div>
           </label>
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
-              <span className={style.itemName}>Region</span>
-              <input
-                type="text"
-                value={country}
-                placeholder={country}
-                className={style.inputext}
-              />
+              <span className={style.itemName}>Country</span>
+              <input type="text" value={country} placeholder={country} />
             </div>
           </label>
           <label className={style.inputFormu}>
             <div className={style.itemForm}>
               <span className={style.itemName}>Lenguage</span>
-              <input
-                type="text"
-                value={"Español"}
-                placeholder={"Español"}
-                className={style.inputext}
-              />
+              <input type="text" value={"Español"} placeholder={"Español"} />
             </div>
           </label>
           <button className={style.btn} onClick={updatesUser}>
@@ -229,61 +205,50 @@ function FormularioEditar({ user }) {
           </button>
         </div>
       </div>
-      <div className={style.vendor}>
-        <span className={style.title}>Quiero Ser Vendedor</span>
-        <span className={style.conditions} onClick={handleModalOpen}>
-          Aceptar Términos y Condiciones
-        </span>
+{/*       <div className={style.vendor}>
+        <span className={style.title}>Roll Sales</span>
         <label>
           <input
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            className={style.inputext}
           />
+          <span onClick={handleModalOpen}>Accept Terms and Conditions</span>
         </label>
-        <button className={style.btn} onClick={updateRol} disabled={!isChecked}>
+        <button className={style.btn} onClick={btnClick} disabled={!isChecked}>
           Solicitar
         </button>
         {showModal && (
           <Modal onClose={handleModalClose}>
-            {/* Contenido de los términos y condiciones */}
-            <h2>Términos y Condiciones</h2>
+            <h2>Terms and Conditions</h2>
             <p>{TermsAndConditions}</p>
-            <button onClick={handleModalClose}>Cerrar</button>
+            <button onClick={handleModalClose}>Close</button>
           </Modal>
-        )}
-        <span className={style.title}>Cambiar Contraseña</span>
+        )} */}
+        {/* <span className={style.title}>Change Password</span>
         <label className={style.inputFormu}>
-          Contraseña actual:
+          Actual password:
           <input
             type="password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
-            className={style.inputext}
           />
         </label>
         <label className={style.inputFormu}>
-          Contraseña nueva:
+          New Password:
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewUsername(e.target.value)}
-            className={style.inputext}
           />
         </label>
-        <button className={style.btn} onClick={updatePass}>
-          Sent
-        </button>
-        <button className={style.btn} onClick={hendrleDelete}>
+        {/* <button className={style.btn} onClick={updatePass}> */}
+          {/* Sent */}
+        {/* </button>
+        <button className={style.btn} onClick={updateActive}>
           Delete Acount
-        </button>
-        {usDelete && (
-          <button className={style.btn} onClick={updateActive}>
-            Delete
-          </button>
-        )}
+        </button> */} 
       </div>
     </div>
   );

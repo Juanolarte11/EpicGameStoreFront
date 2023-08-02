@@ -14,7 +14,7 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
     signInWithPopup(auth, provider).then(async (data) => {
      try {
       const response = await axios.get(
-        `http://localhost:3001/users/emailLogin/${data.user.email}`
+        `/users/emailLogin/${data.user.email}`
       );
       
    
@@ -31,7 +31,7 @@ const ButtonGoogleLogin = ({ handleCloseLogin }) => {
           image: user?.userImage,
           mail: user?.userEmail
         };       
-        console.log(dataUser);
+
         dispatch(getDataUser(dataUser));
         localStorage.setItem("userData", JSON.stringify(dataUser));
         localStorage.setItem("Token", JSON.stringify(token));
